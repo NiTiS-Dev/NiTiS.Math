@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<Version>2.1</Version>
+		<TargetFrameworks>net7.0</TargetFrameworks>
+		<Version>$(Version)</Version>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<PackageVersion>$(Version)</PackageVersion>
+
+		<Copyright>Copyright (c) NiTiS-Dev and contributors</Copyright>
+		<PackageLicenseUrl>https://raw.githubusercontent.com/NiTiS-Dev/NiTiS.Math/dev/LICENSE</PackageLicenseUrl>
+
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<TargetName>$(AssemblyName)</TargetName>
+
+		<Summary>$(Description)</Summary>
+		<PackageTags>NiTiS;Math;Vectors;Matrix;Vector;Matrixes;Physics</PackageTags>
+		
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>embedded</DebugType>
+
+		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Math</RepositoryUrl>
+		<PackageIconUrl>https://raw.githubusercontent.com/NiTiS-Dev/meta/singleton/ntscr/core/original.png</PackageIconUrl>
+	</PropertyGroup>
+</Project>
