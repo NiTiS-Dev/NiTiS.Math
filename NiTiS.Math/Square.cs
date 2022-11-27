@@ -7,7 +7,7 @@ namespace NiTiS.Math;
 public readonly struct Square<T> :
 	IEquatable<Square<T>>,
 	IEqualityOperators<Square<T>, Square<T>, bool>
-	where T : unmanaged, INumberBase<T>, IEqualityOperators<T, T, bool>
+	where T : unmanaged, INumberBase<T>, IComparisonOperators<T, T, bool>
 {
 	public readonly Vector2D<T> Min;
 	public readonly Vector2D<T> Max;
