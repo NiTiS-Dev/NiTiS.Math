@@ -1,13 +1,11 @@
 ﻿using NiTiS.Math;
-using System;
-using System.Numerics;
-using System.Runtime.CompilerServices;
 
 namespace NiTiS.Core.Tests;
 
 public static class Program
 {
-	public static void Main(string[] args)
+	public static unsafe void Main(string[] args)
 	{
+		Vector2D<int>* vec = null; 
 	}
 }

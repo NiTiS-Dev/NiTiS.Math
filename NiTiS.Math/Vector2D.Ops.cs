@@ -1,5 +1,4 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Runtime.CompilerServices;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
@@ -127,9 +126,9 @@ public static class Vector2D
 		=> operand / Length(operand);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> Reflect<T>(Vector2D<T> vector, Vector2D<T> normal, T two)
+	public static Vector2D<T> Reflect<T>(Vector2D<T> vector, Vector2D<T> normal)
 		where T : unmanaged, INumberBase<T>
-		=> vector - (two * Dot(vector, normal)) * normal;
+		=> vector - (Scalar<T>.Two * Dot(vector, normal)) * normal;
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Vector2D<T> SquareRoot<T>(Vector2D<T> operand)
