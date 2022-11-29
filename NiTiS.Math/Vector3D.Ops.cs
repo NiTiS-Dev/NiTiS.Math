@@ -44,6 +44,15 @@ public static class Vector3D
 			);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+	public static Vector3D<T> Cross<T>(Vector3D<T> left, Vector3D<T> right)
+		where T : unmanaged, INumberBase<T>
+		=> new(
+			(left.Y * right.Z) - (left.Z * right.Y),
+			(left.Z * right.X) - (left.X * right.Z),
+			(left.X * right.Y) - (left.Y * right.X)
+		);
+
+	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static T Distance<T>(Vector3D<T> from, Vector3D<T> to)
 		where T : unmanaged, INumberBase<T>, IRootFunctions<T>
 		=> T.Sqrt(DistanceSquared(from, to));

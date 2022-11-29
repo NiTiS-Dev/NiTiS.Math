@@ -12,7 +12,7 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 namespace NiTiS.Math;
 
 [DebuggerDisplay($@"{{{nameof(ToString)}(""G""),nq}}")]
-public unsafe readonly struct Vector4D<T> :
+public readonly unsafe struct Vector4D<T> :
 	// Vector op Vector
 	IAdditionOperators<Vector4D<T>, Vector4D<T>, Vector4D<T>>,
 	ISubtractionOperators<Vector4D<T>, Vector4D<T>, Vector4D<T>>,
