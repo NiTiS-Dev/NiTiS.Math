@@ -38,6 +38,7 @@ public readonly unsafe struct Mat4<T>
 		T.Zero, T.Zero, T.Zero, T.One
 		);
 
+	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public Mat4(
 		T m11, T m12, T m13, T m14,
 		T m21, T m22, T m23, T m24,
