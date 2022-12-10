@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 using System.Runtime.CompilerServices;
 using static System.Runtime.CompilerServices.MethodImplOptions;
-using System.Runtime.InteropServices;
 
 namespace NiTiS.Math;
 
@@ -64,13 +63,13 @@ public readonly unsafe struct Mat4<T>
 		M44 = m44;
 	}
 
-	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static explicit operator Matrix4x4(Mat4<T> mat)
-		=> *(Matrix4x4*)&mat;
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Mat4<float> ConvertFromSystem(Matrix4x4 matrix)
+		=> *((Mat4<float>*)&matrix);
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4 ConvertToSystem(Mat4<float> matrix)
+		=> *((Matrix4x4*)&matrix);
 
-	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static explicit operator Mat4<T>(Matrix4x4 mat)
-		=> *(Mat4<T>*)&mat;
 
 	/// <summary>Indicates whether the current matrix is the identity matrix.</summary>
 	/// <value><see langword="true" /> if the current matrix is the identity matrix; otherwise, <see langword="false" />.</value>
