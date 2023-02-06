@@ -63,13 +63,6 @@ public readonly unsafe struct Mat4<T>
 		M44 = m44;
 	}
 
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
-	public static Mat4<float> ConvertFromSystem(Matrix4x4 matrix)
-		=> *((Mat4<float>*)&matrix);
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
-	public static Matrix4x4 ConvertToSystem(Mat4<float> matrix)
-		=> *((Matrix4x4*)&matrix);
-
 
 	/// <summary>Indicates whether the current matrix is the identity matrix.</summary>
 	/// <value><see langword="true" /> if the current matrix is the identity matrix; otherwise, <see langword="false" />.</value>

@@ -1,12 +1,45 @@
 ﻿using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math;
 
 public static class Vector4D
 {
+	// Cast to System.Numerics
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector4D<float> ConvertFromSystem(this Vector4 vector)
+		=> Unsafe.As<Vector4, Vector4D<float>>(ref vector);
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector4 ConvertToSystem(this Vector4D<float> vector)
+		=> Unsafe.As<Vector4D<float>, Vector4>(ref vector);
+
+	// Cast to System.Runtime.Intrinsics
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector4D<TO> ConvertFromSystem<FROM, TO>(this Vector128<FROM> vector)
+		where TO : unmanaged, INumberBase<TO>
+		where FROM : struct
+		=> Unsafe.As<Vector128<FROM>, Vector4D<TO>>(ref vector);
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector128<TO> ConvertToVec128<FROM, TO>(this Vector4D<FROM> vector)
+		where TO : struct
+		where FROM : unmanaged, INumberBase<FROM>
+		=> Unsafe.As< Vector4D<FROM>, Vector128<TO>>(ref vector);
+
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector4D<TO> ConvertFromSystem<FROM, TO>(this Vector256<FROM> vector)
+		where TO : unmanaged, INumberBase<TO>
+		where FROM : struct
+		=> Unsafe.As<Vector256<FROM>, Vector4D<TO>>(ref vector);
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector256<TO> ConvertToVec256<FROM, TO>(this Vector4D<FROM> vector)
+		where TO : struct
+		where FROM : unmanaged, INumberBase<FROM>
+		=> Unsafe.As<Vector4D<FROM>, Vector256<TO>>(ref vector);
+
+
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Vector4D<T> Abs<T>(Vector4D<T> vec)
 		where T : unmanaged, INumberBase<T>

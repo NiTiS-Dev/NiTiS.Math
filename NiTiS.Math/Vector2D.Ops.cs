@@ -1,11 +1,20 @@
 ﻿using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math;
 
-public static class Vector2D
+public static unsafe class Vector2D
 {
+	// Cast to System.Numerics
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector2D<float> ConvertFromSystem(this Vector2 vector)
+		=> Unsafe.As<Vector2, Vector2D<float>>(ref vector);
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector2 ConvertToSystem(this Vector2D<float> vector)
+		=> Unsafe.As<Vector2D<float>, Vector2>(ref vector);
+
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Vector2D<T> Abs<T>(Vector2D<T> vec)
 		where T : unmanaged, INumberBase<T>

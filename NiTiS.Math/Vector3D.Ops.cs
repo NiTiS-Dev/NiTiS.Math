@@ -7,6 +7,14 @@ namespace NiTiS.Math;
 
 public static class Vector3D
 {
+	// Cast to System.Numerics
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector3D<float> ConvertFromSystem(this Vector3 vector)
+		=> Unsafe.As<Vector3, Vector3D<float>>(ref vector);
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Vector3 ConvertToSystem(this Vector3D<float> vector)
+		=> Unsafe.As<Vector3D<float>, Vector3>(ref vector);
+
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Vector3D<T> Abs<T>(Vector3D<T> vec)
 		where T : unmanaged, INumberBase<T>

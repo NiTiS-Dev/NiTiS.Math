@@ -1,11 +1,19 @@
 ﻿using NiTiS.Core.Annotations;
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
+using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math;
 
 public static unsafe class Mat4
 {
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Mat4<float> ConvertFromSystem(Matrix4x4 matrix)
+	=> *((Mat4<float>*)&matrix);
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4 ConvertToSystem(Mat4<float> matrix)
+		=> *((Matrix4x4*)&matrix);
 	public static Mat4<float> CreateBillboard(Vector3D<float> objPos, Vector3D<float> cameraPos, Vector3D<float> cameraUp, Vector3D<float> cameraForward)
 	{
 		const float epsilon = 1e-4f;
