@@ -1,27 +1,46 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<ItemGroup>
+		<None Include="../LICENSE" Pack="true" PackagePath="" />
+		<None Include="../README.md" Pack="true" PackagePath="" />
+		<None Include="./ICON.png" Pack="true" PackagePath="" />
+	</ItemGroup>
 	<PropertyGroup>
-		<Version>2.1.1</Version>
+		<!-- Versioning -->
+		<Version>2.2</Version>
+		<Authors>NiTiS-Dev;NiTiSon</Authors>
 		<TargetFrameworks>net7.0</TargetFrameworks>
 		<Version>$(Version)</Version>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<PackageVersion>$(Version)</PackageVersion>
 
+		<!-- Package info -->
+		<TargetName>$(AssemblyName)</TargetName>
 		<Copyright>Copyright (c) NiTiS-Dev and contributors</Copyright>
-		<PackageLicenseUrl>https://raw.githubusercontent.com/NiTiS-Dev/NiTiS.Math/dev/LICENSE</PackageLicenseUrl>
+		<Summary>$(Description)</Summary>
+		<PackageIcon>./ICON.png</PackageIcon>
+		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Core.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageLicenseFile>./LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>./README.md</PackageReadmeFile>
 
+		<!-- C# Options -->
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<NoWarn>CS8981;CS1591;IDE1006</NoWarn>
 
-		<TargetName>$(AssemblyName)</TargetName>
-
-		<Summary>$(Description)</Summary>
-		<PackageTags>NiTiS;Math;Vectors;Matrix;Vector;Matrixes;Physics</PackageTags>
-		
 		<DebugSymbols>true</DebugSymbols>
-		<DebugType>embedded</DebugType>
-
-		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Math</RepositoryUrl>
-		<PackageIconUrl>https://raw.githubusercontent.com/NiTiS-Dev/meta/singleton/ntscr/core/original.png</PackageIconUrl>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
 	</PropertyGroup>
+
+	<PropertyGroup Condition="$(Configuration)=='Release'">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup Condition="$(TargetFramework) != 'net48'">
+		<Compile Remove="**/*.net48.cs" />
+	</ItemGroup>
 </Project>

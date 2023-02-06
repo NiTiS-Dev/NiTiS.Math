@@ -2,15 +2,13 @@
 	<PropertyGroup>
 		<AssemblyName>NiTiS.Math</AssemblyName>
 
-		<Description>
-			The NiTiS library including math
-		</Description>
-		
-		<PackageTags>NiTiS;Math;Generic Math</PackageTags>
+		<Description>The NiTiS library providing maths structs and operations</Description>
+
+		<PackageTags>NiTiS;Math;Vectors;Matrix;Vector;Matrixes;Physics;Generics</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NiTiS.Core" Version="3.1" />
+		<PackageReference Include="NiTiS.Core" Version="3.2.1" />
 	</ItemGroup>
 	
 	<Import Project="../Meta.props" />

@@ -7,7 +7,7 @@ namespace NiTiS.Math;
 
 [DebuggerDisplay("Progression [{First}:{D}] {Get(1)},{Get(2)},{Get(3)}")]
 [ObsoleteImpl]
-public class ArithmeticProgression : IProgression<double>
+public class ArithmeticProgression : IMathProgression<double>
 {
 	public double First { get; set; }
 	public double D { get; private set; }

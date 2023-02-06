@@ -1,5 +1,4 @@
-﻿using NiTiS.Core.Operators;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -28,10 +27,7 @@ public readonly unsafe struct Vector3D<T> :
 	IUnaryNegationOperators<Vector3D<T>, Vector3D<T>>,
 	IUnaryPlusOperators<Vector3D<T>, Vector3D<T>>,
 	IFormattable,
-	IEquatable<Vector3D<T>>,
-	// Cast op
-	IImplicitCastOperators<Vector3D<T>, Vector2D<T>>,
-	IExplicitCastOperators<Vector3D<T>, Vector4D<T>>
+	IEquatable<Vector3D<T>>
 	where T :
 		unmanaged,
 		INumberBase<T>

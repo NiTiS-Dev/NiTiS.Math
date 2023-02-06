@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NiTiS.Math;
 
-public interface IProgression<T>
+public interface IMathProgression<T>
 {
 	/// <summary>
 	/// First element of progression
