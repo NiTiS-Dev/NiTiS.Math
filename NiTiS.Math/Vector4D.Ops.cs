@@ -60,6 +60,21 @@ public static class Vector4D
 		=> left + right;
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+	public static T AngleBetween<T>(Vector4D<T> left, Vector4D<T> right)
+		where T : unmanaged, INumberBase<T>, IRootFunctions<T>, ITrigonometricFunctions<T>, IComparisonOperators<T, T, bool>
+	{
+		T value = Dot(left, right);
+		T v1Length = Length(left);
+		T v2Length = Length(right);
+
+		value /= v1Length * v2Length;
+
+		if (value <= -T.One) return T.Pi;
+		if (value >= T.One) return T.Zero;
+		return T.Acos(value);
+	}
+
+	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Vector4D<T> Bitwise<T>(Vector4D<T> operand)
 		where T : unmanaged, INumberBase<T>, IBitwiseOperators<T, T, T>
 		=> new(

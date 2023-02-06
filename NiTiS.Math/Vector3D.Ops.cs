@@ -34,6 +34,21 @@ public static class Vector3D
 		=> left + right;
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+	public static T AngleBetween<T>(Vector3D<T> left, Vector3D<T> right)
+		where T : unmanaged, INumberBase<T>, IRootFunctions<T>, ITrigonometricFunctions<T>, IComparisonOperators<T, T, bool>
+	{
+		T value = Dot(left, right);
+		T v1Length = Length(left);
+		T v2Length = Length(right);
+
+		value /= v1Length * v2Length;
+
+		if (value <= -T.One) return T.Pi;
+		if (value >= T.One) return T.Zero;
+		return T.Acos(value);
+	}
+
+	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Vector3D<T> Bitwise<T>(Vector3D<T> operand)
 		where T : unmanaged, INumberBase<T>, IBitwiseOperators<T, T, T>
 		=> new(

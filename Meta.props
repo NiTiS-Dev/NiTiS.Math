@@ -6,7 +6,7 @@
 	</ItemGroup>
 	<PropertyGroup>
 		<!-- Versioning -->
-		<Version>2.3</Version>
+		<Version>2.3.1</Version>
 		<Authors>NiTiS-Dev;NiTiSon</Authors>
 		<TargetFrameworks>net7.0</TargetFrameworks>
 		<Version>$(Version)</Version>

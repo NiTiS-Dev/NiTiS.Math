@@ -33,6 +33,21 @@ public static unsafe class Vector2D
 		=> left + right;
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+	public static T AngleBetween<T>(Vector2D<T> left, Vector2D<T> right)
+		where T : unmanaged, INumberBase<T>, IRootFunctions<T>, ITrigonometricFunctions<T>, IComparisonOperators<T, T, bool>
+	{
+		T value = Dot(left, right);
+		T v1Length = Length(left);
+		T v2Length = Length(right);
+
+		value /= v1Length * v2Length;
+
+		if (value <= -T.One) return T.Pi;
+		if (value >=  T.One) return T.Zero;
+		return T.Acos(value);
+	}
+
+	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Vector2D<T> Bitwise<T>(Vector2D<T> operand)
 		where T : unmanaged, INumberBase<T>, IBitwiseOperators<T, T, T>
 		=> new(
