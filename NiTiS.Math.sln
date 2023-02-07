@@ -5,6 +5,7 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{28AAFD0D-1666-43A5-8DB4-F8B861645D71}"
 	ProjectSection(SolutionItems) = preProject
+		.filenesting.json = .filenesting.json
 		.github\workflows\build.yml = .github\workflows\build.yml
 		Meta.props = Meta.props
 		README.md = README.md

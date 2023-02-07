@@ -454,6 +454,272 @@ public static unsafe class Matrix4x4
 		return result;
 	}
 
+	/// <summary>
+	/// Creates a customized perspective projection matrix
+	/// </summary>
+	/// <param name="left">The minimum x-value of the view volume at the near view plane</param>
+	/// <param name="right">The maximum x-value of the view volume at the near view plane</param>
+	/// <param name="bottom">The minimum y-value of the view volume at the near view plane</param>
+	/// <param name="top">The maximum y-value of the view volume at the near view plane</param>
+	/// <param name="nearPlaneDistance">The distance to the near view plane</param>
+	/// <param name="farPlaneDistance">The distance to the far view plane</param>
+	/// <returns>The perspective projection matrix</returns>
+	/// <exception cref="System.ArgumentOutOfRangeException"><paramref name="nearPlaneDistance" /> is less than or equal to zero
+	/// -or-
+	/// <paramref name="farPlaneDistance" /> is less than or equal to zero
+	/// -or-
+	/// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" /></exception>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4<T> CreatePerspectiveOffCenter<T>(T left, T right, T bottom, T top, T nearPlaneDistance, T farPlaneDistance)
+		where T : unmanaged, INumberBase<T>, IComparisonOperators<T, T, bool>
+	{
+		if (nearPlaneDistance <= T.Zero)
+			throw new ArgumentOutOfRangeException(nameof(nearPlaneDistance));
+
+		if (farPlaneDistance <= T.Zero)
+			throw new ArgumentOutOfRangeException(nameof(farPlaneDistance));
+
+		if (nearPlaneDistance >= farPlaneDistance)
+			throw new ArgumentOutOfRangeException(nameof(nearPlaneDistance));
+
+		Matrix4x4<T> result;
+
+		T Two = T.One + T.One;
+
+		result.M11 = Two * nearPlaneDistance / (right - left);
+		result.M12 = result.M13 = result.M14 = T.Zero;
+
+		result.M22 = Two * nearPlaneDistance / (top - bottom);
+		result.M21 = result.M23 = result.M24 = T.Zero;
+
+		result.M31 = (left + right) / (right - left);
+		result.M32 = (top + bottom) / (top - bottom);
+		T negFarRange = T.IsPositiveInfinity(farPlaneDistance) ? -T.One : farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+		result.M33 = negFarRange;
+		result.M34 = -T.One;
+
+		result.M43 = nearPlaneDistance * negFarRange;
+		result.M41 = result.M42 = result.M44 = T.Zero;
+
+		return result;
+	}
+
+	/*
+	/// <summary>
+	/// Creates a matrix that reflects the coordinate system about a specified plane
+	/// </summary>
+	/// <param name="value">The plane about which to create a reflection</param>
+	/// <returns>A new matrix expressing the reflection</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4 CreateReflection(Plane value)
+	{
+		value = Plane.Normalize(value);
+
+		float a = value.Normal.X;
+		float b = value.Normal.Y;
+		float c = value.Normal.Z;
+
+		float fa = -2.0f * a;
+		float fb = -2.0f * b;
+		float fc = -2.0f * c;
+
+		Matrix4x4 result = Identity;
+
+		result.M11 = fa * a + 1.0f;
+		result.M12 = fb * a;
+		result.M13 = fc * a;
+
+		result.M21 = fa * b;
+		result.M22 = fb * b + 1.0f;
+		result.M23 = fc * b;
+
+		result.M31 = fa * c;
+		result.M32 = fb * c;
+		result.M33 = fc * c + 1.0f;
+
+		result.M41 = fa * value.D;
+		result.M42 = fb * value.D;
+		result.M43 = fc * value.D;
+
+		return result;
+	}*/
+
+	/// <summary>
+	/// Creates a matrix for rotating points around the X axis
+	/// </summary>
+	/// <param name="radians">The amount, in radians, by which to rotate around the X axis</param>
+	/// <returns>The rotation matrix</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4<T> CreateRotationX<T>(T radians)
+		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
+	{
+		Matrix4x4<T> result = Matrix4x4<T>.Identity;
+
+		T c = T.Cos(radians);
+		T s = T.Sin(radians);
+
+		// [  1  0  0  0 ]
+		// [  0  c  s  0 ]
+		// [  0 -s  c  0 ]
+		// [  0  0  0  1 ]
+
+		result.M22 = c;
+		result.M23 = s;
+		result.M32 = -s;
+		result.M33 = c;
+
+		return result;
+	}
+
+	/// <summary>
+	/// Creates a matrix for rotating points around the X axis from a center point
+	/// </summary>
+	/// <param name="radians">The amount, in radians, by which to rotate around the X axis</param>
+	/// <param name="centerPoint">The center point</param>
+	/// <returns>The rotation matrix</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4<T> CreateRotationX<T>(T radians, Vector3D<T> centerPoint)
+		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
+	{
+		Matrix4x4<T> result = Matrix4x4<T>.Identity;
+
+		T c = T.Cos(radians);
+		T s = T.Sin(radians);
+
+		T y = centerPoint.Y * (T.One - c) + centerPoint.Z * s;
+		T z = centerPoint.Z * (T.One - c) - centerPoint.Y * s;
+
+		// [  1  0  0  0 ]
+		// [  0  c  s  0 ]
+		// [  0 -s  c  0 ]
+		// [  0  y  z  1 ]
+
+		result.M22 = c;
+		result.M23 = s;
+		result.M32 = -s;
+		result.M33 = c;
+		result.M42 = y;
+		result.M43 = z;
+
+		return result;
+	}
+
+	/// <summary>
+	/// Creates a matrix for rotating points around the Y axis
+	/// </summary>
+	/// <param name="radians">The amount, in radians, by which to rotate around the Y-axis</param>
+	/// <returns>The rotation matrix</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4<T> CreateRotationY<T>(T radians)
+		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
+	{
+		Matrix4x4<T> result = Matrix4x4<T>.Identity;
+
+		T c = T.Cos(radians);
+		T s = T.Sin(radians);
+
+		// [  c  0 -s  0 ]
+		// [  0  1  0  0 ]
+		// [  s  0  c  0 ]
+		// [  0  0  0  1 ]
+		result.M11 = c;
+		result.M13 = -s;
+		result.M31 = s;
+		result.M33 = c;
+
+		return result;
+	}
+
+	/// <summary>
+	/// The amount, in radians, by which to rotate around the Y axis from a center point
+	/// </summary>
+	/// <param name="radians">The amount, in radians, by which to rotate around the Y-axis</param>
+	/// <param name="centerPoint">The center point</param>
+	/// <returns>The rotation matrix.</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4<T> CreateRotationY<T>(T radians, Vector3D<T> centerPoint)
+		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
+	{
+		Matrix4x4<T> result = Matrix4x4<T>.Identity;
+
+		T c = T.Cos(radians);
+		T s = T.Sin(radians);
+
+		T x = centerPoint.X * (T.One - c) - centerPoint.Z * s;
+		T z = centerPoint.Z * (T.One - c) + centerPoint.X * s;
+
+		// [  c  0 -s  0 ]
+		// [  0  1  0  0 ]
+		// [  s  0  c  0 ]
+		// [  x  0  z  1 ]
+		result.M11 = c;
+		result.M13 = -s;
+		result.M31 = s;
+		result.M33 = c;
+		result.M41 = x;
+		result.M43 = z;
+
+		return result;
+	}
+
+	/// <summary>
+	/// Creates a matrix for rotating points around the Z axis
+	/// </summary>
+	/// <param name="radians">The amount, in radians, by which to rotate around the Z-axis</param>
+	/// <returns>The rotation matrix</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4<T> CreateRotationZ<T>(T radians)
+		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
+	{
+		Matrix4x4<T> result = Matrix4x4<T>.Identity;
+
+		T c = T.Cos(radians);
+		T s = T.Sin(radians);
+
+		// [  c  s  0  0 ]
+		// [ -s  c  0  0 ]
+		// [  0  0  1  0 ]
+		// [  0  0  0  1 ]
+		result.M11 = c;
+		result.M12 = s;
+		result.M21 = -s;
+		result.M22 = c;
+
+		return result;
+	}
+
+	/// <summary>
+	/// Creates a matrix for rotating points around the Z axis from a center point
+	/// </summary>
+	/// <param name="radians">The amount, in radians, by which to rotate around the Z-axis</param>
+	/// <param name="centerPoint">The center point</param>
+	/// <returns>The rotation matrix</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	public static Matrix4x4<T> CreateRotationZ<T>(T radians, Vector3D<T> centerPoint)
+		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
+	{
+		Matrix4x4<T> result = Matrix4x4<T>.Identity;
+
+		T c = T.Cos(radians);
+		T s = T.Sin(radians);
+
+		T x = centerPoint.X * (T.One - c) + centerPoint.Y * s;
+		T y = centerPoint.Y * (T.One - c) - centerPoint.X * s;
+
+		// [  c  s  0  0 ]
+		// [ -s  c  0  0 ]
+		// [  0  0  1  0 ]
+		// [  x  y  0  1 ]
+		result.M11 = c;
+		result.M12 = s;
+		result.M21 = -s;
+		result.M22 = c;
+		result.M41 = x;
+		result.M42 = y;
+
+		return result;
+	}
+
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateTranslation<T>(Vector3D<T> position)
 		where T : unmanaged, INumberBase<T>
