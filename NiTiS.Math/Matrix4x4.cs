@@ -8,7 +8,7 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 namespace NiTiS.Math;
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
-public unsafe struct Mat4<T>
+public unsafe struct Matrix4x4<T>
 	where T : unmanaged, INumberBase<T>
 {
 	#region Matrix
@@ -84,7 +84,7 @@ public unsafe struct Mat4<T>
 	public Vector3D<T> Translation
 		=> new(M41, M42, M43);
 
-	public static readonly Mat4<T> Identity = new(
+	public static readonly Matrix4x4<T> Identity = new(
 		T.One, T.Zero, T.Zero, T.Zero,
 		T.Zero, T.One, T.Zero, T.Zero,
 		T.Zero, T.Zero, T.One, T.Zero,
@@ -92,7 +92,7 @@ public unsafe struct Mat4<T>
 		);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public Mat4(
+	public Matrix4x4(
 		T m11, T m12, T m13, T m14,
 		T m21, T m22, T m23, T m24,
 		T m31, T m32, T m33, T m34,
