@@ -1,14 +1,12 @@
 {
-  "help": "https://go.microsoft.com/fwlink/?linkid=866610",
-  "dependentFileProviders": {
-    "add": {
-      "extensionToExtension": {
-        "add": {
-          ".cs": [
-            ".Ops.cs"
-          ]
-        }
-      }
-    }
-  }
+	"help": "https://go.microsoft.com/fwlink/?linkid=866610",
+	"dependentFileProviders": {
+		"add": {
+			"extensionToExtension": {
+				"add": {
+					".Ops.cs": [".cs"]
+				}
+			}
+		}
+	}
 }
