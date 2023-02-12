@@ -55,7 +55,7 @@ public unsafe struct Matrix4x4<T>
 		=> new(M13, M23, M33, M43);
 	public Vector4D<T> Column4
 		=> new(M14, M24, M34, M44);
-	
+
 	public T this[int index]
 	{
 		get
@@ -121,7 +121,7 @@ public unsafe struct Matrix4x4<T>
 	/// <summary>Indicates whether the current matrix is the identity matrix.</summary>
 	/// <value><see langword="true" /> if the current matrix is the identity matrix; otherwise: <see langword="false" />.</value>
 	public readonly bool IsIdentity
-			=> M11 == T.One  && M22 == T.One  && M33 == T.One && M44 == T.One
+			=> M11 == T.One && M22 == T.One && M33 == T.One && M44 == T.One
 			&& M12 == T.Zero && M13 == T.Zero && M14 == T.Zero
 			&& M21 == T.Zero && M23 == T.Zero && M24 == T.Zero
 			&& M31 == T.Zero && M32 == T.Zero && M34 == T.Zero

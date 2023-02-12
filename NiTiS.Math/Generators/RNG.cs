@@ -2,22 +2,44 @@
 
 namespace NiTiS.Math.Generators;
 
+/// <summary>
+/// The random number generator base
+/// </summary>
 public abstract class RNG
 {
-    /// <returns>Range of (0f; 1f)</returns>
-    public abstract double Next();
-    public virtual int Next(int min, int max) => Next(max - min) + min;
-    public virtual int Next(int max) => (int)(max * Next());
-    public virtual int this[int min, int max] => Next(min, max);
-    public virtual int this[int max] => Next(max);
-    public virtual float NextSingle()
-        => (float)Next();
-#if NET5_0_OR_GREATER
-    public virtual Half NextHalf()
-        => (Half)Next();
-#else
-	[Obsolete("Half type is not supported\nUse net5.0 or highter")]
-	public virtual float NextHalf()
+	/// <summary>
+	/// Generates a pseudo random number in range from 0 to 1
+	/// </summary>
+	/// <returns>Range of (0f; 1f)</returns>
+	public abstract double Next();
+	/// <summary>
+	/// Generates a pseudo random number in range from <paramref name="min"/> to <paramref name="max"/>
+	/// </summary>
+	/// <param name="min">Minimum posible value</param>
+	/// <param name="max">Maximum posible value</param>
+	/// <returns>[<paramref name="min"/>; <paramref name="max"/>)</returns>
+	public virtual int Next(int min, int max) => Next(max - min) + min;
+	/// <summary>
+	/// Generates a pseudo random number in range from 0 to <paramref name="max"/>
+	/// </summary>
+	/// <param name="max">Maximum posible value</param>
+	/// <returns>[0; <paramref name="max"/>)</returns>
+	public virtual int Next(int max) => (int)(max * Next());
+	/// <summary>
+	/// Generates a pseudo random number in range from <paramref name="min"/> to <paramref name="max"/>
+	/// </summary>
+	/// <param name="min">Minimum posible value</param>
+	/// <param name="max">Maximum posible value</param>
+	/// <returns>[<paramref name="min"/>; <paramref name="max"/>)</returns>
+	public virtual int this[int min, int max] => Next(min, max);
+	/// <summary>
+	/// Generates a pseudo random number in range from 0 to <paramref name="max"/>
+	/// </summary>
+	/// <param name="max">Maximum posible value</param>
+	/// <returns>[0; <paramref name="max"/>)</returns>
+	public virtual int this[int max] => Next(max);
+	public virtual float NextSingle()
 		=> (float)Next();
-#endif
+	public virtual Half NextHalf()
+		=> (Half)Next();
 }

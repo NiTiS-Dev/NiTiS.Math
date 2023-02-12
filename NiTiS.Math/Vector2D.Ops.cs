@@ -9,7 +9,7 @@ public static unsafe class Vector2D
 {
 	// Cast to System.Numerics
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
-	public static Vector2D<float> ConvertFromSystem(this Vector2 vector)
+	public static Vector2D<float> ConvertToGeneric(this Vector2 vector)
 		=> Unsafe.As<Vector2, Vector2D<float>>(ref vector);
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Vector2 ConvertToSystem(this Vector2D<float> vector)

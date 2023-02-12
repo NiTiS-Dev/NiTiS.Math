@@ -11,7 +11,7 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 namespace NiTiS.Math;
 
 [DebuggerDisplay($@"{{{nameof(ToString)}(""G""),nq}}")]
-public readonly unsafe struct Vector3D<T> :
+public unsafe struct Vector3D<T> :
 	// Vector op Vector
 	IAdditionOperators<Vector3D<T>, Vector3D<T>, Vector3D<T>>,
 	ISubtractionOperators<Vector3D<T>, Vector3D<T>, Vector3D<T>>,
@@ -32,9 +32,9 @@ public readonly unsafe struct Vector3D<T> :
 		unmanaged,
 		INumberBase<T>
 {
-	public readonly T X;
-	public readonly T Y;
-	public readonly T Z;
+	public T X;
+	public T Y;
+	public T Z;
 	public readonly T LengthSquared
 	{
 		[MethodImpl(AggressiveInlining | AggressiveOptimization)]

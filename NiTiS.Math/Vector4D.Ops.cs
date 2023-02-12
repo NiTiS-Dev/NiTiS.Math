@@ -10,7 +10,7 @@ public static class Vector4D
 {
 	// Cast to System.Numerics
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
-	public static Vector4D<float> ConvertFromSystem(this Vector4 vector)
+	public static Vector4D<float> ConvertToGeneric(this Vector4 vector)
 		=> Unsafe.As<Vector4, Vector4D<float>>(ref vector);
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Vector4 ConvertToSystem(this Vector4D<float> vector)
