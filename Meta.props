@@ -18,7 +18,7 @@
 		<Copyright>Copyright (c) NiTiS-Dev and contributors</Copyright>
 		<Summary>$(Description)</Summary>
 		<PackageIcon>./ICON.png</PackageIcon>
-		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Core.git</RepositoryUrl>
+		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Math.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseFile>./LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>./README.md</PackageReadmeFile>
