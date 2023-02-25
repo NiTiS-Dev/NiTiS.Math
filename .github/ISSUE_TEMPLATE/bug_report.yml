@@ -7,14 +7,3 @@ body:
     attributes:
       value: |
         Please full a form and describe bug!
-  - type: checkboxes
-    id: typek
-    attributes:
-      label: Traits of bug
-      description: Choose traits that describes this issue
-      options:
-        - label: Arithmetic error
-  - type: textarea
-    label: Please, describe!
-  - type: textarea
-    label: StackTrace
