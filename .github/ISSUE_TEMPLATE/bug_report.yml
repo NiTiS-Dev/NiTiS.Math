@@ -6,10 +6,15 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please full a form and describe bug!
+        # Please full a form and describe bug!<br/>
   - type: textarea
     attributes:
       label: Describe a bug
       placeholder: Sometimes X return non-valid value
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: StackTrace (optional)
+    validations:
+      required: false
