@@ -1,6 +1,8 @@
 ﻿using NiTiS.Core;
 using NiTiS.Core.Annotations;
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -13,7 +15,11 @@ namespace NiTiS.Math.Geometry;
 /// <typeparam name="T">Quaternion data type.</typeparam>
 [NotImplementYet]
 [Obsolete(nameof(NotImplementYetAttribute))]
-public unsafe struct Quaternion<T>
+[DebuggerDisplay($"{{{nameof(ToString)}()}}")]
+public unsafe struct Quaternion<T> :
+	IEqualityOperators<Quaternion<T>, Quaternion<T>, bool>,
+
+	IEquatable<Quaternion<T>>
 	where T :
 		unmanaged,
 		INumberBase<T>
@@ -266,4 +272,13 @@ public unsafe struct Quaternion<T>
 			|| (left.Z != right.Z)
 			|| (left.W != right.W);
 	}
+
+	public override readonly bool Equals([NotNullWhen(true)] object? obj)
+		=> obj is Quaternion<T> q && q == this;
+	public readonly bool Equals(Quaternion<T> other)
+		=> other == this;
+	public override readonly int GetHashCode()
+		=> HashCode.Combine(X, Y, Z, W);
+	public override string ToString()
+		=> $"{{<{X}, {Y}, {Z}>, {W}}}";
 }

@@ -25,13 +25,13 @@ public static unsafe class Matrix4x4
 
 	#region Create
 	/// <summary>
-	/// Creates a spherical billboard that rotates around a specified object position
+	/// Creates a spherical billboard that rotates around a specified object position.
 	/// </summary>
-	/// <param name="ojbectPosition">The position of the object that the billboard will rotate around</param>
-	/// <param name="cameraPosition">The position of the camera</param>
-	/// <param name="cameraUp">The up vector of the camera</param>
-	/// <param name="cameraForward">The forward vector of the camera</param>
-	/// <returns>The created billboard</returns>
+	/// <param name="ojbectPosition">The position of the object that the billboard will rotate around.</param>
+	/// <param name="cameraPosition">The position of the camera.</param>
+	/// <param name="cameraUp">The up vector of the camera.</param>
+	/// <param name="cameraForward">The forward vector of the camera.</param>
+	/// <returns>The created billboard.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<float> CreateBillboard(Vector3d<float> ojbectPosition, Vector3d<float> cameraPosition, Vector3d<float> cameraUp, Vector3d<float> cameraForward)
 	{
@@ -76,14 +76,14 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a cylindrical billboard that rotates around a specified axis
+	/// Creates a cylindrical billboard that rotates around a specified axis.
 	/// </summary>
-	/// <param name="objectPosition">The position of the object that the billboard will rotate around</param>
-	/// <param name="cameraPosition">The position of the camera</param>
-	/// <param name="rotateAxis">The axis to rotate the billboard around</param>
-	/// <param name="cameraForward">The forward vector of the camera</param>
-	/// <param name="objectForward">The forward vector of the object</param>
-	/// <returns></returns>
+	/// <param name="objectPosition">The position of the object that the billboard will rotate around.</param>
+	/// <param name="cameraPosition">The position of the camera.</param>
+	/// <param name="rotateAxis">The axis to rotate the billboard around.</param>
+	/// <param name="cameraForward">The forward vector of the camera.</param>
+	/// <param name="objectForward">The forward vector of the object.</param>
+	/// <returns>The billboard matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<float> CreateConstrainedBillboard(Vector3d<float> objectPosition, Vector3d<float> cameraPosition, Vector3d<float> rotateAxis, Vector3d<float> cameraForward, Vector3d<float> objectForward)
 	{
@@ -153,11 +153,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix that rotates around an arbitrary vector
+	/// Creates a matrix that rotates around an arbitrary vector.
 	/// </summary>
-	/// <param name="axis">The axis to rotate around</param>
-	/// <param name="angle">The angle to rotate around axis, in radians</param>
-	/// <returns>The rotation matrix</returns>
+	/// <param name="axis">The axis to rotate around.</param>
+	/// <param name="angle">The angle to rotate around axis, in radians.</param>
+	/// <returns>The rotation matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateFromAxisAngle<T>(Vector3d<T> axis, T angle)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
@@ -211,10 +211,10 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a rotation matrix from the specified Quaternion rotation value
+	/// Creates a rotation matrix from the specified Quaternion rotation value.
 	/// </summary>
-	/// <param name="quaternion">The source Quaternion</param>
-	/// <returns>The rotation matrix</returns>
+	/// <param name="quaternion">The source Quaternion.</param>
+	/// <returns>The rotation matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateFromQuaternion<T>(Quaternion<T> quaternion)
 		where T : unmanaged, INumberBase<T>
@@ -254,6 +254,7 @@ public static unsafe class Matrix4x4
 	/// <param name="pitch">The angle of rotation, in radians, around the X axis.</param>
 	/// <param name="roll">The angle of rotation, in radians, around the Z axis.</param>
 	/// <returns>The rotation matrix.</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateFromYawPitchRoll<T>(T yaw, T pitch, T roll)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
@@ -262,13 +263,13 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a view matrix
+	/// Creates a view matrix.
 	/// </summary>
-	/// <param name="cameraPosition">The position of the camera</param>
-	/// <param name="cameraTarget">The target towards which the camera is pointing</param>
-	/// <param name="cameraUpVector">The direction that is "up" from the camera's point of view</param>
-	/// <returns>The view matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="cameraPosition">The position of the camera.</param>
+	/// <param name="cameraTarget">The target towards which the camera is pointing.</param>
+	/// <param name="cameraUpVector">The direction that is "up" from the camera's point of view.</param>
+	/// <returns>The view matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateLookAt<T>(Vector3d<T> cameraPosition, Vector3d<T> cameraTarget, Vector3d<T> cameraUpVector)
 		where T : unmanaged, INumberBase<T>, IRootFunctions<T>
 	{
@@ -298,23 +299,21 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates an orthographic perspective matrix from the given view volume dimensions
+	/// Creates an orthographic perspective matrix from the given view volume dimensions.
 	/// </summary>
-	/// <param name="width">The width of the view volume</param>
-	/// <param name="height">The height of the view volume</param>
-	/// <param name="zNearPlane">The minimum Z-value of the view volume</param>
-	/// <param name="zFarPlane">The maximum Z-value of the view volume</param>
-	/// <returns>The orthographic projection matrix</returns>
+	/// <param name="width">The width of the view volume.</param>
+	/// <param name="height">The height of the view volume.</param>
+	/// <param name="zNearPlane">The minimum Z-value of the view volume.</param>
+	/// <param name="zFarPlane">The maximum Z-value of the view volume.</param>
+	/// <returns>The orthographic projection matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateOrthographic<T>(T width, T height, T zNearPlane, T zFarPlane)
 		where T : unmanaged, INumberBase<T>
 	{
 		Matrix4x4<T> result = Matrix4x4<T>.Identity;
 
-		T Two = T.One + T.One;
-
-		result.M11 = Two / width;
-		result.M22 = Two / height;
+		result.M11 = Scalar<T>.Two / width;
+		result.M22 = Scalar<T>.Two / height;
 		result.M33 = T.One / (zNearPlane - zFarPlane);
 		result.M43 = zNearPlane / (zNearPlane - zFarPlane);
 
@@ -322,25 +321,23 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a customized orthographic projection matrix</summary>
-	/// <param name="left">The minimum X-value of the view volume</param>
-	/// <param name="right">The maximum X-value of the view volume</param>
-	/// <param name="bottom">The minimum Y-value of the view volume</param>
-	/// <param name="top">The maximum Y-value of the view volume</param>
-	/// <param name="zNearPlane">The minimum Z-value of the view volume</param>
-	/// <param name="zFarPlane">The maximum Z-value of the view volume</param>
-	/// <returns>The orthographic projection matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// Creates a customized orthographic projection matrix.</summary>
+	/// <param name="left">The minimum X-value of the view volume.</param>
+	/// <param name="right">The maximum X-value of the view volume.</param>
+	/// <param name="bottom">The minimum Y-value of the view volume.</param>
+	/// <param name="top">The maximum Y-value of the view volume.</param>
+	/// <param name="zNearPlane">The minimum Z-value of the view volume.</param>
+	/// <param name="zFarPlane">The maximum Z-value of the view volume.</param>
+	/// <returns>The orthographic projection matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateOrthographicOffCenter<T>(T left, T right, T bottom, T top, T zNearPlane, T zFarPlane)
 		where T : unmanaged, INumberBase<T>
 	{
 		Matrix4x4<T> result = Matrix4x4<T>.Identity;
 
-		T Two = T.One + T.One;
+		result.M11 = Scalar<T>.Two / (right - left);
 
-		result.M11 = Two / (right - left);
-
-		result.M22 = Two / (top - bottom);
+		result.M22 = Scalar<T>.Two / (top - bottom);
 
 		result.M33 = T.One / (zNearPlane - zFarPlane);
 
@@ -352,19 +349,21 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a perspective projection matrix from the given view volume dimensions
+	/// Creates a perspective projection matrix from the given view volume dimensions.
 	/// </summary>
-	/// <param name="width">The width of the view volume at the near view plane</param>
-	/// <param name="height">The height of the view volume at the near view plane</param>
-	/// <param name="nearPlaneDistance">The distance to the near view plane</param>
-	/// <param name="farPlaneDistance">The distance to the far view plane</param>
-	/// <returns>The perspective projection matrix</returns>
-	/// <exception cref="ArgumentOutOfRangeException"><paramref name="nearPlaneDistance" /> is less than or equal to zero
-	/// -or-
-	/// <paramref name="farPlaneDistance" /> is less than or equal to zero
-	/// -or-
-	/// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" /></exception>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="width">The width of the view volume at the near view plane.</param>
+	/// <param name="height">The height of the view volume at the near view plane.</param>
+	/// <param name="nearPlaneDistance">The distance to the near view plane.</param>
+	/// <param name="farPlaneDistance">The distance to the far view plane.</param>
+	/// <returns>The perspective projection matrix.</returns>
+	/// <exception cref="ArgumentOutOfRangeException">
+	///	<paramref name="nearPlaneDistance" /> is less than or equal to zero.
+	///	-or-
+	///	<paramref name="farPlaneDistance" /> is less than or equal to zero.
+	///	-or-
+	///	<paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.
+	/// </exception>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreatePerspective<T>(T width, T height, T nearPlaneDistance, T farPlaneDistance)
 		where T : unmanaged, INumberBase<T>, IComparisonOperators<T, T, bool>
 	{
@@ -399,21 +398,22 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a perspective projection matrix based on a field of view, aspect ratio, and near and far view plane distances
+	/// Creates a perspective projection matrix based on a field of view, aspect ratio, and near and far view plane distances.
 	/// </summary>
-	/// <param name="fieldOfView">The field of view in the y direction, in radians</param>
-	/// <param name="aspectRatio">The aspect ratio, defined as view space width divided by height</param>
-	/// <param name="nearPlaneDistance">The distance to the near view plane</param>
-	/// <param name="farPlaneDistance">The distance to the far view plane</param>
+	/// <param name="fieldOfView">The field of view in the y direction, in radians.</param>
+	/// <param name="aspectRatio">The aspect ratio, defined as view space width divided by height.</param>
+	/// <param name="nearPlaneDistance">The distance to the near view plane.</param>
+	/// <param name="farPlaneDistance">The distance to the far view plane.</param>
 	/// <returns>The perspective projection matrix.</returns>
-	/// <exception cref="ArgumentOutOfRangeException"><paramref name="fieldOfView" /> is less than or equal to zero
+	/// <exception cref="ArgumentOutOfRangeException">
+	/// <paramref name="fieldOfView" /> is less than or equal to zero.
 	/// -or-
-	/// <paramref name="fieldOfView" /> is greater than or equal to <see cref="SMath.PI" />
-	/// <paramref name="nearPlaneDistance" /> is less than or equal to zero
+	/// <paramref name="fieldOfView" /> is greater than or equal to <see cref="SMath.PI" />.
+	/// <paramref name="nearPlaneDistance" /> is less than or equal to zero.
 	/// -or-
-	/// <paramref name="farPlaneDistance" /> is less than or equal to zero
+	/// <paramref name="farPlaneDistance" /> is less than or equal to zero.
 	/// -or-
-	/// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" /></exception>
+	/// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.</exception>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreatePerspectiveFieldOfView<T>(T fieldOfView, T aspectRatio, T nearPlaneDistance, T farPlaneDistance)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>, IComparisonOperators<T, T, bool>
@@ -453,21 +453,23 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a customized perspective projection matrix
+	/// Creates a customized perspective projection matrix.
 	/// </summary>
-	/// <param name="left">The minimum x-value of the view volume at the near view plane</param>
-	/// <param name="right">The maximum x-value of the view volume at the near view plane</param>
-	/// <param name="bottom">The minimum y-value of the view volume at the near view plane</param>
-	/// <param name="top">The maximum y-value of the view volume at the near view plane</param>
-	/// <param name="nearPlaneDistance">The distance to the near view plane</param>
-	/// <param name="farPlaneDistance">The distance to the far view plane</param>
-	/// <returns>The perspective projection matrix</returns>
-	/// <exception cref="ArgumentOutOfRangeException"><paramref name="nearPlaneDistance" /> is less than or equal to zero
+	/// <param name="left">The minimum x-value of the view volume at the near view plane.</param>
+	/// <param name="right">The maximum x-value of the view volume at the near view plane.</param>
+	/// <param name="bottom">The minimum y-value of the view volume at the near view plane.</param>
+	/// <param name="top">The maximum y-value of the view volume at the near view plane.</param>
+	/// <param name="nearPlaneDistance">The distance to the near view plane.</param>
+	/// <param name="farPlaneDistance">The distance to the far view plane.</param>
+	/// <returns>The perspective projection matrix.</returns>
+	/// <exception cref="ArgumentOutOfRangeException">
+	/// <paramref name="nearPlaneDistance" /> is less than or equal to zero.
 	/// -or-
-	/// <paramref name="farPlaneDistance" /> is less than or equal to zero
+	/// <paramref name="farPlaneDistance" /> is less than or equal to zero.
 	/// -or-
-	/// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" /></exception>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <paramref name="nearPlaneDistance" /> is greater than or equal to <paramref name="farPlaneDistance" />.
+	/// </exception>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreatePerspectiveOffCenter<T>(T left, T right, T bottom, T top, T nearPlaneDistance, T farPlaneDistance)
 		where T : unmanaged, INumberBase<T>, IComparisonOperators<T, T, bool>
 	{
@@ -503,13 +505,13 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix that reflects the coordinate system about a specified plane
+	/// Creates a matrix that reflects the coordinate system about a specified plane.
 	/// </summary>
-	/// <param name="value">The plane about which to create a reflection</param>
-	/// <returns>A new matrix expressing the reflection</returns>
+	/// <param name="value">The plane about which to create a reflection.</param>
+	/// <returns>A new matrix expressing the reflection.</returns>
 	[NotImplementYet]
 	[Obsolete(nameof(NotImplementYetAttribute))]
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateReflection<T>(Plane<T> value)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -547,11 +549,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix for rotating points around the X axis
+	/// Creates a matrix for rotating points around the X axis.
 	/// </summary>
-	/// <param name="radians">The amount, in radians, by which to rotate around the X axis</param>
-	/// <returns>The rotation matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="radians">The amount, in radians, by which to rotate around the X axis.</param>
+	/// <returns>The rotation matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateRotationX<T>(T radians)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
@@ -574,12 +576,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix for rotating points around the X axis from a center point
+	/// Creates a matrix for rotating points around the X axis from a center point.
 	/// </summary>
-	/// <param name="radians">The amount, in radians, by which to rotate around the X axis</param>
-	/// <param name="centerPoint">The center point</param>
-	/// <returns>The rotation matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="radians">The amount, in radians, by which to rotate around the X axis.</param>
+	/// <param name="centerPoint">The center point.</param>
+	/// <returns>The rotation matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateRotationX<T>(T radians, Vector3d<T> centerPoint)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
@@ -607,11 +609,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix for rotating points around the Y axis
+	/// Creates a matrix for rotating points around the Y axis.
 	/// </summary>
-	/// <param name="radians">The amount, in radians, by which to rotate around the Y-axis</param>
-	/// <returns>The rotation matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="radians">The amount, in radians, by which to rotate around the Y-axis.</param>
+	/// <returns>The rotation matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateRotationY<T>(T radians)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
@@ -633,12 +635,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// The amount, in radians, by which to rotate around the Y axis from a center point
+	/// The amount, in radians, by which to rotate around the Y axis from a center point.
 	/// </summary>
-	/// <param name="radians">The amount, in radians, by which to rotate around the Y-axis</param>
-	/// <param name="centerPoint">The center point</param>
+	/// <param name="radians">The amount, in radians, by which to rotate around the Y-axis.</param>
+	/// <param name="centerPoint">The center point.</param>
 	/// <returns>The rotation matrix.</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateRotationY<T>(T radians, Vector3d<T> centerPoint)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
@@ -665,11 +667,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix for rotating points around the Z axis
+	/// Creates a matrix for rotating points around the Z axis.
 	/// </summary>
-	/// <param name="radians">The amount, in radians, by which to rotate around the Z-axis</param>
-	/// <returns>The rotation matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="radians">The amount, in radians, by which to rotate around the Z-axis.</param>
+	/// <returns>The rotation matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateRotationZ<T>(T radians)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
@@ -691,12 +693,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix for rotating points around the Z axis from a center point
+	/// Creates a matrix for rotating points around the Z axis from a center point.
 	/// </summary>
-	/// <param name="radians">The amount, in radians, by which to rotate around the Z-axis</param>
-	/// <param name="centerPoint">The center point</param>
+	/// <param name="radians">The amount, in radians, by which to rotate around the Z-axis.</param>
+	/// <param name="centerPoint">The center point.</param>
 	/// <returns>The rotation matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateRotationZ<T>(T radians, Vector3d<T> centerPoint)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
@@ -723,12 +725,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a scaling matrix from the specified X, Y, and Z components
+	/// Creates a scaling matrix from the specified X, Y, and Z components.
 	/// </summary>
-	/// <param name="xScale">The value to scale by on the X axis</param>
-	/// <param name="yScale">The value to scale by on the Y axis</param>
-	/// <param name="zScale">The value to scale by on the Z axis</param>
-	/// <returns>The scaling matrix</returns>
+	/// <param name="xScale">The value to scale by on the X axis.</param>
+	/// <param name="yScale">The value to scale by on the Y axis.</param>
+	/// <param name="zScale">The value to scale by on the Z axis.</param>
+	/// <returns>The scaling matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateScale<T>(T xScale, T yScale, T zScale)
 		where T : unmanaged, INumberBase<T>
@@ -741,14 +743,14 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a scaling matrix that is offset by a given center point
+	/// Creates a scaling matrix that is offset by a given center point.
 	/// </summary>
-	/// <param name="xScale">The value to scale by on the X axis</param>
-	/// <param name="yScale">The value to scale by on the Y axis</param>
-	/// <param name="zScale">The value to scale by on the Z axis</param>
-	/// <param name="centerPoint">The center point</param>
-	/// <returns>The scaling matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="xScale">The value to scale by on the X axis.</param>
+	/// <param name="yScale">The value to scale by on the Y axis.</param>
+	/// <param name="zScale">The value to scale by on the Z axis.</param>
+	/// <param name="centerPoint">The center point.</param>
+	/// <returns>The scaling matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateScale<T>(T xScale, T yScale, T zScale, Vector3d<T> centerPoint)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -768,10 +770,10 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a scaling matrix from the specified vector scale
+	/// Creates a scaling matrix from the specified vector scale.
 	/// </summary>
-	/// <param name="scales">The scale to use</param>
-	/// <returns>The scaling matrix</returns>
+	/// <param name="scales">The scale to use.</param>
+	/// <returns>The scaling matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateScale<T>(Vector3d<T> scales)
 		where T : unmanaged, INumberBase<T>
@@ -784,11 +786,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a scaling matrix with a center point
+	/// Creates a scaling matrix with a center point.
 	/// </summary>
-	/// <param name="scales">The vector that contains the amount to scale on each axis</param>
-	/// <param name="centerPoint">The center point</param>
-	/// <returns>The scaling matrix</returns>
+	/// <param name="scales">The vector that contains the amount to scale on each axis.</param>
+	/// <param name="centerPoint">The center point.</param>
+	/// <returns>The scaling matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateScale<T>(Vector3d<T> scales, Vector3d<T> centerPoint)
 		where T : unmanaged, INumberBase<T>
@@ -809,10 +811,10 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a uniform scaling matrix that scale equally on each axis
+	/// Creates a uniform scaling matrix that scale equally on each axis.
 	/// </summary>
-	/// <param name="scale">The uniform scaling factor</param>
-	/// <returns>The scaling matrix</returns>
+	/// <param name="scale">The uniform scaling factor.</param>
+	/// <returns>The scaling matrix.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateScale<T>(T scale)
 		where T : unmanaged, INumberBase<T>
@@ -827,12 +829,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a uniform scaling matrix that scales equally on each axis with a center point
+	/// Creates a uniform scaling matrix that scales equally on each axis with a center point.
 	/// </summary>
-	/// <param name="scale">The uniform scaling factor</param>
-	/// <param name="centerPoint">The center point</param>
-	/// <returns>The scaling matrix</returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <param name="scale">The uniform scaling factor.</param>
+	/// <param name="centerPoint">The center point.</param>
+	/// <returns>The scaling matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateScale<T>(T scale, Vector3d<T> centerPoint)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -854,12 +856,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a matrix that flattens geometry into a specified plane as if casting a shadow from a specified light source</summary>
-	/// <param name="lightDirection">The direction from which the light that will cast the shadow is coming</param>
-	/// <param name="plane">The plane onto which the new matrix should flatten geometry so as to cast a shadow</param>
-	/// <returns>A new matrix that can be used to flatten geometry onto the specified plane from the specified direction</returns>
+	/// Creates a matrix that flattens geometry into a specified plane as if casting a shadow from a specified light source.</summary>
+	/// <param name="lightDirection">The direction from which the light that will cast the shadow is coming.</param>
+	/// <param name="plane">The plane onto which the new matrix should flatten geometry so as to cast a shadow.</param>
+	/// <returns>A new matrix that can be used to flatten geometry onto the specified plane from the specified direction.</returns>
 
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateShadow<T>(Vector3d<T> lightDirection, Plane<T> plane)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -894,10 +896,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a translation matrix from the specified 3-dimensional vector
+	/// Creates a translation matrix from the specified 3-dimensional vector.
 	/// </summary>
-	/// <param name="position">The amount to translate in each axis</param>
-	/// <returns>The translation matrix</returns>
+	/// <param name="position">The amount to translate in each axis.</param>
+	/// <returns>The translation matrix.</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateTranslation<T>(Vector3d<T> position)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -909,12 +912,13 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a translation matrix from the specified X, Y, and Z components
+	/// Creates a translation matrix from the specified X, Y, and Z components.
 	/// </summary>
-	/// <param name="xPosition">The amount to translate on the X axis</param>
-	/// <param name="yPosition">The amount to translate on the Y axis</param>
-	/// <param name="zPosition">The amount to translate on the Z axis</param>
-	/// <returns>The translation matrix</returns>
+	/// <param name="xPosition">The amount to translate on the X axis.</param>
+	/// <param name="yPosition">The amount to translate on the Y axis.</param>
+	/// <param name="zPosition">The amount to translate on the Z axis.</param>
+	/// <returns>The translation matrix.</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> CreateTranslation<T>(T xPosition, T yPosition, T zPosition)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -926,13 +930,14 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Creates a world matrix with the specified parameters
+	/// Creates a world matrix with the specified parameters.
 	/// </summary>
-	/// <param name="position">The position of the object</param>
-	/// <param name="forward">The forward direction of the object</param>
+	/// <param name="position">The position of the object.</param>
+	/// <param name="forward">The forward direction of the object.</param>
 	/// <param name="up">The upward direction of the object. Its value is usually <c>[0, 1, 0]</c>.</param>
 	/// <returns>The world matrix.</returns>
 	/// <remarks><paramref name="position" /> is used in translation operations.</remarks>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<T> CreateWorld<T>(Vector3d<T> position, Vector3d<T> forward, Vector3d<T> up)
 		where T : unmanaged, INumberBase<T>, IRootFunctions<T>
 	{
@@ -962,11 +967,11 @@ public static unsafe class Matrix4x4
 	}
 	#endregion
 
-	/// <summary>Adds each element in one matrix with its corresponding element in a second matrix</summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second matrix</param>
-	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" /></returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <summary>Adds each element in one matrix with its corresponding element in a second matrix.</summary>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second matrix.</param>
+	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" />.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<float> Add(Matrix4x4<float> left, Matrix4x4<float> right)
 	{
 		if (AdvSimd.IsSupported)
@@ -1008,11 +1013,11 @@ public static unsafe class Matrix4x4
 		return m;
 	}
 
-	/// <summary>Adds <paramref name="right"/> value in each element of a second matrix</summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second value</param>
-	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" /></returns>
-	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
+	/// <summary>Adds <paramref name="right"/> value in each element of a second matrix.</summary>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second value.</param>
+	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" />.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<float> Add(Matrix4x4<float> left, float right)
 	{
 		if (AdvSimd.IsSupported)
@@ -1070,10 +1075,10 @@ public static unsafe class Matrix4x4
 		return m;
 	}
 
-	/// <summary>Adds each element in one matrix with its corresponding element in a second matrix</summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second matrix</param>
-	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" /></returns>
+	/// <summary>Adds each element in one matrix with its corresponding element in a second matrix.</summary>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second matrix.</param>
+	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" />.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> Add<T>(Matrix4x4<T> left, Matrix4x4<T> right)
 		where T : unmanaged, INumberBase<T>
@@ -1081,10 +1086,10 @@ public static unsafe class Matrix4x4
 		return left + right;
 	}
 
-	/// <summary>Adds <paramref name="right"/> value in each element of a second matrix</summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second value</param>
-	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" /></returns>
+	/// <summary>Adds <paramref name="right"/> value in each element of a second matrix.</summary>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second value.</param>
+	/// <returns>The matrix that contains the summed values of <paramref name="left" /> and <paramref name="right" />.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> Add<T>(Matrix4x4<T> left, T right)
 		where T : unmanaged, INumberBase<T>
@@ -1093,11 +1098,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Tries to invert the specified matrix. The return value indicates whether the operation succeeded
+	/// Tries to invert the specified matrix. The return value indicates whether the operation succeeded.
 	/// </summary>
-	/// <param name="matrix">The matrix to invert</param>
-	/// <param name="result">When this method returns, contains the inverted matrix if the operation succeeded</param>
-	/// <returns><see langword="true" /> if <paramref name="matrix" /> was converted successfully; otherwise,  <see langword="false" /></returns>
+	/// <param name="matrix">The matrix to invert.</param>
+	/// <param name="result">When this method returns, contains the inverted matrix if the operation succeeded.</param>
+	/// <returns><see langword="true" /> if <paramref name="matrix" /> was converted successfully; otherwise,  <see langword="false" />.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static unsafe bool Invert(Matrix4x4<float> matrix, out Matrix4x4<float> result)
 	{
@@ -1108,13 +1113,13 @@ public static unsafe class Matrix4x4
 		return p;
 	}
 
-		/// <summary>
-		/// Tries to invert the specified matrix. The return value indicates whether the operation succeeded
-		/// </summary>
-		/// <param name="matrix">The matrix to invert</param>
-		/// <param name="result">When this method returns, contains the inverted matrix if the operation succeeded</param>
-		/// <returns><see langword="true" /> if <paramref name="matrix" /> was converted successfully; otherwise,  <see langword="false" /></returns>
-		[MethodImpl(AggressiveInlining)]
+	/// <summary>
+	/// Tries to invert the specified matrix. The return value indicates whether the operation succeeded.
+	/// </summary>
+	/// <param name="matrix">The matrix to invert.</param>
+	/// <param name="result">When this method returns, contains the inverted matrix if the operation succeeded.</param>
+	/// <returns><see langword="true" /> if <paramref name="matrix" /> was converted successfully; otherwise,  <see langword="false" />.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static unsafe bool Invert<T>(Matrix4x4<T> matrix, out Matrix4x4<T> result)
 		where T : unmanaged, INumberBase<T>, IFloatingPointIeee754<T>
 	{
@@ -1186,12 +1191,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Multiplies two matrices together to compute the product
+	/// Multiplies two matrices together to compute the product.
 	/// </summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second matrix</param>
-	/// <returns>The product matrix</returns>
-	[MethodImpl(AggressiveInlining)]
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second matrix.</param>
+	/// <returns>The product matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<float> Multiply(Matrix4x4<float> left, Matrix4x4<float> right)
 	{
 		if (AdvSimd.Arm64.IsSupported)
@@ -1305,12 +1310,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Multiplies a matrix by a float to compute the product
+	/// Multiplies a matrix by a float to compute the product.
 	/// </summary>
-	/// <param name="left">The matrix to scale</param>
-	/// <param name="right">The scaling value to use</param>
-	/// <returns>The scaled matrix</returns>
-	[MethodImpl(AggressiveInlining)]
+	/// <param name="left">The matrix to scale.</param>
+	/// <param name="right">The scaling value to use.</param>
+	/// <returns>The scaled matrix.</returns>
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<float> Multiply(Matrix4x4<float> left, float right)
 	{
 		if (AdvSimd.IsSupported)
@@ -1362,12 +1367,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Multiplies two matrices together to compute the product
+	/// Multiplies two matrices together to compute the product.
 	/// </summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second matrix</param>
-	/// <returns>The product matrix</returns>
-	[MethodImpl(AggressiveInlining)]
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second matrix.</param>
+	/// <returns>The product matrix.</returns>
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> Multiply<T>(Matrix4x4<T> left, Matrix4x4<T> right)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -1375,11 +1380,11 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Multiplies a matrix by a float to compute the product
+	/// Multiplies a matrix by a float to compute the product.
 	/// </summary>
-	/// <param name="left">The matrix to scale</param>
-	/// <param name="right">The scaling value to use</param>
-	/// <returns>The scaled matrix</returns>
+	/// <param name="left">The matrix to scale.</param>
+	/// <param name="right">The scaling value to use.</param>
+	/// <returns>The scaled matrix.</returns>
 	[MethodImpl(AggressiveInlining)]
 	public static Matrix4x4<T> Multiply<T>(Matrix4x4<T> left, T right)
 		where T : unmanaged, INumberBase<T>
@@ -1388,10 +1393,10 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Negates the specified matrix by multiplying all its values by -1
+	/// Negates the specified matrix by multiplying all its values by -1.
 	/// </summary>
-	/// <param name="value">The matrix to negate</param>
-	/// <returns>The negated matrix</returns>
+	/// <param name="value">The matrix to negate.</param>
+	/// <returns>The negated matrix.</returns>
 	[MethodImpl(AggressiveInlining)]
 	public static Matrix4x4<T> Negate<T>(Matrix4x4<T> value)
 		where T : unmanaged, INumberBase<T>
@@ -1400,12 +1405,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Subtracts each element in a second matrix from its corresponding element in a first matrix
+	/// Subtracts each element in a second matrix from its corresponding element in a first matrix.
 	/// </summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second matrix</param>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second matrix.</param>
 	/// <returns>The matrix containing the values that result from subtracting each element in <paramref name="right" /> from its corresponding element in <paramref name="left" />.</returns>
-	[MethodImpl(AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<float> Subtract(Matrix4x4<float> left, Matrix4x4<float> right)
 	{
 		if (AdvSimd.IsSupported)
@@ -1448,12 +1453,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Subtracts second value from its corresponding element in a first matrix
+	/// Subtracts second value from its corresponding element in a first matrix.
 	/// </summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second value</param>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second value.</param>
 	/// <returns>The matrix containing the values that result from subtracting <paramref name="right" /> value from its corresponding element in <paramref name="left" />.</returns>
-	[MethodImpl(AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<float> Subtract(Matrix4x4<float> left, float right)
 	{
 		if (AdvSimd.IsSupported)
@@ -1512,12 +1517,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Subtracts each element in a second matrix from its corresponding element in a first matrix
+	/// Subtracts each element in a second matrix from its corresponding element in a first matrix.
 	/// </summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second matrix</param>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second matrix.</param>
 	/// <returns>The matrix containing the values that result from subtracting each element in <paramref name="right" /> from its corresponding element in <paramref name="left" />.</returns>
-	[MethodImpl(AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> Subtract<T>(Matrix4x4<T> left, Matrix4x4<T> right)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -1525,12 +1530,12 @@ public static unsafe class Matrix4x4
 	}
 
 	/// <summary>
-	/// Subtracts second value from its corresponding element in a first matrix
+	/// Subtracts second value from its corresponding element in a first matrix.
 	/// </summary>
-	/// <param name="left">The first matrix</param>
-	/// <param name="right">The second value</param>
+	/// <param name="left">The first matrix.</param>
+	/// <param name="right">The second value.</param>
 	/// <returns>The matrix containing the values that result from subtracting <paramref name="right" /> value from its corresponding element in <paramref name="left" />.</returns>
-	[MethodImpl(AggressiveInlining)]
+	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Matrix4x4<T> Subtract<T>(Matrix4x4<T> left, T right)
 		where T : unmanaged, INumberBase<T>
 	{
@@ -1554,12 +1559,15 @@ public static unsafe class Matrix4x4
 			throw new PlatformNotSupportedException();
 		}
 	}
-	/// <summary>Attempts to extract the scale, translation, and rotation components from the given scale, rotation, or translation matrix. The return value indicates whether the operation succeeded</summary>
-	/// <param name="matrix">The source matrix</param>
-	/// <param name="scale">When this method returns, contains the scaling component of the transformation matrix if the operation succeeded</param>
-	/// <param name="rotation">When this method returns, contains the rotation component of the transformation matrix if the operation succeeded</param>
-	/// <param name="translation">When the method returns, contains the translation component of the transformation matrix if the operation succeeded</param>
-	/// <returns><see langword="true" /> if <paramref name="matrix" /> was decomposed successfully; otherwise,  <see langword="false" /></returns>
+
+	/// <summary>Attempts to extract the scale, translation, and rotation components from the given scale, rotation, or translation matrix. The return value indicates whether the operation succeeded.</summary>
+	/// <param name="matrix">The source matrix.</param>
+	/// <param name="scale">When this method returns, contains the scaling component of the transformation matrix if the operation succeeded.</param>
+	/// <param name="rotation">When this method returns, contains the rotation component of the transformation matrix if the operation succeeded.</param>
+	/// <param name="translation">When the method returns, contains the translation component of the transformation matrix if the operation succeeded.</param>
+	/// <returns><see langword="true" /> if <paramref name="matrix" /> was decomposed successfully; otherwise, <see langword="false" />.</returns>
+	[NotImplementYet]
+	[Obsolete(nameof(NotImplementYetAttribute))]
 	public static bool Decompose(Matrix4x4<float> matrix, out Vector3d<float> scale, out Quaternion<float> rotation, out Vector3d<float> translation)
 	{
 		bool p = System.Numerics.Matrix4x4.Decompose(matrix.ConvertToSystem(), out Vector3 scale2, out System.Numerics.Quaternion rotation2, out Vector3 translation2);
@@ -1570,13 +1578,16 @@ public static unsafe class Matrix4x4
 
 		return p;	
 	}
-		/// <summary>Attempts to extract the scale, translation, and rotation components from the given scale, rotation, or translation matrix. The return value indicates whether the operation succeeded</summary>
-		/// <param name="matrix">The source matrix</param>
-		/// <param name="scale">When this method returns, contains the scaling component of the transformation matrix if the operation succeeded</param>
-		/// <param name="rotation">When this method returns, contains the rotation component of the transformation matrix if the operation succeeded</param>
-		/// <param name="translation">When the method returns, contains the translation component of the transformation matrix if the operation succeeded</param>
-		/// <returns><see langword="true" /> if <paramref name="matrix" /> was decomposed successfully; otherwise,  <see langword="false" /></returns>
-		public static bool Decompose<T>(Matrix4x4<T> matrix, out Vector3d<T> scale, out Quaternion<T> rotation, out Vector3d<T> translation)
+
+	/// <summary>Attempts to extract the scale, translation, and rotation components from the given scale, rotation, or translation matrix. The return value indicates whether the operation succeeded.</summary>
+	/// <param name="matrix">The source matrix</param>
+	/// <param name="scale">When this method returns, contains the scaling component of the transformation matrix if the operation succeeded.</param>
+	/// <param name="rotation">When this method returns, contains the rotation component of the transformation matrix if the operation succeeded.</param>
+	/// <param name="translation">When the method returns, contains the translation component of the transformation matrix if the operation succeeded.</param>
+	/// <returns><see langword="true" /> if <paramref name="matrix" /> was decomposed successfully; otherwise, <see langword="false" />.</returns>
+	[NotImplementYet]
+	[Obsolete(nameof(NotImplementYetAttribute))]
+	public static bool Decompose<T>(Matrix4x4<T> matrix, out Vector3d<T> scale, out Quaternion<T> rotation, out Vector3d<T> translation)
 		where T : unmanaged, INumberBase<T>, IRootFunctions<T>, IComparisonOperators<T, T, bool>, IComparisonOperators<T, float, bool>
 	{
 		bool result = true;
@@ -1767,7 +1778,6 @@ public static unsafe class Matrix4x4
 
 		return result;
 	}
-
 
 
 	private struct CanonicalBasis<T>
