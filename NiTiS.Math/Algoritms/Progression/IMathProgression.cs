@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NiTiS.Math;
+namespace NiTiS.Math.Algoritms.Progression;
 
 public interface IMathProgression<T>
 {

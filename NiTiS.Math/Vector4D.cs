@@ -11,23 +11,23 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 namespace NiTiS.Math;
 
 [DebuggerDisplay($@"{{{nameof(ToString)}(""G""),nq}}")]
-public unsafe struct Vector4D<T> :
+public unsafe struct Vector4d<T> :
 	// Vector op Vector
-	IAdditionOperators<Vector4D<T>, Vector4D<T>, Vector4D<T>>,
-	ISubtractionOperators<Vector4D<T>, Vector4D<T>, Vector4D<T>>,
-	IDivisionOperators<Vector4D<T>, Vector4D<T>, Vector4D<T>>,
-	IMultiplyOperators<Vector4D<T>, Vector4D<T>, Vector4D<T>>,
-	IEqualityOperators<Vector4D<T>, Vector4D<T>, bool>,
+	IAdditionOperators<Vector4d<T>, Vector4d<T>, Vector4d<T>>,
+	ISubtractionOperators<Vector4d<T>, Vector4d<T>, Vector4d<T>>,
+	IDivisionOperators<Vector4d<T>, Vector4d<T>, Vector4d<T>>,
+	IMultiplyOperators<Vector4d<T>, Vector4d<T>, Vector4d<T>>,
+	IEqualityOperators<Vector4d<T>, Vector4d<T>, bool>,
 	// Vector op T
-	IAdditionOperators<Vector4D<T>, T, Vector4D<T>>,
-	ISubtractionOperators<Vector4D<T>, T, Vector4D<T>>,
-	IDivisionOperators<Vector4D<T>, T, Vector4D<T>>,
-	IMultiplyOperators<Vector4D<T>, T, Vector4D<T>>,
+	IAdditionOperators<Vector4d<T>, T, Vector4d<T>>,
+	ISubtractionOperators<Vector4d<T>, T, Vector4d<T>>,
+	IDivisionOperators<Vector4d<T>, T, Vector4d<T>>,
+	IMultiplyOperators<Vector4d<T>, T, Vector4d<T>>,
 	// Unary op
-	IUnaryNegationOperators<Vector4D<T>, Vector4D<T>>,
-	IUnaryPlusOperators<Vector4D<T>, Vector4D<T>>,
+	IUnaryNegationOperators<Vector4d<T>, Vector4d<T>>,
+	IUnaryPlusOperators<Vector4d<T>, Vector4d<T>>,
 	IFormattable,
-	IEquatable<Vector4D<T>>
+	IEquatable<Vector4d<T>>
 	where T :
 		unmanaged,
 		INumberBase<T>
@@ -39,56 +39,56 @@ public unsafe struct Vector4D<T> :
 	public readonly T LengthSquared
 	{
 		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-		get => Vector4D.Dot(this, this);
+		get => Vector4d.Dot(this, this);
 	}
 
 	public const int ElementCount = 4;
 	private static readonly int VectorSize = sizeof(T) * ElementCount;
-	public Vector4D(ReadOnlySpan<T> data)
+	public Vector4d(ReadOnlySpan<T> data)
 	{
 		if (data.Length < ElementCount)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector4D<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
+		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
 	}
-	public Vector4D(ReadOnlySpan<byte> data)
+	public Vector4d(ReadOnlySpan<byte> data)
 	{
 		if (data.Length < VectorSize)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector4D<T>>(ref MemoryMarshal.GetReference(data));
+		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref MemoryMarshal.GetReference(data));
 	}
-	public Vector4D(ReadOnlySpan<T> data, int offset)
+	public Vector4d(ReadOnlySpan<T> data, int offset)
 	{
 		if (data.Length < ElementCount + offset)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector4D<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data.Slice(offset))));
+		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data.Slice(offset))));
 	}
-	public Vector4D(ReadOnlySpan<byte> data, int offset)
+	public Vector4d(ReadOnlySpan<byte> data, int offset)
 	{
 		if (data.Length < VectorSize + offset)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector4D<T>>(ref MemoryMarshal.GetReference(data.Slice(offset)));
+		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref MemoryMarshal.GetReference(data.Slice(offset)));
 	}
-	public Vector4D(Vector3D<T> base3, T w)
+	public Vector4d(Vector3d<T> base3, T w)
 		=> (X, Y, Z, W) = (base3.X, base3.Y, base3.Z, w);
-	public Vector4D(Vector2D<T> base2, T z, T w)
+	public Vector4d(Vector2d<T> base2, T z, T w)
 		=> (X, Y, Z, W) = (base2.X, base2.Y, z, w);
-	public Vector4D(T x, T y, T z, T w)
+	public Vector4d(T x, T y, T z, T w)
 		=> (X, Y, Z, W) = (x, y, z, w);
-	public Vector4D(T xyzw)
+	public Vector4d(T xyzw)
 		=> (X, Y, Z, W) = (xyzw, xyzw, xyzw, xyzw);
-	public static Vector4D<T> One => new(T.One, T.One, T.One, T.One);
-	public static Vector4D<T> Zero => new(T.Zero, T.Zero, T.Zero, T.Zero);
-	public static Vector4D<T> UnitX => new(T.One, T.Zero, T.Zero, T.Zero);
-	public static Vector4D<T> UnitY => new(T.Zero, T.One, T.Zero, T.Zero);
-	public static Vector4D<T> UnitZ => new(T.Zero, T.Zero, T.One, T.Zero);
-	public static Vector4D<T> UnitW => new(T.Zero, T.Zero, T.Zero, T.One);
+	public static Vector4d<T> One => new(T.One, T.One, T.One, T.One);
+	public static Vector4d<T> Zero => new(T.Zero, T.Zero, T.Zero, T.Zero);
+	public static Vector4d<T> UnitX => new(T.One, T.Zero, T.Zero, T.Zero);
+	public static Vector4d<T> UnitY => new(T.Zero, T.One, T.Zero, T.Zero);
+	public static Vector4d<T> UnitZ => new(T.Zero, T.Zero, T.One, T.Zero);
+	public static Vector4d<T> UnitW => new(T.Zero, T.Zero, T.Zero, T.One);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator +(Vector4D<T> left, Vector4D<T> right)
+	public static Vector4d<T> operator +(Vector4d<T> left, Vector4d<T> right)
 		=> new(
 			left.X + right.X,
 			left.Y + right.Y,
@@ -96,7 +96,7 @@ public unsafe struct Vector4D<T> :
 			left.W + right.W
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator -(Vector4D<T> left, Vector4D<T> right)
+	public static Vector4d<T> operator -(Vector4d<T> left, Vector4d<T> right)
 		=> new(
 			left.X - right.X,
 			left.Y - right.Y,
@@ -104,7 +104,7 @@ public unsafe struct Vector4D<T> :
 			left.W - right.W
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator /(Vector4D<T> left, Vector4D<T> right)
+	public static Vector4d<T> operator /(Vector4d<T> left, Vector4d<T> right)
 		=> new(
 			left.X / right.X,
 			left.Y / right.Y,
@@ -112,7 +112,7 @@ public unsafe struct Vector4D<T> :
 			left.W / right.W
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator *(Vector4D<T> left, Vector4D<T> right)
+	public static Vector4d<T> operator *(Vector4d<T> left, Vector4d<T> right)
 		=> new(
 			left.X * right.X,
 			left.Y * right.Y,
@@ -121,20 +121,20 @@ public unsafe struct Vector4D<T> :
 			);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static bool operator ==(Vector4D<T> left, Vector4D<T> right)
+	public static bool operator ==(Vector4d<T> left, Vector4d<T> right)
 		=> left.X == right.X
 		&& left.Y == right.Y
 		&& left.Z == right.Z
 		&& left.W == right.W;
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static bool operator !=(Vector4D<T> left, Vector4D<T> right)
+	public static bool operator !=(Vector4d<T> left, Vector4d<T> right)
 		=> left.X != right.X
 		|| left.Y != right.Y
 		|| left.Z != right.Z
 		|| left.W != right.W;
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator +(Vector4D<T> left, T right)
+	public static Vector4d<T> operator +(Vector4d<T> left, T right)
 		=> new(
 			left.X + right,
 			left.Y + right,
@@ -142,7 +142,7 @@ public unsafe struct Vector4D<T> :
 			left.W + right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator -(Vector4D<T> left, T right)
+	public static Vector4d<T> operator -(Vector4d<T> left, T right)
 		=> new(
 			left.X - right,
 			left.Y - right,
@@ -150,7 +150,7 @@ public unsafe struct Vector4D<T> :
 			left.W - right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator /(Vector4D<T> left, T right)
+	public static Vector4d<T> operator /(Vector4d<T> left, T right)
 		=> new(
 			left.X / right,
 			left.Y / right,
@@ -158,7 +158,7 @@ public unsafe struct Vector4D<T> :
 			left.W / right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator /(T left, Vector4D<T> right)
+	public static Vector4d<T> operator /(T left, Vector4d<T> right)
 		=> new(
 			left / right.X,
 			left / right.Y,
@@ -166,7 +166,7 @@ public unsafe struct Vector4D<T> :
 			left / right.W
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator *(Vector4D<T> left, T right)
+	public static Vector4d<T> operator *(Vector4d<T> left, T right)
 		=> new(
 			left.X * right,
 			left.Y * right,
@@ -174,7 +174,7 @@ public unsafe struct Vector4D<T> :
 			left.W * right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator *(T left, Vector4D<T> right)
+	public static Vector4d<T> operator *(T left, Vector4d<T> right)
 		=> new(
 			left * right.X,
 			left * right.Y,
@@ -183,7 +183,7 @@ public unsafe struct Vector4D<T> :
 			);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator -(Vector4D<T> operand)
+	public static Vector4d<T> operator -(Vector4d<T> operand)
 		=> new(
 			-operand.X,
 			-operand.Y,
@@ -191,7 +191,7 @@ public unsafe struct Vector4D<T> :
 			-operand.W
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector4D<T> operator +(Vector4D<T> operand)
+	public static Vector4d<T> operator +(Vector4d<T> operand)
 		=> new(
 			+operand.X,
 			+operand.Y,
@@ -200,13 +200,13 @@ public unsafe struct Vector4D<T> :
 			);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static implicit operator Vector2D<T>(Vector4D<T> operand)
+	public static implicit operator Vector2d<T>(Vector4d<T> operand)
 		=> new(
 			operand.X,
 			operand.Y
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static implicit operator Vector3D<T>(Vector4D<T> operand)
+	public static implicit operator Vector3d<T>(Vector4d<T> operand)
 		=> new(
 			operand.X,
 			operand.Y,
@@ -239,31 +239,31 @@ public unsafe struct Vector4D<T> :
 	public override readonly int GetHashCode()
 		=> HashCode.Combine(X, Y, Z, W);
 	public override readonly bool Equals([NotNullWhen(true)] object? obj)
-		=> obj is Vector4D<T> vec
+		=> obj is Vector4d<T> vec
 		? vec == this : false;
-	public readonly bool Equals(Vector4D<T> other)
+	public readonly bool Equals(Vector4d<T> other)
 		=> this == other;
 	public override readonly string ToString() => ToString("G", CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format, IFormatProvider? formatProvider)
 	{
 		StringBuilder sb = new();
-		string separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
+		string separator = ",";
 		sb.Append('<');
 
 		sb.Append(X.ToString(format, formatProvider));
 		sb.Append(separator);
-		if (!string.IsNullOrWhiteSpace(separator))
+		if (!String.IsNullOrWhiteSpace(separator))
 			sb.Append(' ');
 
 		sb.Append(Y.ToString(format, formatProvider));
 		sb.Append(separator);
-		if (!string.IsNullOrWhiteSpace(separator))
+		if (!String.IsNullOrWhiteSpace(separator))
 			sb.Append(' ');
 
 		sb.Append(Z.ToString(format, formatProvider));
 		sb.Append(separator);
-		if (!string.IsNullOrWhiteSpace(separator))
+		if (!String.IsNullOrWhiteSpace(separator))
 			sb.Append(' ');
 
 		sb.Append(W.ToString(format, formatProvider));

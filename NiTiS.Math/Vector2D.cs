@@ -11,23 +11,23 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 namespace NiTiS.Math;
 
 [DebuggerDisplay($@"{{{nameof(ToString)}(""G""),nq}}")]
-public unsafe struct Vector2D<T> :
+public unsafe struct Vector2d<T> :
 	// Vector op Vector
-	IAdditionOperators<Vector2D<T>, Vector2D<T>, Vector2D<T>>,
-	ISubtractionOperators<Vector2D<T>, Vector2D<T>, Vector2D<T>>,
-	IDivisionOperators<Vector2D<T>, Vector2D<T>, Vector2D<T>>,
-	IMultiplyOperators<Vector2D<T>, Vector2D<T>, Vector2D<T>>,
-	IEqualityOperators<Vector2D<T>, Vector2D<T>, bool>,
+	IAdditionOperators<Vector2d<T>, Vector2d<T>, Vector2d<T>>,
+	ISubtractionOperators<Vector2d<T>, Vector2d<T>, Vector2d<T>>,
+	IDivisionOperators<Vector2d<T>, Vector2d<T>, Vector2d<T>>,
+	IMultiplyOperators<Vector2d<T>, Vector2d<T>, Vector2d<T>>,
+	IEqualityOperators<Vector2d<T>, Vector2d<T>, bool>,
 	// Vector op T
-	IAdditionOperators<Vector2D<T>, T, Vector2D<T>>,
-	ISubtractionOperators<Vector2D<T>, T, Vector2D<T>>,
-	IDivisionOperators<Vector2D<T>, T, Vector2D<T>>,
-	IMultiplyOperators<Vector2D<T>, T, Vector2D<T>>,
+	IAdditionOperators<Vector2d<T>, T, Vector2d<T>>,
+	ISubtractionOperators<Vector2d<T>, T, Vector2d<T>>,
+	IDivisionOperators<Vector2d<T>, T, Vector2d<T>>,
+	IMultiplyOperators<Vector2d<T>, T, Vector2d<T>>,
 	// Unary op
-	IUnaryNegationOperators<Vector2D<T>, Vector2D<T>>,
-	IUnaryPlusOperators<Vector2D<T>, Vector2D<T>>,
+	IUnaryNegationOperators<Vector2d<T>, Vector2d<T>>,
+	IUnaryPlusOperators<Vector2d<T>, Vector2d<T>>,
 	IFormattable,
-	IEquatable<Vector2D<T>>
+	IEquatable<Vector2d<T>>
 	where T :
 		unmanaged,
 		INumberBase<T>
@@ -37,141 +37,141 @@ public unsafe struct Vector2D<T> :
 	public readonly T LengthSquared
 	{
 		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-		get => Vector2D.Dot(this, this);
+		get => Vector2d.Dot(this, this);
 	}
 
 	public const int ElementCount = 2;
 	private static readonly int VectorSize = sizeof(T) * ElementCount;
-	public Vector2D(ReadOnlySpan<T> data)
+	public Vector2d(ReadOnlySpan<T> data)
 	{
 		if (data.Length < ElementCount)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector2D<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
+		this = Unsafe.ReadUnaligned<Vector2d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
 	}
-	public Vector2D(ReadOnlySpan<byte> data)
+	public Vector2d(ReadOnlySpan<byte> data)
 	{
 		if (data.Length < VectorSize)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector2D<T>>(ref MemoryMarshal.GetReference(data));
+		this = Unsafe.ReadUnaligned<Vector2d<T>>(ref MemoryMarshal.GetReference(data));
 	}
-	public Vector2D(ReadOnlySpan<T> data, int offset)
+	public Vector2d(ReadOnlySpan<T> data, int offset)
 	{
 		if (data.Length < ElementCount + offset)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector2D<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data.Slice(offset))));
+		this = Unsafe.ReadUnaligned<Vector2d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data.Slice(offset))));
 	}
-	public Vector2D(ReadOnlySpan<byte> data, int offset)
+	public Vector2d(ReadOnlySpan<byte> data, int offset)
 	{
 		if (data.Length < VectorSize + offset)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector2D<T>>(ref MemoryMarshal.GetReference(data.Slice(offset)));
+		this = Unsafe.ReadUnaligned<Vector2d<T>>(ref MemoryMarshal.GetReference(data.Slice(offset)));
 	}
-	public Vector2D(T x, T y)
+	public Vector2d(T x, T y)
 		=> (X, Y) = (x, y);
-	public Vector2D(T xy)
+	public Vector2d(T xy)
 		=> (X, Y) = (xy, xy);
 
-	public static Vector2D<T> One => new(T.One, T.One);
-	public static Vector2D<T> Zero => new(T.Zero, T.Zero);
-	public static Vector2D<T> UnitX => new(T.One, T.Zero);
-	public static Vector2D<T> UnitY => new(T.Zero, T.One);
+	public static Vector2d<T> One => new(T.One, T.One);
+	public static Vector2d<T> Zero => new(T.Zero, T.Zero);
+	public static Vector2d<T> UnitX => new(T.One, T.Zero);
+	public static Vector2d<T> UnitY => new(T.Zero, T.One);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator +(Vector2D<T> left, Vector2D<T> right)
+	public static Vector2d<T> operator +(Vector2d<T> left, Vector2d<T> right)
 		=> new(
 			left.X + right.X,
 			left.Y + right.Y
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator -(Vector2D<T> left, Vector2D<T> right)
+	public static Vector2d<T> operator -(Vector2d<T> left, Vector2d<T> right)
 		=> new(
 			left.X - right.X,
 			left.Y - right.Y
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator /(Vector2D<T> left, Vector2D<T> right)
+	public static Vector2d<T> operator /(Vector2d<T> left, Vector2d<T> right)
 		=> new(
 			left.X / right.X,
 			left.Y / right.Y
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator *(Vector2D<T> left, Vector2D<T> right)
+	public static Vector2d<T> operator *(Vector2d<T> left, Vector2d<T> right)
 		=> new(
 			left.X * right.X,
 			left.Y * right.Y
 			);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static bool operator ==(Vector2D<T> left, Vector2D<T> right)
+	public static bool operator ==(Vector2d<T> left, Vector2d<T> right)
 		=> left.X == right.X
 		&& left.Y == right.Y;
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static bool operator !=(Vector2D<T> left, Vector2D<T> right)
+	public static bool operator !=(Vector2d<T> left, Vector2d<T> right)
 		=> left.X != right.X
 		|| left.Y != right.Y;
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator +(Vector2D<T> left, T right)
+	public static Vector2d<T> operator +(Vector2d<T> left, T right)
 		=> new(
 			left.X + right,
 			left.Y + right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator -(Vector2D<T> left, T right)
+	public static Vector2d<T> operator -(Vector2d<T> left, T right)
 		=> new(
 			left.X - right,
 			left.Y - right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator /(Vector2D<T> left, T right)
+	public static Vector2d<T> operator /(Vector2d<T> left, T right)
 		=> new(
 			left.X / right,
 			left.Y / right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator /(T left, Vector2D<T> right)
+	public static Vector2d<T> operator /(T left, Vector2d<T> right)
 		=> new(
 			left / right.X,
 			left / right.Y
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator *(Vector2D<T> left, T right)
+	public static Vector2d<T> operator *(Vector2d<T> left, T right)
 		=> new(
 			left.X * right,
 			left.Y * right
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator *(T left, Vector2D<T> right)
+	public static Vector2d<T> operator *(T left, Vector2d<T> right)
 		=> new(
 			left * right.X,
 			left * right.Y
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator -(Vector2D<T> operand)
+	public static Vector2d<T> operator -(Vector2d<T> operand)
 		=> new(
 			-operand.X,
 			-operand.Y
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static Vector2D<T> operator +(Vector2D<T> operand)
+	public static Vector2d<T> operator +(Vector2d<T> operand)
 		=> new(
 			+operand.X,
 			+operand.Y
 			);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static explicit operator Vector3D<T>(Vector2D<T> operand)
+	public static explicit operator Vector3d<T>(Vector2d<T> operand)
 		=> new(
 			operand.X,
 			operand.Y,
 			T.Zero
 			);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static explicit operator Vector4D<T>(Vector2D<T> operand)
+	public static explicit operator Vector4d<T>(Vector2d<T> operand)
 		=> new(
 			operand.X,
 			operand.Y,
@@ -201,20 +201,20 @@ public unsafe struct Vector2D<T> :
 	public override readonly int GetHashCode()
 		=> HashCode.Combine(X, Y);
 	public override readonly bool Equals([NotNullWhen(true)] object? obj)
-		=> obj is Vector2D<T> vec
+		=> obj is Vector2d<T> vec
 		? vec == this : false;
-	public readonly bool Equals(Vector2D<T> other)
+	public readonly bool Equals(Vector2d<T> other)
 		=> this == other;
 	public override readonly string ToString() => ToString("G", CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format, IFormatProvider? formatProvider)
 	{
 		StringBuilder sb = new();
-		string separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
+		string separator = ",";
 		sb.Append('<');
 		sb.Append(X.ToString(format, formatProvider));
 		sb.Append(separator);
-		if (!string.IsNullOrWhiteSpace(separator))
+		if (!String.IsNullOrWhiteSpace(separator))
 			sb.Append(' ');
 		sb.Append(Y.ToString(format, formatProvider));
 		sb.Append('>');

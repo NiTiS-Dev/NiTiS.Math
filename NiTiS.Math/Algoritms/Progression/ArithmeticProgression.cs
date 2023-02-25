@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace NiTiS.Math;
+namespace NiTiS.Math.Algoritms.Progression;
 
 [DebuggerDisplay("Progression [{First}:{D}] {Get(1)},{Get(2)},{Get(3)}")]
 [ObsoleteImpl]
@@ -18,11 +18,11 @@ public class ArithmeticProgression : IMathProgression<double>
 	}
 	public double Get(int index)
 	{
-		return First + (D * (index - 1));
+		return First + D * (index - 1);
 	}
 	public static double Get(int index, double first, double d)
 	{
-		return first + (d * (index - 1));
+		return first + d * (index - 1);
 	}
 	public double this[int index]
 	{

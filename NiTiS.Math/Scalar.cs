@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
@@ -7,9 +8,12 @@ namespace NiTiS.Math;
 internal static class Scalar<T>
 	where T : INumberBase<T>
 {
-	public static T Two
+	public static readonly T Two;
+	public static readonly T Half;
+
+	static Scalar()
 	{
-		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-		get => T.One + T.One;
+		Two = T.One + T.One;
+		Half = T.One / Two;
 	}
 }

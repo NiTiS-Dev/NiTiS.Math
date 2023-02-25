@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace NiTiS.Math;
+namespace NiTiS.Math.Algoritms.Progression;
 
 [DebuggerDisplay("Progression [{First}:*{Q}] {Get(1)},{Get(2)},{Get(3)}")]
 [ObsoleteImpl]
@@ -18,11 +18,11 @@ public class GeometricProgression : IMathProgression<double>
 	}
 	public double Get(int index)
 	{
-		return First * System.Math.Pow(Q, index - 1);
+		return First * SMath.Pow(Q, index - 1);
 	}
 	public static double Get(int index, double first, double q)
 	{
-		return first * System.Math.Pow(q, index - 1);
+		return first * SMath.Pow(q, index - 1);
 	}
 	public double this[int index]
 	{
@@ -33,11 +33,11 @@ public class GeometricProgression : IMathProgression<double>
 	}
 	public double Sum(int endIndex)
 	{
-		return (First * (System.Math.Pow(Q, endIndex) - 1)) / (Q - 1);
+		return First * (SMath.Pow(Q, endIndex) - 1) / (Q - 1);
 	}
 	public static double Sum(int endIndex, double first, double q)
 	{
-		return (first * (System.Math.Pow(q, endIndex) - 1)) / (q - 1);
+		return first * (SMath.Pow(q, endIndex) - 1) / (q - 1);
 	}
 	public IEnumerable<double> SumArray(int count)
 	{

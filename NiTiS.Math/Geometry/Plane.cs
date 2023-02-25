@@ -2,15 +2,15 @@
 using System;
 using System.Numerics;
 
-namespace NiTiS.Math;
+namespace NiTiS.Math.Geometry;
 
 [NotImplementYet]
 [Obsolete(nameof(NotImplementYetAttribute))]
 public unsafe struct Plane<T>
-	where T :
-	unmanaged,
-	INumberBase<T>
+    where T :
+    unmanaged,
+    INumberBase<T>
 {
-	public Vector3D<T> Normal;
-	public T D;
+    public Vector3d<T> Normal;
+    public T D;
 }
