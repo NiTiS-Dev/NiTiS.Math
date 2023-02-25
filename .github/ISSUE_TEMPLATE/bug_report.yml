@@ -8,13 +8,13 @@ body:
       value: |
         Please full a form and describe bug!
   - type: checkboxes
+    label: Traits of bug
     id: typek
     attributes:
-      label: Traits of bug
       description: Choose traits that describes this issue
       options:
         - label: Arithmetic error
   - type: textarea
     label: Please, describe!
-  - type: textare
+  - type: textarea
     label: StackTrace
