@@ -7,3 +7,9 @@ body:
     attributes:
       value: |
         Please full a form and describe bug!
+  - type: textarea
+    attributes:
+      label: Describe a bug
+      placeholder: Sometimes X return non-valid value
+    validations:
+      required: true
