@@ -32,10 +32,26 @@ public unsafe struct Vector4d<T> :
 		unmanaged,
 		INumberBase<T>
 {
+	/// <summary>
+	/// X value of vector, the first dimension.
+	/// </summary>
 	public T X;
+	/// <summary>
+	/// Y value of vector, the second dimension.
+	/// </summary>
 	public T Y;
+	/// <summary>
+	/// Z value of vector, the third dimension.
+	/// </summary>
 	public T Z;
+	/// <summary>
+	/// W value of vector, the fourth dimension.
+	/// </summary>
 	public T W;
+
+	/// <summary>
+	/// Squared magnitude of vector.
+	/// </summary>
 	public readonly T LengthSquared
 	{
 		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
@@ -44,6 +60,47 @@ public unsafe struct Vector4d<T> :
 
 	public const int ElementCount = 4;
 	private static readonly int VectorSize = sizeof(T) * ElementCount;
+
+	/// <summary>
+	/// Creates new fourth-dimensional vector with values <c>(<paramref name="x"/>, <paramref name="y"/>, <paramref name="z"/>, <paramref name="z"/>)</c>.
+	/// </summary>
+	/// <param name="x">X value of vector.</param>
+	/// <param name="y">Y value of vector.</param>
+	/// <param name="z">Z value of vector.</param>
+	/// <param name="w">W value of vector.</param>
+	public Vector4d(T x, T y, T z, T w)
+		=> (X, Y, Z, W) = (x, y, z, w);
+
+	/// <summary>
+	/// Creates new fourth-dimensional vector with values <c>(<paramref name="xyzw"/>, <paramref name="xyzw"/>, <paramref name="xyzw"/>, <paramref name="xyzw"/>)</c>.
+	/// </summary>
+	/// <param name="xyzw">X, Y, Z and W value of vector.</param>
+	public Vector4d(T xyzw)
+		=> (X, Y, Z, W) = (xyzw, xyzw, xyzw, xyzw);
+
+	/// <summary>
+	/// Expands two-dimension vector to fourth-dimension.
+	/// </summary>
+	/// <param name="base2">Base vector.</param>
+	/// <param name="z">Z value.</param>
+	/// <param name="w">W value.</param>
+	public Vector4d(Vector2d<T> base2, T z, T w)
+		=> (X, Y, Z, W) = (base2.X, base2.Y, z, w);
+
+	/// <summary>
+	/// Expands third-dimension vector to fourth-dimension.
+	/// </summary>
+	/// <param name="base3">Base vector.</param>
+	/// <param name="w">W value.</param>
+	public Vector4d(Vector3d<T> base3, T w)
+		=> (X, Y, Z, W) = (base3.X, base3.Y, base3.Z, w);
+
+	/// <summary>
+	/// Creates vector by buffer.
+	/// </summary>
+	/// <param name="data">Buffer with vector data.</param>
+	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
+
 	public Vector4d(ReadOnlySpan<T> data)
 	{
 		if (data.Length < ElementCount)
@@ -51,6 +108,12 @@ public unsafe struct Vector4d<T> :
 
 		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
 	}
+
+	/// <summary>
+	/// Creates vector by buffer.
+	/// </summary>
+	/// <param name="data">Buffer with vector data.</param>
+	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
 	public Vector4d(ReadOnlySpan<byte> data)
 	{
 		if (data.Length < VectorSize)
@@ -58,33 +121,35 @@ public unsafe struct Vector4d<T> :
 
 		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref MemoryMarshal.GetReference(data));
 	}
-	public Vector4d(ReadOnlySpan<T> data, int offset)
-	{
-		if (data.Length < ElementCount + offset)
-			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data.Slice(offset))));
-	}
-	public Vector4d(ReadOnlySpan<byte> data, int offset)
-	{
-		if (data.Length < VectorSize + offset)
-			throw new ArgumentOutOfRangeException(nameof(data));
-
-		this = Unsafe.ReadUnaligned<Vector4d<T>>(ref MemoryMarshal.GetReference(data.Slice(offset)));
-	}
-	public Vector4d(Vector3d<T> base3, T w)
-		=> (X, Y, Z, W) = (base3.X, base3.Y, base3.Z, w);
-	public Vector4d(Vector2d<T> base2, T z, T w)
-		=> (X, Y, Z, W) = (base2.X, base2.Y, z, w);
-	public Vector4d(T x, T y, T z, T w)
-		=> (X, Y, Z, W) = (x, y, z, w);
-	public Vector4d(T xyzw)
-		=> (X, Y, Z, W) = (xyzw, xyzw, xyzw, xyzw);
+	/// <summary>
+	/// Vector with all ones, <c>(1, 1, 1, 1)</c>.
+	/// </summary>
 	public static Vector4d<T> One => new(T.One, T.One, T.One, T.One);
+
+	/// <summary>
+	/// Vector with all zeros, <c>(0, 0, 0, 0)</c>.
+	/// </summary>
 	public static Vector4d<T> Zero => new(T.Zero, T.Zero, T.Zero, T.Zero);
+
+	/// <summary>
+	/// Vector which X is one, <c>(1, 0, 0, 0)</c>.
+	/// </summary>
 	public static Vector4d<T> UnitX => new(T.One, T.Zero, T.Zero, T.Zero);
+
+	/// <summary>
+	/// Vector which Y is one, <c>(0, 1, 0, 0)</c>.
+	/// </summary>
 	public static Vector4d<T> UnitY => new(T.Zero, T.One, T.Zero, T.Zero);
+
+	/// <summary>
+	/// Vector which Z is one, <c>(0, 0, 1, 0)</c>.
+	/// </summary>
 	public static Vector4d<T> UnitZ => new(T.Zero, T.Zero, T.One, T.Zero);
+
+	/// <summary>
+	/// Vector which W is one, <c>(0, 0, 0, 1)</c>.
+	/// </summary>
 	public static Vector4d<T> UnitW => new(T.Zero, T.Zero, T.Zero, T.One);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
@@ -236,13 +301,18 @@ public unsafe struct Vector4d<T> :
 		array[3 + (int)offset] = W;
 	}
 
+	/// <inheritdoc/>
 	public override readonly int GetHashCode()
 		=> HashCode.Combine(X, Y, Z, W);
+
+	/// <inheritdoc/>
 	public override readonly bool Equals([NotNullWhen(true)] object? obj)
 		=> obj is Vector4d<T> vec
 		? vec == this : false;
 	public readonly bool Equals(Vector4d<T> other)
 		=> this == other;
+
+	/// <inheritdoc/>
 	public override readonly string ToString() => ToString("G", CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format, IFormatProvider? formatProvider)

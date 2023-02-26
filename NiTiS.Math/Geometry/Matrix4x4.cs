@@ -101,7 +101,8 @@ public unsafe struct Matrix4x4<T> :
 		set => (M41, M42, M43) = (value.X, value.Y, value.Z);
 	}
 
-	public static readonly Matrix4x4<T> Identity = new(
+	public static Matrix4x4<T> Identity
+		=> new(
 		T.One, T.Zero, T.Zero, T.Zero,
 		T.Zero, T.One, T.Zero, T.Zero,
 		T.Zero, T.Zero, T.One, T.Zero,
@@ -183,6 +184,12 @@ public unsafe struct Matrix4x4<T> :
 		M44 = m44;
 	}
 
+	/// <summary>
+	/// Add one matrix to another one.
+	/// </summary>
+	/// <param name="left">The left argument.</param>
+	/// <param name="right">The right argument.</param>
+	/// <returns>Resulting matrix - result of addition <paramref name="right"/> to <paramref name="left"/> matrix.</returns>
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Matrix4x4<T> operator +(Matrix4x4<T> left, Matrix4x4<T> right)
 	{
@@ -205,6 +212,12 @@ public unsafe struct Matrix4x4<T> :
 		return left;
 	}
 
+	/// <summary>
+	/// Subtract one matrix from another one.
+	/// </summary>
+	/// <param name="left">The left argument.</param>
+	/// <param name="right">The right argument.</param>
+	/// <returns>Resulting matrix - result of subtraction <paramref name="right"/> from <paramref name="left"/> matrix.</returns>
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Matrix4x4<T> operator -(Matrix4x4<T> left, Matrix4x4<T> right)
 	{
@@ -241,6 +254,13 @@ public unsafe struct Matrix4x4<T> :
 			left.M23 != right.M23 || left.M24 != right.M24 || left.M31 != right.M31 || left.M32 != right.M32 ||
 			left.M34 != right.M34 || left.M41 != right.M41 || left.M42 != right.M42 || left.M43 != right.M43);
 
+	/// <summary>
+	/// Multiply two matrices.
+	/// </summary>
+	/// <param name="left">The left argument.</param>
+	/// <param name="right">The right argument.</param>
+	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
+
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Matrix4x4<T> operator *(Matrix4x4<T> left, Matrix4x4<T> right)
 	{
@@ -273,6 +293,12 @@ public unsafe struct Matrix4x4<T> :
 		return m;
 	}
 
+	/// <summary>
+	/// Add scalar to matrix.
+	/// </summary>
+	/// <param name="left">The left argument.</param>
+	/// <param name="right">The right argument.</param>
+	/// <returns>Resulting matrix - result of addition <paramref name="right"/> scalar to <paramref name="left"/> matrix.</returns>
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Matrix4x4<T> operator +(Matrix4x4<T> left, T right)
 	{
@@ -296,11 +322,11 @@ public unsafe struct Matrix4x4<T> :
 	}
 
 	/// <summary>
-	/// Subtract one matrix from another one.
+	/// Subtract scalar from matrix.
 	/// </summary>
 	/// <param name="left">The left argument.</param>
 	/// <param name="right">The right argument.</param>
-	/// <returns>Resulting matrix - result of subtraction <paramref name="right"/> from <paramref name="left"/> matrix.</returns>
+	/// <returns>Resulting matrix - result of subtraction <paramref name="right"/> scalar from <paramref name="left"/> matrix.</returns>
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Matrix4x4<T> operator -(Matrix4x4<T> left, T right)
 	{
@@ -338,11 +364,11 @@ public unsafe struct Matrix4x4<T> :
 			left.M34 != right || left.M41 != right || left.M42 != right || left.M43 != right);
 
 	/// <summary>
-	/// Multiply two matrices.
+	/// Multiply matrix by scalar.
 	/// </summary>
 	/// <param name="left">The left argument.</param>
 	/// <param name="right">The right argument.</param>
-	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
+	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> matrix and <paramref name="right"/> scalar.</returns>
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static Matrix4x4<T> operator *(Matrix4x4<T> left, T right)
 	{

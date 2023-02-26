@@ -6,14 +6,29 @@ using System.Runtime.InteropServices;
 
 namespace NiTiS.Math.Geometry;
 
+/// <summary>
+/// 
+/// </summary>
+/// <typeparam name="T"></typeparam>
 [DebuggerTypeProxy(typeof(IRegionDebugView<>))]
 [DebuggerDisplay("Size = {Size}")]
 public unsafe struct Region2d<T>
 	where T : unmanaged, INumberBase<T>
 {
+	/// <summary>
+	/// Origin point of region.
+	/// </summary>
 	public Vector2d<T> Begin;
+	/// <summary>
+	/// Size of region.
+	/// </summary>
 	public Vector2d<T> Size;
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="begin"></param>
+	/// <param name="size"></param>
 	public Region2d(Vector2d<T> begin, Vector2d<T> size)
 	{
 		Begin = begin;

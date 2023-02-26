@@ -1779,7 +1779,6 @@ public static unsafe class Matrix4x4
 		return result;
 	}
 
-
 	private struct CanonicalBasis<T>
 		where T : unmanaged, INumberBase<T>
 	{
@@ -1788,6 +1787,7 @@ public static unsafe class Matrix4x4
 		public Vector3d<T> Row2;
 	};
 
+#pragma warning disable CS0649 // Element never use
 	private struct VectorBasis<T>
 		where T : unmanaged, INumberBase<T>
 	{
@@ -1795,4 +1795,5 @@ public static unsafe class Matrix4x4
 		public unsafe Vector3d<T>* Element1;
 		public unsafe Vector3d<T>* Element2;
 	}
+#pragma warning restore
 }

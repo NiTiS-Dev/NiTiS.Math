@@ -32,9 +32,22 @@ public unsafe struct Vector3d<T> :
 		unmanaged,
 		INumberBase<T>
 {
+	/// <summary>
+	/// X value of vector, the first dimension.
+	/// </summary>
 	public T X;
+	/// <summary>
+	/// Y value of vector, the second dimension.
+	/// </summary>
 	public T Y;
+	/// <summary>
+	/// Z value of vector, the third dimension.
+	/// </summary>
 	public T Z;
+
+	/// <summary>
+	/// Squared magnitude of vector.
+	/// </summary>
 	public readonly T LengthSquared
 	{
 		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
@@ -44,6 +57,36 @@ public unsafe struct Vector3d<T> :
 	public const int ElementCount = 3;
 	private static readonly int VectorSize = sizeof(T) * ElementCount;
 
+	/// <summary>
+	/// Creates new third-dimensional vector with values <c>(<paramref name="x"/>, <paramref name="y"/>, <paramref name="z"/>)</c>.
+	/// </summary>
+	/// <param name="x">X value of vector.</param>
+	/// <param name="y">Y value of vector.</param>
+	/// <param name="z">Z value of vector.</param>
+	public Vector3d(T x, T y, T z)
+		=> (X, Y, Z) = (x, y, z);
+
+	/// <summary>
+	/// Creates new third-dimensional vector with values <c>(<paramref name="xyz"/>, <paramref name="xyz"/>, <paramref name="xyz"/>)</c>.
+	/// </summary>
+	/// <param name="xyz">X, Y and Z value of vector.</param>
+	public Vector3d(T xyz)
+		=> (X, Y, Z) = (xyz, xyz, xyz);
+
+	/// <summary>
+	/// Expands two-dimension vector to third-dimension.
+	/// </summary>
+	/// <param name="base2">Base vector.</param>
+	/// <param name="z">Z value.</param>
+	public Vector3d(Vector2d<T> base2, T z)
+		=> (X, Y, Z) = (base2.X, base2.Y, z);
+
+
+	/// <summary>
+	/// Creates vector by buffer.
+	/// </summary>
+	/// <param name="data">Buffer with vector data.</param>
+	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
 	public Vector3d(ReadOnlySpan<T> data)
 	{
 		if (data.Length < ElementCount)
@@ -51,6 +94,12 @@ public unsafe struct Vector3d<T> :
 
 		this = Unsafe.ReadUnaligned<Vector3d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
 	}
+
+	/// <summary>
+	/// Creates vector by buffer.
+	/// </summary>
+	/// <param name="data">Buffer with vector data.</param>
+	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
 	public Vector3d(ReadOnlySpan<byte> data)
 	{
 		if (data.Length < VectorSize)
@@ -58,30 +107,30 @@ public unsafe struct Vector3d<T> :
 
 		this = Unsafe.ReadUnaligned<Vector3d<T>>(ref MemoryMarshal.GetReference(data));
 	}
-	public Vector3d(ReadOnlySpan<T> data, int offset)
-	{
-		if (data.Length < ElementCount + offset)
-			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Vector3d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data.Slice(offset))));
-	}
-	public Vector3d(ReadOnlySpan<byte> data, int offset)
-	{
-		if (data.Length < VectorSize + offset)
-			throw new ArgumentOutOfRangeException(nameof(data));
-
-		this = Unsafe.ReadUnaligned<Vector3d<T>>(ref MemoryMarshal.GetReference(data.Slice(offset)));
-	}
-	public Vector3d(Vector2d<T> base2, T z)
-		=> (X, Y, Z) = (base2.X, base2.Y, z);
-	public Vector3d(T x, T y, T z)
-		=> (X, Y, Z) = (x, y, z);
-	public Vector3d(T xyz)
-		=> (X, Y, Z) = (xyz, xyz, xyz);
+	/// <summary>
+	/// Vector with all ones, <c>(1, 1, 1)</c>.
+	/// </summary>
 	public static Vector3d<T> One => new(T.One, T.One, T.One);
+
+	/// <summary>
+	/// Vector with all zeros, <c>(0, 0, 0)</c>.
+	/// </summary>
 	public static Vector3d<T> Zero => new(T.Zero, T.Zero, T.Zero);
+
+	/// <summary>
+	/// Vector which X is one, <c>(1, 0, 0)</c>.
+	/// </summary>
 	public static Vector3d<T> UnitX => new(T.One, T.Zero, T.Zero);
+
+	/// <summary>
+	/// Vector which Y is one, <c>(0, 1, 0)</c>.
+	/// </summary>
 	public static Vector3d<T> UnitY => new(T.Zero, T.One, T.Zero);
+
+	/// <summary>
+	/// Vector which Z is one, <c>(0, 0, 1)</c>.
+	/// </summary>
 	public static Vector3d<T> UnitZ => new(T.Zero, T.Zero, T.One);
 
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
@@ -217,14 +266,19 @@ public unsafe struct Vector3d<T> :
 		array[1 + (int)offset] = Y;
 		array[2 + (int)offset] = Z;
 	}
-
+	/// <inheritdoc/>
 	public override readonly int GetHashCode()
 		=> HashCode.Combine(X, Y, Z);
+
+	/// <inheritdoc/>
 	public override readonly bool Equals([NotNullWhen(true)] object? obj)
 		=> obj is Vector3d<T> vec
 		? vec == this : false;
+	
 	public readonly bool Equals(Vector3d<T> other)
 		=> this == other;
+
+	/// <inheritdoc/>
 	public override readonly string ToString() => ToString("G", CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format) => ToString(format, CultureInfo.CurrentCulture);
 	public readonly string ToString(string? format, IFormatProvider? formatProvider)
