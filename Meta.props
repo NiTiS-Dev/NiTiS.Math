@@ -6,19 +6,19 @@
 	</ItemGroup>
 	<PropertyGroup>
 		<!-- Versioning -->
-		<Version>2.3.1</Version>
 		<Authors>NiTiS-Dev;NiTiSon</Authors>
 		<TargetFrameworks>net7.0</TargetFrameworks>
 		<Version>$(Version)</Version>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
-		<PackageVersion>$(Version)</PackageVersion>
+		<PackageVersion Condition="$(VersionPrefix)==''">$(Version)</PackageVersion>
+		<PackageVersion Condition="$(VersionPrefix)!=''">$(Version)-$(VersionPrefix)</PackageVersion>
 
 		<!-- Package info -->
 		<TargetName>$(AssemblyName)</TargetName>
 		<Copyright>Copyright (c) NiTiS-Dev and contributors</Copyright>
 		<Summary>$(Description)</Summary>
 		<PackageIcon>./ICON.png</PackageIcon>
-		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Core.git</RepositoryUrl>
+		<RepositoryUrl>https://github.com/NiTiS-Dev/NiTiS.Math.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseFile>./LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>./README.md</PackageReadmeFile>
@@ -27,7 +27,7 @@
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<NoWarn>CS8981;CS1591;IDE1006</NoWarn>
+		<NoWarn>CS8981;CS1591;IDE1006;IDE0049;IDE0054</NoWarn>
 
 		<DebugSymbols>true</DebugSymbols>
 		<DebugType>full</DebugType>

@@ -1,4 +1,5 @@
 ﻿using NiTiS.Math;
+using NiTiS.Math.Geometry;
 using NUnit.Framework;
 using System.Reflection.Metadata;
 

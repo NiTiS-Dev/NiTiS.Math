@@ -5,6 +5,7 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{28AAFD0D-1666-43A5-8DB4-F8B861645D71}"
 	ProjectSection(SolutionItems) = preProject
+		.filenesting.json = .filenesting.json
 		.github\workflows\build.yml = .github\workflows\build.yml
 		Meta.props = Meta.props
 		README.md = README.md
@@ -12,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{28AAFD0D-1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math", "NiTiS.Math\NiTiS.Math.csproj", "{76975105-21AB-4C9A-8064-C54CF1B2884C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Tests", "Tests\NiTiS.Math.Tests.csproj", "{35EED413-824F-4EF5-ABCC-C29E4E9553B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Benchmark", "Tests\NiTiS.Math.Benchmark\NiTiS.Math.Benchmark.csproj", "{C74BB3E5-E3D8-4AE8-A236-CC082712B9FF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Tests", "Tests\NiTiS.Math.Tests\NiTiS.Math.Tests.csproj", "{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +27,14 @@ Global
 		{76975105-21AB-4C9A-8064-C54CF1B2884C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76975105-21AB-4C9A-8064-C54CF1B2884C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76975105-21AB-4C9A-8064-C54CF1B2884C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35EED413-824F-4EF5-ABCC-C29E4E9553B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35EED413-824F-4EF5-ABCC-C29E4E9553B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35EED413-824F-4EF5-ABCC-C29E4E9553B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35EED413-824F-4EF5-ABCC-C29E4E9553B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C74BB3E5-E3D8-4AE8-A236-CC082712B9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C74BB3E5-E3D8-4AE8-A236-CC082712B9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C74BB3E5-E3D8-4AE8-A236-CC082712B9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C74BB3E5-E3D8-4AE8-A236-CC082712B9FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

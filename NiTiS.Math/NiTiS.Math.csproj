@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AssemblyName>NiTiS.Math</AssemblyName>
+		<Version>2.3.3</Version>
+		<VersionPrefix>preview</VersionPrefix>
 
 		<Description>The NiTiS library providing maths structs and operations</Description>
 
