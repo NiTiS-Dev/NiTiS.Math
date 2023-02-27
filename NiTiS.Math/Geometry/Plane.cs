@@ -1,4 +1,5 @@
 ﻿using NiTiS.Core.Annotations;
+using NiTiS.Math.Vectors;
 using System;
 using System.Numerics;
 

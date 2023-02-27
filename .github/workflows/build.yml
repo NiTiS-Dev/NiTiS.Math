@@ -4,6 +4,7 @@ on:
   push:
     branches:
     - dev
+    - stable   
     paths:
     - '**.cs'
     - '**.csproj'
@@ -38,6 +39,7 @@ jobs:
           path: .build/${{ matrix.project }}/*.dll
           
       - name: Github Upload
+        if: (github.event_name == 'push')
         run: |
           cd .pack/
           dotnet nuget push ${{ matrix.project }}/*.nupkg --source https://nuget.pkg.github.com/NiTiS-Dev/index.json --api-key ${GITHUB_TOKEN} --skip-duplicate
@@ -45,6 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Nuget Upload
+        if: (github.event_name == 'push')
         run: |
           cd .pack/
           dotnet nuget push ${{ matrix.project }}/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${NUGET_TOKEN} --skip-duplicate

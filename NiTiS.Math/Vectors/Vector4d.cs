@@ -8,8 +8,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
-namespace NiTiS.Math;
+namespace NiTiS.Math.Vectors;
 
+/// <summary>
+/// Fourth-dimension vector with direction and magnitude.
+/// </summary>
 [DebuggerDisplay($@"{{{nameof(ToString)}(""G""),nq}}")]
 public unsafe struct Vector4d<T> :
 	// Vector op Vector
@@ -100,7 +103,6 @@ public unsafe struct Vector4d<T> :
 	/// </summary>
 	/// <param name="data">Buffer with vector data.</param>
 	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
-
 	public Vector4d(ReadOnlySpan<T> data)
 	{
 		if (data.Length < ElementCount)
@@ -323,17 +325,17 @@ public unsafe struct Vector4d<T> :
 
 		sb.Append(X.ToString(format, formatProvider));
 		sb.Append(separator);
-		if (!String.IsNullOrWhiteSpace(separator))
+		if (!string.IsNullOrWhiteSpace(separator))
 			sb.Append(' ');
 
 		sb.Append(Y.ToString(format, formatProvider));
 		sb.Append(separator);
-		if (!String.IsNullOrWhiteSpace(separator))
+		if (!string.IsNullOrWhiteSpace(separator))
 			sb.Append(' ');
 
 		sb.Append(Z.ToString(format, formatProvider));
 		sb.Append(separator);
-		if (!String.IsNullOrWhiteSpace(separator))
+		if (!string.IsNullOrWhiteSpace(separator))
 			sb.Append(' ');
 
 		sb.Append(W.ToString(format, formatProvider));

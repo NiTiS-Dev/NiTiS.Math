@@ -1,11 +1,11 @@
-﻿using NiTiS.Math.Geometry;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Numerics;
 using System.Security.AccessControl;
 using SMat4 = System.Numerics.Matrix4x4;
-using GMat4 = NiTiS.Math.Geometry.Matrix4x4<float>;
-using GMat = NiTiS.Math.Geometry.Matrix4x4;
+using GMat4 = NiTiS.Math.Matrices.Matrix4x4<float>;
+using GMat = NiTiS.Math.Matrices.Matrix4x4;
+using NiTiS.Math.Matrices;
 
 namespace NiTiS.Math.Tests;
 

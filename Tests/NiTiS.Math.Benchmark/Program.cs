@@ -1,9 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using NiTiS.Math.Geometry;
 using SMat4 = System.Numerics.Matrix4x4;
-using GMat4 = NiTiS.Math.Geometry.Matrix4x4<float>;
-using GMat = NiTiS.Math.Geometry.Matrix4x4;
+using GMat4 = NiTiS.Math.Matrices.Matrix4x4<float>;
+using GMat = NiTiS.Math.Matrices.Matrix4x4;
 using NiTiS.Core;
 using System;
 using System.Numerics;

@@ -1,14 +1,16 @@
 ﻿using NiTiS.Core.Annotations;
+using NiTiS.Math.Geometry;
+using NiTiS.Math.Matrices;
+using NiTiS.Math.Vectors;
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
-using System.Security.Principal;
-using static System.Runtime.CompilerServices.MethodImplOptions;
 using System.Runtime.Intrinsics.Arm;
+using System.Runtime.Intrinsics.X86;
+using static System.Runtime.CompilerServices.MethodImplOptions;
 
-namespace NiTiS.Math.Geometry;
+namespace NiTiS.Math.Matrices;
 
 public static unsafe class Matrix4x4
 {
@@ -258,7 +260,7 @@ public static unsafe class Matrix4x4
 	public static Matrix4x4<T> CreateFromYawPitchRoll<T>(T yaw, T pitch, T roll)
 		where T : unmanaged, INumberBase<T>, ITrigonometricFunctions<T>
 	{
-		Quaternion<T> q = Quaternion.CreateFromYawPitchRoll(yaw, pitch, roll);
+		Quaternion<T> q = Geometry.Quaternion.CreateFromYawPitchRoll(yaw, pitch, roll);
 		return CreateFromQuaternion(q);
 	}
 
@@ -515,7 +517,7 @@ public static unsafe class Matrix4x4
 	public static Matrix4x4<T> CreateReflection<T>(Plane<T> value)
 		where T : unmanaged, INumberBase<T>
 	{
-		value = Plane.Normalize(value);
+		value = Geometry.Plane.Normalize(value);
 
 		T a = value.Normal.X;
 		T b = value.Normal.Y;
@@ -865,7 +867,7 @@ public static unsafe class Matrix4x4
 	public static Matrix4x4<T> CreateShadow<T>(Vector3d<T> lightDirection, Plane<T> plane)
 		where T : unmanaged, INumberBase<T>
 	{
-		Plane<T> p = Plane.Normalize(plane);
+		Plane<T> p = Geometry.Plane.Normalize(plane);
 
 		T dot = p.Normal.X * lightDirection.X + p.Normal.Y * lightDirection.Y + p.Normal.Z * lightDirection.Z;
 		T a = -p.Normal.X;
@@ -1572,11 +1574,11 @@ public static unsafe class Matrix4x4
 	{
 		bool p = System.Numerics.Matrix4x4.Decompose(matrix.ConvertToSystem(), out Vector3 scale2, out System.Numerics.Quaternion rotation2, out Vector3 translation2);
 
-		scale = Vector3d.ConvertToGeneric(scale2);
+		scale = scale2.ConvertToGeneric();
 		rotation = Unsafe.As<System.Numerics.Quaternion, Quaternion<float>>(ref rotation2);
 		translation = translation2.ConvertToGeneric();
 
-		return p;	
+		return p;
 	}
 
 	/// <summary>Attempts to extract the scale, translation, and rotation components from the given scale, rotation, or translation matrix. The return value indicates whether the operation succeeded.</summary>
@@ -1619,9 +1621,9 @@ public static unsafe class Matrix4x4
 				pVectorBasis[1] = (Vector3d<T>*)&matTemp.M21;
 				pVectorBasis[2] = (Vector3d<T>*)&matTemp.M31;
 
-				*(pVectorBasis[0]) = new Vector3d<T>(matrix.M11, matrix.M12, matrix.M13);
-				*(pVectorBasis[1]) = new Vector3d<T>(matrix.M21, matrix.M22, matrix.M23);
-				*(pVectorBasis[2]) = new Vector3d<T>(matrix.M31, matrix.M32, matrix.M33);
+				*pVectorBasis[0] = new Vector3d<T>(matrix.M11, matrix.M12, matrix.M13);
+				*pVectorBasis[1] = new Vector3d<T>(matrix.M21, matrix.M22, matrix.M23);
+				*pVectorBasis[2] = new Vector3d<T>(matrix.M31, matrix.M32, matrix.M33);
 
 				scale.X = Vector3d.Length(*pVectorBasis[0]);
 				scale.Y = Vector3d.Length(*pVectorBasis[1]);
@@ -1682,7 +1684,7 @@ public static unsafe class Matrix4x4
 
 				if (pfScales[a] < DecomposeEpsilon)
 				{
-					*(pVectorBasis[a]) = pCanonicalBasis[a];
+					*pVectorBasis[a] = pCanonicalBasis[a];
 				}
 
 				*pVectorBasis[a] = Vector3d.Normalize(*pVectorBasis[a]);
@@ -1754,7 +1756,7 @@ public static unsafe class Matrix4x4
 				{
 					// switch coordinate system by negating the scale and inverting the basis vector on the x-axis
 					pfScales[a] = -pfScales[a];
-					*pVectorBasis[a] = -(*pVectorBasis[a]);
+					*pVectorBasis[a] = -*pVectorBasis[a];
 
 					det = -det;
 				}
@@ -1762,7 +1764,7 @@ public static unsafe class Matrix4x4
 				det -= T.One;
 				det *= det;
 
-				if ((FloatScalar<T>.DecomposeEpsilon < det))
+				if (FloatScalar<T>.DecomposeEpsilon < det)
 				{
 					// Non-SRT matrix encountered
 					rotation = Quaternion<T>.Identity;
@@ -1771,7 +1773,7 @@ public static unsafe class Matrix4x4
 				else
 				{
 					// generate the quaternion from the matrix
-					rotation = Quaternion.CreateFromRotationMatrix(matTemp);
+					rotation = Geometry.Quaternion.CreateFromRotationMatrix(matTemp);
 				}
 			}
 		}

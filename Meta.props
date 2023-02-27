@@ -6,12 +6,12 @@
 	</ItemGroup>
 	<PropertyGroup>
 		<!-- Versioning -->
-		<Version>2.3.2</Version>
 		<Authors>NiTiS-Dev;NiTiSon</Authors>
 		<TargetFrameworks>net7.0</TargetFrameworks>
 		<Version>$(Version)</Version>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
-		<PackageVersion>$(Version)</PackageVersion>
+		<PackageVersion Condition="$(VersionPrefix)==''">$(Version)</PackageVersion>
+		<PackageVersion Condition="$(VersionPrefix)!=''">$(Version)-$(VersionPrefix)</PackageVersion>
 
 		<!-- Package info -->
 		<TargetName>$(AssemblyName)</TargetName>

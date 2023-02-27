@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using NiTiS.Math.Matrices;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math.Geometry;
