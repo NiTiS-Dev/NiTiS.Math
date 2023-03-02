@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using NiTiS.Math.Vectors;
 
 namespace NiTiS.Math.Geometry;
 

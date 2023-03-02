@@ -1,7 +1,6 @@
 ﻿using NiTiS.Core.Annotations;
 using NiTiS.Math.Geometry;
 using NiTiS.Math.Matrices;
-using NiTiS.Math.Vectors;
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;

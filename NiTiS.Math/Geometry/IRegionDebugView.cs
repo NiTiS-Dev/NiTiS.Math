@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Numerics;
-using NiTiS.Math.Vectors;
 
 namespace NiTiS.Math.Geometry;
 
