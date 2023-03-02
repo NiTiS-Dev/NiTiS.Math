@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NiTiS.Math.Matrices;
+using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -8,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
-namespace NiTiS.Math.Vectors;
+namespace NiTiS.Math;
 
 /// <summary>
 /// Fourth-dimension vector with direction and magnitude.
@@ -266,19 +267,73 @@ public unsafe struct Vector4d<T> :
 			+operand.W
 			);
 
+	#region Multiplication with Matrices
+
+	//TODO: Matrix4x2,3 not implement yet
+
+	///// <summary>
+	///// Multiply two matrices.
+	///// </summary>
+	///// <param name="left">Vector, first operand that use like 1x4 matrix.</param>
+	///// <param name="right">Matrix, second operand.</param>
+	///// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
+	//[MethodImpl(AggressiveOptimization)]
+	//public static Vector3d<T> operator *(Vector4d<T> left, Matrix4x2<T> right)
+	//{
+	//	Unsafe.SkipInit(out Vector4d<T> result);
+
+	//	result.X = Vector3d.Dot(left, right.Column1);
+	//	result.Y = Vector3d.Dot(left, right.Column2);
+	//	result.Z = Vector3d.Dot(left, right.Column3);
+
+	//	return result;
+	//}
+
+	///// <summary>
+	///// Multiply two matrices.
+	///// </summary>
+	///// <param name="left">Vector, first operand that use like 1x4 matrix.</param>
+	///// <param name="right">Matrix, second operand.</param>
+	///// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
+	//[MethodImpl(AggressiveOptimization)]
+	//public static Vector3d<T> operator *(Vector4d<T> left, Matrix4x3<T> right)
+	//{
+	//	Unsafe.SkipInit(out Vector4d<T> result);
+
+	//	result.X = Vector3d.Dot(left, right.Column1);
+	//	result.Y = Vector3d.Dot(left, right.Column2);
+	//	result.Z = Vector3d.Dot(left, right.Column3);
+
+	//	return result;
+	//}
+
+	/// <summary>
+	/// Multiply two matrices.
+	/// </summary>
+	/// <param name="left">Vector, first operand that use like 1x4 matrix.</param>
+	/// <param name="right">Matrix, second operand.</param>
+	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
+	[MethodImpl(AggressiveOptimization)]
+	public static Vector4d<T> operator *(Vector4d<T> left, Matrix4x4<T> right)
+	{
+		Unsafe.SkipInit(out Vector4d<T> result);
+
+		result.X = Vector4d.Dot(left, right.Column1);
+		result.Y = Vector4d.Dot(left, right.Column2);
+		result.Z = Vector4d.Dot(left, right.Column3);
+		result.W = Vector4d.Dot(left, right.Column4);
+
+		return result;
+	}
+
+	#endregion
+
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static implicit operator Vector2d<T>(Vector4d<T> operand)
-		=> new(
-			operand.X,
-			operand.Y
-			);
+		=> new(operand.X, operand.Y);
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
 	public static implicit operator Vector3d<T>(Vector4d<T> operand)
-		=> new(
-			operand.X,
-			operand.Y,
-			operand.Z
-			);
+		=> new(operand.X, operand.Y, operand.Z);
 
 	public readonly void CopyTo(T[] array)
 		=> CopyTo(array, 0);
@@ -310,7 +365,7 @@ public unsafe struct Vector4d<T> :
 	/// <inheritdoc/>
 	public override readonly bool Equals([NotNullWhen(true)] object? obj)
 		=> obj is Vector4d<T> vec
-		? vec == this : false;
+		&& this == vec;
 	public readonly bool Equals(Vector4d<T> other)
 		=> this == other;
 

@@ -3,7 +3,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
-namespace NiTiS.Math.Vectors;
+namespace NiTiS.Math;
 
 public static class Vector3d
 {
