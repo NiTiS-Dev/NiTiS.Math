@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AssemblyName>NiTiS.Math</AssemblyName>
-		<Version>2.3.4</Version>
+		<Version>2.3.5</Version>
 		<VersionPrefix>preview</VersionPrefix>
 
-		<Description>The NiTiS library providing maths structs and operations</Description>
+		<Description>The NiTiS library providing maths structs and operations for them.</Description>
 
-		<PackageTags>NiTiS;Math;Vectors;Matrix;Vector;Matrixes;Physics;Generics</PackageTags>
+		<PackageTags>NiTiS;Math;Vectors;Quaternion;Matrix;Vector;Matrixes;Physics;Generics</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>

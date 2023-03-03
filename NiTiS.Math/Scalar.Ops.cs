@@ -49,6 +49,7 @@ public static class Scalar
 		=> radians * (180d / double.Pi);
 
 	#endregion
+	
 	#region Prime
 	/// <summary>
 	/// Cheks if <paramref name="number"/> is prime.<br/>
@@ -95,25 +96,8 @@ public static class Scalar
 		return true;
 	}
 	#endregion Prime
+	
 	#region GCD
-	/// <summary>
-	/// Resolves greatest divisor for <paramref name="a"/> and <paramref name="b"/>.
-	/// </summary>
-	/// <param name="a">The first argument.</param>
-	/// <param name="b">The second argument.</param>
-	/// <returns>Greatest common divisor.</returns>
-	public static long GreatestCommonDivisor(long a, long b)
-		=> b == 0? (a < 0 ? -a : a)
-		: GreatestCommonDivisor(b, a % b);
-	/// <summary>
-	/// Resolves greatest divisor for <paramref name="a"/> and <paramref name="b"/>.
-	/// </summary>
-	/// <param name="a">The first argument.</param>
-	/// <param name="b">The second argument.</param>
-	/// <returns>Greatest common divisor.</returns>
-	public static int GreatestCommonDivisor(int a, int b)
-		=> b == 0 ? (a < 0 ? -a : a)
-		: GreatestCommonDivisor(b, a % b);
 	/// <summary>
 	/// Resolves greatest divisor for <paramref name="a"/> and <paramref name="b"/>.
 	/// </summary>
@@ -128,29 +112,8 @@ public static class Scalar
 		=> b == N.Zero ? (a < N.Zero ? -a : a)
 		: GreatestCommonDivisor(b, a % b);
 	#endregion
+
 	#region LCM
-	/// <summary>
-	/// Resolves leastest multiple for <paramref name="a"/> and <paramref name="b"/>.
-	/// </summary>
-	/// <param name="a">The first argument.</param>
-	/// <param name="b">The second argument.</param>
-	/// <returns>Least common multiple.</returns>
-	public static long LeastCommonMultiple(long a, long b)
-	{
-		long lcm = (a / GreatestCommonDivisor(a, b)) * b;
-		return lcm > 0 ? lcm : -lcm;
-	}
-	/// <summary>
-	/// Resolves leastest multiple for <paramref name="a"/> and <paramref name="b"/>.
-	/// </summary>
-	/// <param name="a">The first argument.</param>
-	/// <param name="b">The second argument.</param>
-	/// <returns>Least common multiple.</returns>
-	public static int LeastCommonMultiple(int a, int b)
-	{
-		int lcm = (a / GreatestCommonDivisor(a, b)) * b;
-		return lcm > 0 ? lcm : -lcm;
-	}
 	/// <summary>
 	/// Resolves leastest multiple for <paramref name="a"/> and <paramref name="b"/>.
 	/// </summary>
@@ -166,5 +129,11 @@ public static class Scalar
 		N lcm = (a / GreatestCommonDivisor(a, b)) * b;
 		return lcm > N.Zero ? lcm : -lcm;
 	}
+	#endregion
+
+	#region Lerp
+	public static N Lerp<N>(N origin, N end, N progress)
+		where N : INumberBase<N>
+		=> origin + (end - origin) * progress;
 	#endregion
 }

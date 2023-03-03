@@ -65,7 +65,7 @@ public unsafe struct Vector4d<N> :
     private static readonly int VectorSize = sizeof(N) * ElementCount;
 
     /// <summary>
-    /// Creates new fourth-dimensional vector with values <c>(<paramref name="x"/>, <paramref name="y"/>, <paramref name="z"/>, <paramref name="z"/>)</c>.
+    /// Creates new fourth-dimensional vector with values <c>(<paramref name="x"/>, <paramref name="y"/>, <paramref name="z"/>, <paramref name="w"/>)</c>.
     /// </summary>
     /// <param name="x">X value of vector.</param>
     /// <param name="y">Y value of vector.</param>

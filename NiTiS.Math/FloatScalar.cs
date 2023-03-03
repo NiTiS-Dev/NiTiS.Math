@@ -1,12 +1,16 @@
-﻿using System.Globalization;
+﻿#pragma warning disable CS1591
+using System.Globalization;
 using System.Numerics;
 
 namespace NiTiS.Math;
 
+/// <summary>
+/// Hook to some generic float constants.
+/// </summary>
 internal static class FloatScalar<T>
 	where T : INumberBase<T>, IComparisonOperators<T, T, bool>
 {
-	private static T billboardEpsilon, billboardMinAngle, decomposeEpsilon;
+	private static T billboardEpsilon, billboardMinAngle, decomposeEpsilon, slerpEpsilon;
 
 	public static T BillboardEpsilon
 	{
@@ -16,6 +20,16 @@ internal static class FloatScalar<T>
 				return billboardEpsilon = T.Parse("1e-4", NumberStyles.Float, null);
 
 			return billboardEpsilon;
+		}
+	}
+	public static T SlerpEpsilon
+	{
+		get
+		{
+			if (slerpEpsilon == T.Zero)
+				return slerpEpsilon = T.Parse("1e-6", NumberStyles.Float, null);
+
+			return slerpEpsilon;
 		}
 	}
 	public static T BillboardMinAngle
@@ -39,3 +53,4 @@ internal static class FloatScalar<T>
 		}
 	}
 }
+#pragma warning restore
