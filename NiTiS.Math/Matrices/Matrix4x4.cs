@@ -12,6 +12,8 @@ namespace NiTiS.Math.Matrices;
 /// <typeparam name="N">Matrix data type.</typeparam>
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public unsafe struct Matrix4x4<N> :
+	IMatrix<Matrix4x4<N>, N>,
+
 	IAdditionOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
 	ISubtractionOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
 	IMultiplyOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
@@ -26,10 +28,16 @@ public unsafe struct Matrix4x4<N> :
 	where N : unmanaged, INumberBase<N>
 {
 	#region Matrix
-	public const int
-		RowsCount = 4,
-		ColumnsCount = 4,
-		ElementCount = ColumnsCount * RowsCount;
+	private const int
+		rowsCount = 4,
+		columnsCount = 4,
+		ElementCount = columnsCount * rowsCount;
+
+	/// <inheritdoc/>
+	public static int ColumnsCount => columnsCount;
+
+	/// <inheritdoc/>
+	public static int RowsCount => rowsCount;
 
 	public N M11;
 	public N M12;
@@ -80,17 +88,29 @@ public unsafe struct Matrix4x4<N> :
 			return Unsafe.Add(ref M11, index);
 		}
 	}
-	public N this[int x_, int _x]
+
+	/// <inheritdoc/>
+	public N this[int row, int column]
 	{
+		set
+		{
+			if (column >= rowsCount)
+				throw new ArgumentOutOfRangeException(nameof(column));
+
+			if (row >= columnsCount)
+				throw new ArgumentOutOfRangeException(nameof(row));
+
+			Unsafe.Add(ref M11, row * columnsCount + column) = value;
+		}
 		get
 		{
-			if (_x >= RowsCount)
-				throw new ArgumentOutOfRangeException(nameof(_x));
+			if (column >= rowsCount)
+				throw new ArgumentOutOfRangeException(nameof(column));
 
-			if (x_ >= ColumnsCount)
-				throw new ArgumentOutOfRangeException(nameof(x_));
+			if (row >= columnsCount)
+				throw new ArgumentOutOfRangeException(nameof(row));
 
-			return Unsafe.Add(ref M11, x_ * ColumnsCount + _x);
+			return Unsafe.Add(ref M11, row * columnsCount + column);
 		}
 	}
 
