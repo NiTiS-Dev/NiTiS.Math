@@ -1,11 +1,11 @@
-﻿using NiTiS.Math.Matrices;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
 using System.Text;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
@@ -235,75 +235,7 @@ public unsafe struct Vector3d<N> :
 			+operand.Z
 			);
 
-	#region Multiplication with Matrices
-
-	//TODO: Matrix4x2,3 not implement yet
-
-	///// <summary>
-	///// Multiply two matrices.
-	///// </summary>
-	///// <param name="left">Vector, first operand that use like 1x4 matrix.</param>
-	///// <param name="right">Matrix, second operand.</param>
-	///// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
-	//[MethodImpl(AggressiveOptimization)]
-	//public static Vector3d<T> operator *(Vector4d<T> left, Matrix4x2<T> right)
-	//{
-	//	Unsafe.SkipInit(out Vector4d<T> result);
-
-	//	result.X = Vector3d.Dot(left, right.Column1);
-	//	result.Y = Vector3d.Dot(left, right.Column2);
-	//	result.Z = Vector3d.Dot(left, right.Column3);
-
-	//	return result;
-	//}
-
-	///// <summary>
-	///// Multiply two matrices.
-	///// </summary>
-	///// <param name="left">Vector, first operand that use like 1x4 matrix.</param>
-	///// <param name="right">Matrix, second operand.</param>
-	///// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
-	//[MethodImpl(AggressiveOptimization)]
-	//public static Vector3d<T> operator *(Vector4d<T> left, Matrix4x3<T> right)
-	//{
-	//	Unsafe.SkipInit(out Vector4d<T> result);
-
-	//	result.X = Vector3d.Dot(left, right.Column1);
-	//	result.Y = Vector3d.Dot(left, right.Column2);
-	//	result.Z = Vector3d.Dot(left, right.Column3);
-
-	//	return result;
-	//}
-
-	/// <summary>
-	/// Multiply two matrices.
-	/// </summary>
-	/// <param name="left">Vector, first operand that use like 1x4 matrix.</param>
-	/// <param name="right">Matrix, second operand.</param>
-	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
-	[MethodImpl(AggressiveOptimization)]
-	public static Vector4d<T> operator *(Vector4d<T> left, Matrix4x4<T> right)
-	{
-		Unsafe.SkipInit(out Vector4d<T> result);
-
-		result.X = Vector4d.Dot(left, right.Column1);
-		result.Y = Vector4d.Dot(left, right.Column2);
-		result.Z = Vector4d.Dot(left, right.Column3);
-		result.W = Vector4d.Dot(left, right.Column4);
-
-		return result;
-	}
-
-	#endregion
-
 	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-<<<<<<<< HEAD:NiTiS.Math/Vector4d.cs
-	public static implicit operator Vector2d<T>(Vector4d<T> operand)
-		=> new(operand.X, operand.Y);
-	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
-	public static implicit operator Vector3d<T>(Vector4d<T> operand)
-		=> new(operand.X, operand.Y, operand.Z);
-========
 	public static implicit operator Vector2d<N>(Vector3d<N> operand)
 		=> new(
 			operand.X,
@@ -317,7 +249,6 @@ public unsafe struct Vector3d<N> :
 			operand.Z,
 			N.One
 			);
->>>>>>>> dev:NiTiS.Math/Vector3d.cs
 
 	public readonly void CopyTo(N[] array)
 		=> CopyTo(array, 0);
@@ -345,16 +276,10 @@ public unsafe struct Vector3d<N> :
 
 	/// <inheritdoc/>
 	public override readonly bool Equals([NotNullWhen(true)] object? obj)
-<<<<<<<< HEAD:NiTiS.Math/Vector4d.cs
-		=> obj is Vector4d<T> vec
-		&& this == vec;
-	public readonly bool Equals(Vector4d<T> other)
-========
 		=> obj is Vector3d<N> vec
 		? vec == this : false;
 
 	public readonly bool Equals(Vector3d<N> other)
->>>>>>>> dev:NiTiS.Math/Vector3d.cs
 		=> this == other;
 
 	/// <inheritdoc/>
