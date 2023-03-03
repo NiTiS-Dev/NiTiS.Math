@@ -31,7 +31,7 @@ public unsafe struct Matrix4x4<N> :
 	private const int
 		rowsCount = 4,
 		columnsCount = 4,
-		ElementCount = columnsCount * rowsCount;
+		elementCount = columnsCount * rowsCount;
 
 	/// <inheritdoc/>
 	public static int ColumnsCount => columnsCount;
@@ -82,7 +82,7 @@ public unsafe struct Matrix4x4<N> :
 	{
 		get
 		{
-			if (index >= ElementCount)
+			if (index >= elementCount)
 				throw new ArgumentOutOfRangeException(nameof(index));
 
 			return Unsafe.Add(ref M11, index);

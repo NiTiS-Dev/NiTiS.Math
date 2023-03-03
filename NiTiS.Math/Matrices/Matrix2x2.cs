@@ -9,14 +9,22 @@ namespace NiTiS.Math.Matrices;
 
 /// <summary>Represents a 2x2 matrix.</summary>
 /// <typeparam name="N">Matrix data type.</typeparam>
-public struct Matrix2x2<N>
+public struct Matrix2x2<N> :
+	IMatrix<Matrix2x2<N>, N>
 	where N : unmanaged, INumberBase<N>
 {
 	#region Matrix
-	public const int
-		RowsCount = 2,
-		ColumnsCount = 2,
-		ElementCount = ColumnsCount * RowsCount;
+
+	private const int
+		rowsCount = 2,
+		columnsCount = 2,
+		elementCount = columnsCount * rowsCount;
+
+	/// <inheritdoc/>
+	public static int ColumnsCount => columnsCount;
+
+	/// <inheritdoc/>
+	public static int RowsCount => rowsCount;
 
 	public N M11;
 	public N M12;
@@ -40,23 +48,35 @@ public struct Matrix2x2<N>
 	{
 		get
 		{
-			if (index >= ElementCount)
+			if (index >= elementCount)
 				throw new ArgumentOutOfRangeException(nameof(index));
 
 			return Unsafe.Add(ref M11, index);
 		}
 	}
-	public N this[int x_, int _x]
+
+	/// <inheritdoc/>
+	public N this[int row, int column]
 	{
+		set
+		{
+			if (column >= rowsCount)
+				throw new ArgumentOutOfRangeException(nameof(column));
+
+			if (row >= columnsCount)
+				throw new ArgumentOutOfRangeException(nameof(row));
+
+			Unsafe.Add(ref M11, row * columnsCount + column) = value;
+		}
 		get
 		{
-			if (_x >= RowsCount)
-				throw new ArgumentOutOfRangeException(nameof(_x));
+			if (column >= rowsCount)
+				throw new ArgumentOutOfRangeException(nameof(column));
 
-			if (x_ >= ColumnsCount)
-				throw new ArgumentOutOfRangeException(nameof(x_));
+			if (row >= columnsCount)
+				throw new ArgumentOutOfRangeException(nameof(row));
 
-			return Unsafe.Add(ref M11, x_ * ColumnsCount + _x);
+			return Unsafe.Add(ref M11, row * columnsCount + column);
 		}
 	}
 
