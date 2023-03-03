@@ -14,12 +14,18 @@ namespace NiTiS.Math.Geometry;
 /// <typeparam name="N">Quaternion data type.</typeparam>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 public unsafe struct Quaternion<N> :
+	IAdditionOperators<Quaternion<N>, Quaternion<N>, Quaternion<N>>,
+	ISubtractionOperators<Quaternion<N>, Quaternion<N>, Quaternion<N>>,
+	IMultiplyOperators<Quaternion<N>, Quaternion<N>, Quaternion<N>>,
+	IDivisionOperators<Quaternion<N>, Quaternion<N>, Quaternion<N>>,
 	IEqualityOperators<Quaternion<N>, Quaternion<N>, bool>,
+
+	IUnaryNegationOperators<Quaternion<N>, Quaternion<N>>,
 
 	IEquatable<Quaternion<N>>
 	where N :
-		unmanaged,
-		INumberBase<N>
+	unmanaged,
+	INumberBase<N>
 {
 	/// <summary>The X value of the vector component of the quaternion</summary>
 	public N X;

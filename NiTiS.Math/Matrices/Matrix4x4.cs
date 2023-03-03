@@ -17,15 +17,16 @@ public unsafe struct Matrix4x4<N> :
 	IAdditionOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
 	ISubtractionOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
 	IMultiplyOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
+	IEqualityOperators<Matrix4x4<N>, Matrix4x4<N>, bool>,
 
 	IAdditionOperators<Matrix4x4<N>, N, Matrix4x4<N>>,
 	ISubtractionOperators<Matrix4x4<N>, N, Matrix4x4<N>>,
 	IMultiplyOperators<Matrix4x4<N>, N, Matrix4x4<N>>,
 
-	IEqualityOperators<Matrix4x4<N>, Matrix4x4<N>, bool>,
-
 	IEquatable<Matrix4x4<N>>
-	where N : unmanaged, INumberBase<N>
+	where N :
+	unmanaged,
+	INumberBase<N>
 {
 	#region Matrix
 	private const int
