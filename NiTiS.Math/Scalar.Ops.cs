@@ -28,7 +28,7 @@ public static class Scalar
 	/// <returns>Radians.</returns>
 	[MethodImpl(AggressiveInlining)]
 	public static double ToRadians(double degrees)
-		=> degrees * float.Pi / 180d;
+		=> degrees * double.Pi / 180d;
 
 	/// <summary>
 	/// Convert radians to degrees

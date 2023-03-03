@@ -334,7 +334,6 @@ public unsafe struct Matrix4x4<N> :
 	/// <param name="left">The left argument.</param>
 	/// <param name="right">The right argument.</param>
 	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
-
 	[MethodImpl(AggressiveOptimization)]
 	public static Matrix4x4<N> operator *(Matrix4x4<N> left, Matrix4x4<N> right)
 	{
@@ -366,6 +365,45 @@ public unsafe struct Matrix4x4<N> :
 
 		return m;
 	}
+
+	/// <summary>
+	/// Multiply two matrices.
+	/// </summary>
+	/// <param name="left">The left argument.</param>
+	/// <param name="right">The right argument.</param>
+	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
+	[MethodImpl(AggressiveOptimization)]
+	public static Vector4d<N> operator *(Matrix4x4<N> left, Vector4d<N> right)
+	{
+		Unsafe.SkipInit(out Vector4d<N> m);
+
+		m.X = Vector4d.Dot(left.Row1, right);
+		m.Y = Vector4d.Dot(left.Row2, right);
+		m.Z = Vector4d.Dot(left.Row3, right);
+		m.W = Vector4d.Dot(left.Row4, right);
+		
+		return m;
+	}
+
+	/// <summary>
+	/// Multiply two matrices.
+	/// </summary>
+	/// <param name="left">The left argument.</param>
+	/// <param name="right">The right argument.</param>
+	/// <returns>Resulting matrix - result of multiplication of <paramref name="left"/> and <paramref name="right"/> matrices.</returns>
+	[MethodImpl(AggressiveOptimization)]
+	public static Vector4d<N> operator *(Vector4d<N> left, Matrix4x4<N> right)
+	{
+		Unsafe.SkipInit(out Vector4d<N> m);
+
+		m.X = Vector4d.Dot(left, right.Column1);
+		m.Y = Vector4d.Dot(left, right.Column2);
+		m.Z = Vector4d.Dot(left, right.Column3);
+		m.W = Vector4d.Dot(left, right.Column4);
+
+		return m;
+	}
+
 
 	/// <summary>
 	/// Multiply matrix by scalar.

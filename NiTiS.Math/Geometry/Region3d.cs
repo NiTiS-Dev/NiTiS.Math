@@ -7,28 +7,28 @@ using System.Runtime.InteropServices;
 namespace NiTiS.Math.Geometry;
 
 /// <summary>
-/// Two-dimension region with origin point and size.
+/// Third-dimension region with origin point and size.
 /// </summary>
 /// <typeparam name="T">Region type.</typeparam>
 [DebuggerDisplay("Size = {Size}")]
-public unsafe struct Region2d<T>
+public unsafe struct Region3d<T>
 	where T : unmanaged, INumberBase<T>
 {
 	/// <summary>
 	/// Origin point of region.
 	/// </summary>
-	public Vector2d<T> Origin;
+	public Vector3d<T> Origin;
 	/// <summary>
 	/// Size of region.
 	/// </summary>
-	public Vector2d<T> Size;
+	public Vector3d<T> Size;
 
 	/// <summary>
 	/// Creates new region with <paramref name="origin"/> point and <paramref name="size"/>.
 	/// </summary>
 	/// <param name="origin">Region origin point.</param>
 	/// <param name="size">Region size.</param>
-	public Region2d(Vector2d<T> origin, Vector2d<T> size)
+	public Region3d(Vector3d<T> origin, Vector3d<T> size)
 	{
 		Origin = origin;
 		Size = size;
@@ -40,10 +40,11 @@ public unsafe struct Region2d<T>
 	/// <param name="origin">Region origin point.</param>
 	/// <param name="sizeX">Region size X.</param>
 	/// <param name="sizeY">Region size Y.</param>
-	public Region2d(Vector2d<T> origin, T sizeX, T sizeY)
+	/// <param name="sizeZ">Region size Z.</param>
+	public Region3d(Vector3d<T> origin, T sizeX, T sizeY, T sizeZ)
 	{
 		Origin = origin;
-		Size = new(sizeX, sizeY);
+		Size = new(sizeX, sizeY, sizeZ);
 	}
 
 	/// <summary>
@@ -51,12 +52,14 @@ public unsafe struct Region2d<T>
 	/// </summary>
 	/// <param name="originX">Region origin point X.</param>
 	/// <param name="originY">Region origin point Y.</param>
+	/// <param name="originZ">Region origin point Z.</param>
 	/// <param name="sizeX">Region size X.</param>
 	/// <param name="sizeY">Region size Y.</param>
-	public Region2d(T originX, T originY, T sizeX, T sizeY)
+	/// <param name="sizeZ">Region size Z.</param>
+	public Region3d(T originX, T originY, T originZ, T sizeX, T sizeY, T sizeZ)
 	{
-		Origin = new(originX, originY);
-		Size = new(sizeX, sizeY);
+		Origin = new(originX, originY, originZ);
+		Size = new(sizeX, sizeY, sizeZ);
 	}
 
 	/// <summary>
@@ -64,10 +67,11 @@ public unsafe struct Region2d<T>
 	/// </summary>
 	/// <param name="originX">Region origin point X.</param>
 	/// <param name="originY">Region origin point Y.</param>
+	/// <param name="originZ">Region origin point Z.</param>
 	/// <param name="size">Region size.</param>
-	public Region2d(T originX, T originY, Vector2d<T> size)
+	public Region3d(T originX, T originY, T originZ, Vector3d<T> size)
 	{
-		Origin = new(originX, originY);
+		Origin = new(originX, originY, originZ);
 		Size = size;
 	}
 
@@ -76,12 +80,12 @@ public unsafe struct Region2d<T>
 	/// </summary>
 	/// <param name="data">Buffer with region data.</param>
 	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
-	public Region2d(ReadOnlySpan<T> data)
+	public Region3d(ReadOnlySpan<T> data)
 	{
-		if (data.Length < 4)
+		if (data.Length < 6)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Region2d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
+		this = Unsafe.ReadUnaligned<Region3d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
 	}
 
 	/// <summary>
@@ -89,12 +93,12 @@ public unsafe struct Region2d<T>
 	/// </summary>
 	/// <param name="data">Buffer with region data.</param>
 	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
-	public Region2d(ReadOnlySpan<byte> data)
+	public Region3d(ReadOnlySpan<byte> data)
 	{
-		if (data.Length < 4 * sizeof(T))
+		if (data.Length < 6 * sizeof(T))
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Region2d<T>>(ref MemoryMarshal.GetReference(data));
+		this = Unsafe.ReadUnaligned<Region3d<T>>(ref MemoryMarshal.GetReference(data));
 	}
 
 	/// <summary>
@@ -110,8 +114,14 @@ public unsafe struct Region2d<T>
 		Size.Y;
 
 	/// <summary>
+	/// Region depth.
+	/// </summary>
+	public T Depth =>
+		Size.Z;
+
+	/// <summary>
 	/// Point where region is ends.
 	/// </summary>
-	public Vector2d<T> End
+	public Vector3d<T> End
 		=> Origin + Size;
 }
