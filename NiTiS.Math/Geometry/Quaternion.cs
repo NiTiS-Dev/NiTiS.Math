@@ -1,11 +1,10 @@
-﻿using NiTiS.Core;
-using NiTiS.Core.Annotations;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math.Geometry;
 
@@ -13,8 +12,6 @@ namespace NiTiS.Math.Geometry;
 /// <remarks>The <see cref="Quaternion{T}" /> structure is used to efficiently rotate an object about the (x,y,z) vector by the angle theta, where:
 /// <c>w = cos(theta/2)</c></remarks>
 /// <typeparam name="N">Quaternion data type.</typeparam>
-[NotImplementYet]
-[Obsolete(nameof(NotImplementYetAttribute))]
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 public unsafe struct Quaternion<N> :
 	IEqualityOperators<Quaternion<N>, Quaternion<N>, bool>,
@@ -32,6 +29,14 @@ public unsafe struct Quaternion<N> :
 	public N Z;
 	/// <summary>The rotation component of the quaternion</summary>
 	public N W;
+
+	/// <summary>Calculates the squared length of the quaternion.</summary>
+	/// <returns>The length squared of the quaternion.</returns>
+	public readonly N LengthSquared
+	{
+		[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+		get => Quaternion.Dot(this, this);
+	}
 
 	/// <summary>Constructs a quaternion from the specified components.</summary>
 	/// <param name="x">The value to assign to the X component of the quaternion.</param>

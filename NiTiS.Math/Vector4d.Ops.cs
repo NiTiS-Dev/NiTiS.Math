@@ -6,22 +6,25 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math;
 
+/// <summary>
+/// <see cref="Vector4d{N}"/> operations provider.
+/// </summary>
 public static class Vector4d
 {
 	/// <summary>
-	/// Convert <see cref="Vector4"/> to <see cref="Vector4d{T}"/>
+	/// Convert <see cref="Vector4"/> to <see cref="Vector4d{T}"/>.
 	/// </summary>
-	/// <param name="vector">Origin non-generic vector</param>
-	/// <returns>The generic vector</returns>
+	/// <param name="vector">Origin non-generic vector.</param>
+	/// <returns>The generic vector.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Vector4d<float> ConvertToGeneric(this Vector4 vector)
 		=> Unsafe.As<Vector4, Vector4d<float>>(ref vector);
 
 	/// <summary>
-	/// Convert <see cref="Vector4d{T}"/> to <see cref="Vector4"/>
+	/// Convert <see cref="Vector4d{T}"/> to <see cref="Vector4"/>.
 	/// </summary>
-	/// <param name="vector">Origin generic vector</param>
-	/// <returns>The non-generic vector</returns>
+	/// <param name="vector">Origin generic vector.</param>
+	/// <returns>The non-generic vector.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
 	public static Vector4 ConvertToSystem(this Vector4d<float> vector)
 		=> Unsafe.As<Vector4d<float>, Vector4>(ref vector);
