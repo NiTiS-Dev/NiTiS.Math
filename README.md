@@ -5,5 +5,3 @@ Library providing tons of mathematics operation
 + **Vector[2-4]D** structs & operations
 + **Matrix4x4** structure & operations
 + **Quaternion** structore & operations
-+ **WinchmannRandom** - random number generator
-+ **IMathProgression** interface
