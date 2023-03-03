@@ -35,32 +35,32 @@ public static class Vector3d
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Add<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Add<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left + right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Add<T>(Vector3d<T> left, T right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Add<N>(Vector3d<N> left, N right)
+        where N : unmanaged, INumberBase<N>
         => left + right;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T AngleBetween<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>, ITrigonometricFunctions<T>, IComparisonOperators<T, T, bool>
+    public static F AngleBetween<F>(Vector3d<F> left, Vector3d<F> right)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>, ITrigonometricFunctions<F>, IComparisonOperators<F, F, bool>
     {
-        T value = Dot(left, right);
-        T v1Length = Length(left);
-        T v2Length = Length(right);
+        F value = Dot(left, right);
+        F v1Length = Length(left);
+        F v2Length = Length(right);
 
         value /= v1Length * v2Length;
 
-        if (value <= -T.One) return T.Pi;
-        if (value >= T.One) return T.Zero;
-        return T.Acos(value);
+        if (value <= -F.One) return F.Pi;
+        if (value >= F.One) return F.Zero;
+        return F.Acos(value);
     }
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Bitwise<T>(Vector3d<T> operand)
-        where T : unmanaged, INumberBase<T>, IBitwiseOperators<T, T, T>
+    public static Vector3d<N> Bitwise<N>(Vector3d<N> operand)
+        where N : unmanaged, INumberBase<N>, IBitwiseOperators<N, N, N>
         => new(
             ~operand.X,
             ~operand.Y,
@@ -68,17 +68,17 @@ public static class Vector3d
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Clamp<T>(Vector3d<T> value, Vector3d<T> min, Vector3d<T> max)
-        where T : unmanaged, INumberBase<T>, INumber<T>
+    public static Vector3d<N> Clamp<N>(Vector3d<N> value, Vector3d<N> min, Vector3d<N> max)
+        where N : unmanaged, INumber<N>
         => new(
-            T.Clamp(value.X, min.X, max.X),
-            T.Clamp(value.Y, min.Y, max.Y),
-            T.Clamp(value.Z, min.Z, max.Z)
+            N.Clamp(value.X, min.X, max.X),
+            N.Clamp(value.Y, min.Y, max.Y),
+            N.Clamp(value.Z, min.Z, max.Z)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Cross<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Cross<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => new(
             left.Y * right.Z - left.Z * right.Y,
             left.Z * right.X - left.X * right.Z,
@@ -86,29 +86,29 @@ public static class Vector3d
         );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Distance<T>(Vector3d<T> from, Vector3d<T> to)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
-        => T.Sqrt(DistanceSquared(from, to));
+    public static F Distance<F>(Vector3d<F> from, Vector3d<F> to)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>
+        => F.Sqrt(DistanceSquared(from, to));
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T DistanceSquared<T>(Vector3d<T> from, Vector3d<T> to)
-        where T : unmanaged, INumberBase<T>
+    public static N DistanceSquared<N>(Vector3d<N> from, Vector3d<N> to)
+        where N : unmanaged, INumberBase<N>
     {
-        Vector3d<T> diff = from - to;
+        Vector3d<N> diff = from - to;
         return Dot(diff, diff);
     }
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Divide<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Divide<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left / right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Divide<T>(Vector3d<T> left, T right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Divide<N>(Vector3d<N> left, N right)
+        where N : unmanaged, INumberBase<N>
         => left / right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Divide<T>(T left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Divide<N>(N left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => new(
             left * right.X,
             left * right.Y,
@@ -116,49 +116,55 @@ public static class Vector3d
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Dot<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static N Dot<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left.X * right.X + left.Y * right.Y + left.Z * right.Z;
 
-    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Length<T>(Vector3d<T> operand)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
-        => T.Sqrt(operand.LengthSquared);
+	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+	public static N Dot<N>(Vector3d<N> left, N right)
+		where N : unmanaged, INumberBase<N>
+		=> left.X * right + left.Y * right + left.Z * right;
+
+
+	[MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    public static F Length<F>(Vector3d<F> operand)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>
+        => F.Sqrt(operand.LengthSquared);
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Lerp<T>(Vector3d<T> left, Vector3d<T> right, T amount)
-        where T : unmanaged, INumberBase<T>
-        => left * (T.One - amount) + right * amount;
+    public static Vector3d<N> Lerp<N>(Vector3d<N> left, Vector3d<N> right, N amount)
+        where N : unmanaged, INumberBase<N>
+        => left * (N.One - amount) + right * amount;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Max<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumber<T>
+    public static Vector3d<N> Max<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumber<N>
         => new(
-            T.Max(left.X, right.X),
-            T.Max(left.Y, right.Y),
-            T.Max(left.Z, right.Z)
+            N.Max(left.X, right.X),
+            N.Max(left.Y, right.Y),
+            N.Max(left.Z, right.Z)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Min<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumber<T>
+    public static Vector3d<N> Min<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumber<N>
         => new(
-            T.Min(left.X, right.X),
-            T.Min(left.Y, right.Y),
-            T.Min(left.Z, right.Z)
+            N.Min(left.X, right.X),
+            N.Min(left.Y, right.Y),
+            N.Min(left.Z, right.Z)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Multiply<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Multiply<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left * right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Multiply<T>(Vector3d<T> left, T right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Multiply<N>(Vector3d<N> left, N right)
+        where N : unmanaged, INumberBase<N>
         => left * right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Multiply<T>(T left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Multiply<N>(N left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => new(
             left * right.X,
             left * right.Y,
@@ -166,32 +172,32 @@ public static class Vector3d
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Negate<T>(Vector3d<T> operand)
-        where T : unmanaged, INumberBase<T>
+    public static Vector3d<N> Negate<N>(Vector3d<N> operand)
+        where N : unmanaged, INumberBase<N>
         => -operand;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Normalize<T>(Vector3d<T> operand)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
+    public static Vector3d<N> Normalize<N>(Vector3d<N> operand)
+        where N : unmanaged, INumberBase<N>, IRootFunctions<N>
         => operand / Length(operand);
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Reflect<T>(Vector3d<T> vector, Vector3d<T> normal, T two)
-        where T : unmanaged, INumberBase<T>
-        => vector - two * Dot(vector, normal) * normal;
+    public static Vector3d<N> Reflect<N>(Vector3d<N> vector, Vector3d<N> normal)
+        where N : unmanaged, INumberBase<N>
+        => vector - Scalar<N>.Two * Dot(vector, normal) * normal;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> SquareRoot<T>(Vector3d<T> operand)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
+    public static Vector3d<F> SquareRoot<F>(Vector3d<F> operand)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>
         => new(
-            T.Sqrt(operand.X),
-            T.Sqrt(operand.Y),
-            T.Sqrt(operand.Z)
+            F.Sqrt(operand.X),
+            F.Sqrt(operand.Y),
+            F.Sqrt(operand.Z)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector3d<T> Substract<T>(Vector3d<T> left, Vector3d<T> right)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
+    public static Vector3d<N> Substract<N>(Vector3d<N> left, Vector3d<N> right)
+        where N : unmanaged, INumberBase<N>
         => new(
             left.X - right.X,
             left.Y - right.Y,
@@ -204,7 +210,7 @@ public static class Vector3d
     /// <param name="operand">The sum operand</param>
     /// <returns>The sum of the vector coordinates</returns>
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Sum<T>(Vector3d<T> operand)
-        where T : unmanaged, INumberBase<T>
+    public static N Sum<N>(Vector3d<N> operand)
+        where N : unmanaged, INumberBase<N>
         => operand.X + operand.Y + operand.Z;
 }

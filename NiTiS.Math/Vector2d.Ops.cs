@@ -34,159 +34,164 @@ public static unsafe class Vector2d
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Add<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Add<N>(Vector2d<N> left, Vector2d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left + right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Add<T>(Vector2d<T> left, T right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Add<N>(Vector2d<N> left, N right)
+        where N : unmanaged, INumberBase<N>
         => left + right;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T AngleBetween<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>, ITrigonometricFunctions<T>, IComparisonOperators<T, T, bool>
+    public static F AngleBetween<F>(Vector2d<F> left, Vector2d<F> right)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>, ITrigonometricFunctions<F>, IComparisonOperators<F, F, bool>
     {
-        T value = Dot(left, right);
-        T v1Length = Length(left);
-        T v2Length = Length(right);
+        F value = Dot(left, right);
+        F v1Length = Length(left);
+        F v2Length = Length(right);
 
         value /= v1Length * v2Length;
 
-        if (value <= -T.One) return T.Pi;
-        if (value >= T.One) return T.Zero;
-        return T.Acos(value);
+        if (value <= -F.One) return F.Pi;
+        if (value >= F.One) return F.Zero;
+        return F.Acos(value);
     }
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Bitwise<T>(Vector2d<T> operand)
-        where T : unmanaged, INumberBase<T>, IBitwiseOperators<T, T, T>
+    public static Vector2d<N> Bitwise<N>(Vector2d<N> operand)
+        where N : unmanaged, INumberBase<N>, IBitwiseOperators<N, N, N>
         => new(
             ~operand.X,
             ~operand.Y
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Clamp<T>(Vector2d<T> value, Vector2d<T> min, Vector2d<T> max)
-        where T : unmanaged, INumberBase<T>, INumber<T>
+    public static Vector2d<N> Clamp<N>(Vector2d<N> value, Vector2d<N> min, Vector2d<N> max)
+        where N : unmanaged, INumberBase<N>, INumber<N>
         => new(
-            T.Clamp(value.X, min.X, max.X),
-            T.Clamp(value.Y, min.Y, max.Y)
+            N.Clamp(value.X, min.X, max.X),
+            N.Clamp(value.Y, min.Y, max.Y)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Distance<T>(Vector2d<T> from, Vector2d<T> to)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
-        => T.Sqrt(DistanceSquared(from, to));
+    public static N Distance<N>(Vector2d<N> from, Vector2d<N> to)
+        where N : unmanaged, INumberBase<N>, IRootFunctions<N>
+        => N.Sqrt(DistanceSquared(from, to));
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T DistanceSquared<T>(Vector2d<T> from, Vector2d<T> to)
-        where T : unmanaged, INumberBase<T>
+    public static N DistanceSquared<N>(Vector2d<N> from, Vector2d<N> to)
+        where N : unmanaged, INumberBase<N>
     {
-        Vector2d<T> diff = from - to;
+        Vector2d<N> diff = from - to;
         return Dot(diff, diff);
     }
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Divide<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Divide<N>(Vector2d<N> left, Vector2d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left / right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Divide<T>(Vector2d<T> left, T right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Divide<N>(Vector2d<N> left, N right)
+        where N : unmanaged, INumberBase<N>
         => left / right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Divide<T>(T left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Divide<N>(N left, Vector2d<N> right)
+        where N : unmanaged, INumberBase<N>
         => new(
             left * right.X,
             left * right.Y
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Dot<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static N Dot<N>(Vector2d<N> left, Vector2d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left.X * right.X + left.Y * right.Y;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Length<T>(Vector2d<T> operand)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
-        => T.Sqrt(operand.LengthSquared);
+    public static N Dot<N>(Vector2d<N> left, N right)
+        where N : unmanaged, INumberBase<N>
+        => left.X * right + left.Y * right;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Lerp<T>(Vector2d<T> left, Vector2d<T> right, T amount)
-        where T : unmanaged, INumberBase<T>
-        => left * (T.One - amount) + right * amount;
+    public static F Length<F>(Vector2d<F> operand)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>
+        => F.Sqrt(operand.LengthSquared);
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Max<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumber<T>
+    public static Vector2d<N> Lerp<N>(Vector2d<N> left, Vector2d<N> right, N amount)
+        where N : unmanaged, INumberBase<N>
+        => left * (N.One - amount) + right * amount;
+
+    [MethodImpl(AggressiveInlining | AggressiveOptimization)]
+    public static Vector2d<N> Max<N>(Vector2d<N> left, Vector2d<N> right)
+        where N : unmanaged, INumber<N>
         => new(
-            T.Max(left.X, right.X),
-            T.Max(left.Y, right.Y)
+            N.Max(left.X, right.X),
+            N.Max(left.Y, right.Y)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Min<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumber<T>
+    public static Vector2d<N> Min<N>(Vector2d<N> left, Vector2d<N> right)
+        where N : unmanaged, INumber<N>
         => new(
-            T.Min(left.X, right.X),
-            T.Min(left.Y, right.Y)
+            N.Min(left.X, right.X),
+            N.Min(left.Y, right.Y)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Multiply<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Multiply<N>(Vector2d<N> left, Vector2d<N> right)
+        where N : unmanaged, INumberBase<N>
         => left * right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Multiply<T>(Vector2d<T> left, T right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Multiply<N>(Vector2d<N> left, N right)
+        where N : unmanaged, INumberBase<N>
         => left * right;
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Multiply<T>(T left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Multiply<N>(N left, Vector2d<N> right)
+        where N : unmanaged, INumberBase<N>
         => new(
             left * right.X,
             left * right.Y
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Negate<T>(Vector2d<T> operand)
-        where T : unmanaged, INumberBase<T>
+    public static Vector2d<N> Negate<N>(Vector2d<N> operand)
+        where N : unmanaged, INumberBase<N>
         => -operand;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Normalize<T>(Vector2d<T> operand)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
+    public static Vector2d<F> Normalize<F>(Vector2d<F> operand)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>
         => operand / Length(operand);
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Reflect<T>(Vector2d<T> vector, Vector2d<T> normal)
-        where T : unmanaged, INumberBase<T>
-        => vector - Scalar<T>.Two * Dot(vector, normal) * normal;
+    public static Vector2d<N> Reflect<N>(Vector2d<N> vector, Vector2d<N> normal)
+        where N : unmanaged, INumberBase<N>
+        => vector - Scalar<N>.Two * Dot(vector, normal) * normal;
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> SquareRoot<T>(Vector2d<T> operand)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
+    public static Vector2d<F> SquareRoot<F>(Vector2d<F> operand)
+        where F : unmanaged, INumberBase<F>, IRootFunctions<F>
         => new(
-            T.Sqrt(operand.X),
-            T.Sqrt(operand.Y)
+            F.Sqrt(operand.X),
+            F.Sqrt(operand.Y)
             );
 
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static Vector2d<T> Substract<T>(Vector2d<T> left, Vector2d<T> right)
-        where T : unmanaged, INumberBase<T>, IRootFunctions<T>
+    public static Vector2d<N> Substract<N>(Vector2d<N> left, Vector2d<N> right)
+        where N : unmanaged, INumberBase<N>
         => new(
             left.X - right.X,
             left.Y - right.Y
             );
 
     /// <summary>
-    /// Calculate sum of the <paramref name="operand"/>
+    /// Calculate sum of the <paramref name="operand"/>.
     /// </summary>
-    /// <param name="operand">The sum operand</param>
-    /// <returns>The sum of the vector coordinates</returns>
+    /// <param name="operand">The sum operand.</param>
+    /// <returns>The sum of the vector coordinates.</returns>
     [MethodImpl(AggressiveInlining | AggressiveOptimization)]
-    public static T Sum<T>(Vector2d<T> operand)
-        where T : unmanaged, INumberBase<T>
+    public static N Sum<N>(Vector2d<N> operand)
+        where N : unmanaged, INumberBase<N>
         => operand.X + operand.Y;
 }
