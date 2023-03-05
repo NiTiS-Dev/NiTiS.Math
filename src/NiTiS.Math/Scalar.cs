@@ -5,15 +5,15 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math;
 
-internal static class Scalar<T>
-	where T : INumberBase<T>
+internal static class Scalar<N>
+	where N : INumberBase<N>
 {
-	public static readonly T Two;
-	public static readonly T Half;
+	public static readonly N Two;
+	public static readonly N Half;
 
 	static Scalar()
 	{
-		Two = T.One + T.One;
-		Half = T.One / Two;
+		Two = N.One + N.One;
+		Half = N.One / Two;
 	}
 }

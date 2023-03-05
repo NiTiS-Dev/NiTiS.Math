@@ -9,26 +9,26 @@ namespace NiTiS.Math.Geometry;
 /// <summary>
 /// Third-dimension region with origin point and size.
 /// </summary>
-/// <typeparam name="T">Region type.</typeparam>
+/// <typeparam name="N">Region type.</typeparam>
 [DebuggerDisplay("Size = {Size}")]
-public unsafe struct Region3d<T>
-	where T : unmanaged, INumberBase<T>
+public unsafe struct Region3d<N>
+	where N : unmanaged, INumberBase<N>
 {
 	/// <summary>
 	/// Origin point of region.
 	/// </summary>
-	public Vector3d<T> Origin;
+	public Vector3d<N> Origin;
 	/// <summary>
 	/// Size of region.
 	/// </summary>
-	public Vector3d<T> Size;
+	public Vector3d<N> Size;
 
 	/// <summary>
 	/// Creates new region with <paramref name="origin"/> point and <paramref name="size"/>.
 	/// </summary>
 	/// <param name="origin">Region origin point.</param>
 	/// <param name="size">Region size.</param>
-	public Region3d(Vector3d<T> origin, Vector3d<T> size)
+	public Region3d(Vector3d<N> origin, Vector3d<N> size)
 	{
 		Origin = origin;
 		Size = size;
@@ -41,7 +41,7 @@ public unsafe struct Region3d<T>
 	/// <param name="sizeX">Region size X.</param>
 	/// <param name="sizeY">Region size Y.</param>
 	/// <param name="sizeZ">Region size Z.</param>
-	public Region3d(Vector3d<T> origin, T sizeX, T sizeY, T sizeZ)
+	public Region3d(Vector3d<N> origin, N sizeX, N sizeY, N sizeZ)
 	{
 		Origin = origin;
 		Size = new(sizeX, sizeY, sizeZ);
@@ -56,7 +56,7 @@ public unsafe struct Region3d<T>
 	/// <param name="sizeX">Region size X.</param>
 	/// <param name="sizeY">Region size Y.</param>
 	/// <param name="sizeZ">Region size Z.</param>
-	public Region3d(T originX, T originY, T originZ, T sizeX, T sizeY, T sizeZ)
+	public Region3d(N originX, N originY, N originZ, N sizeX, N sizeY, N sizeZ)
 	{
 		Origin = new(originX, originY, originZ);
 		Size = new(sizeX, sizeY, sizeZ);
@@ -69,7 +69,7 @@ public unsafe struct Region3d<T>
 	/// <param name="originY">Region origin point Y.</param>
 	/// <param name="originZ">Region origin point Z.</param>
 	/// <param name="size">Region size.</param>
-	public Region3d(T originX, T originY, T originZ, Vector3d<T> size)
+	public Region3d(N originX, N originY, N originZ, Vector3d<N> size)
 	{
 		Origin = new(originX, originY, originZ);
 		Size = size;
@@ -80,12 +80,12 @@ public unsafe struct Region3d<T>
 	/// </summary>
 	/// <param name="data">Buffer with region data.</param>
 	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
-	public Region3d(ReadOnlySpan<T> data)
+	public Region3d(ReadOnlySpan<N> data)
 	{
 		if (data.Length < 6)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Region3d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
+		this = Unsafe.ReadUnaligned<Region3d<N>>(ref Unsafe.As<N, byte>(ref MemoryMarshal.GetReference(data)));
 	}
 
 	/// <summary>
@@ -95,33 +95,45 @@ public unsafe struct Region3d<T>
 	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
 	public Region3d(ReadOnlySpan<byte> data)
 	{
-		if (data.Length < 6 * sizeof(T))
+		if (data.Length < 6 * sizeof(N))
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Region3d<T>>(ref MemoryMarshal.GetReference(data));
+		this = Unsafe.ReadUnaligned<Region3d<N>>(ref MemoryMarshal.GetReference(data));
 	}
 
 	/// <summary>
 	/// Region width.
 	/// </summary>
-	public T Width =>
+	public N Width =>
 		Size.X;
 
 	/// <summary>
 	/// Region height.
 	/// </summary>
-	public T Height =>
+	public N Height =>
 		Size.Y;
 
 	/// <summary>
 	/// Region depth.
 	/// </summary>
-	public T Depth =>
+	public N Depth =>
 		Size.Z;
+
+	/// <summary>
+	/// Center of region.
+	/// </summary>
+	public Vector3d<N> Center
+		=> Origin + HalfSize;
+
+	/// <summary>
+	/// Half size of region.
+	/// </summary>
+	public Vector3d<N> HalfSize
+		=> Size / Scalar<N>.Two;
 
 	/// <summary>
 	/// Point where region is ends.
 	/// </summary>
-	public Vector3d<T> End
+	public Vector3d<N> End
 		=> Origin + Size;
 }
