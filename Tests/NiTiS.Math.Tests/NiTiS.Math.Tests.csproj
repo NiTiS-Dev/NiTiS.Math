@@ -18,7 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\NiTiS.Math\NiTiS.Math.csproj" />
+		<ProjectReference Include="..\..\src\NiTiS.Math\NiTiS.Math.csproj" />
 	</ItemGroup>
 
 </Project>
