@@ -1,17 +1,13 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
-using SMat4 = System.Numerics.Matrix4x4;
-using GMat4 = NiTiS.Math.Matrices.Matrix4x4<float>;
 using GMat = NiTiS.Math.Matrices.Matrix4x4;
-using NiTiS.Core;
-using System;
-using System.Numerics;
+using GMat4 = NiTiS.Math.Matrices.Matrix4x4<float>;
+using SMat4 = System.Numerics.Matrix4x4;
 
 public class Program
 {
 	private static void Main(string[] args)
 	{
-		BenchmarkRunner.Run(new Type[] { typeof(MinusCheck), typeof(PlusCheck), typeof(MultiplyCheck) });
+		//BenchmarkRunner.Run(new Type[] { typeof(MinusCheck), typeof(PlusCheck), typeof(MultiplyCheck) });
 	}
 	private static SMat4 x, y, z;
 	private static GMat4 gx, gy, gz;
@@ -25,6 +21,8 @@ public class Program
 		gx = GMat4.Identity;
 		gy = new(2, 4, 1, 5, 2, 1, 4, 5, 1, 56, 8, 1, 232, 123, 12123413, 1);
 		gz = default;
+
+		
 	}
 
 	public class PlusCheck

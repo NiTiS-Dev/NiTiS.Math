@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{28AAFD0D-1
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math", "NiTiS.Math\NiTiS.Math.csproj", "{76975105-21AB-4C9A-8064-C54CF1B2884C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math", "src\NiTiS.Math\NiTiS.Math.csproj", "{76975105-21AB-4C9A-8064-C54CF1B2884C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Benchmark", "Tests\NiTiS.Math.Benchmark\NiTiS.Math.Benchmark.csproj", "{C74BB3E5-E3D8-4AE8-A236-CC082712B9FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Benchmark", "benchmarks\NiTiS.Math.Benchmark\NiTiS.Math.Benchmark.csproj", "{C74BB3E5-E3D8-4AE8-A236-CC082712B9FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Tests", "Tests\NiTiS.Math.Tests\NiTiS.Math.Tests.csproj", "{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Tests", "tests\NiTiS.Math.Tests\NiTiS.Math.Tests.csproj", "{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

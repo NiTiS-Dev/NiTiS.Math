@@ -9,26 +9,26 @@ namespace NiTiS.Math.Geometry;
 /// <summary>
 /// Two-dimension region with origin point and size.
 /// </summary>
-/// <typeparam name="T">Region type.</typeparam>
+/// <typeparam name="N">Region type.</typeparam>
 [DebuggerDisplay("Size = {Size}")]
-public unsafe struct Region2d<T>
-	where T : unmanaged, INumberBase<T>
+public unsafe struct Region2d<N>
+	where N : unmanaged, INumberBase<N>
 {
 	/// <summary>
 	/// Origin point of region.
 	/// </summary>
-	public Vector2d<T> Origin;
+	public Vector2d<N> Origin;
 	/// <summary>
 	/// Size of region.
 	/// </summary>
-	public Vector2d<T> Size;
+	public Vector2d<N> Size;
 
 	/// <summary>
 	/// Creates new region with <paramref name="origin"/> point and <paramref name="size"/>.
 	/// </summary>
 	/// <param name="origin">Region origin point.</param>
 	/// <param name="size">Region size.</param>
-	public Region2d(Vector2d<T> origin, Vector2d<T> size)
+	public Region2d(Vector2d<N> origin, Vector2d<N> size)
 	{
 		Origin = origin;
 		Size = size;
@@ -40,7 +40,7 @@ public unsafe struct Region2d<T>
 	/// <param name="origin">Region origin point.</param>
 	/// <param name="sizeX">Region size X.</param>
 	/// <param name="sizeY">Region size Y.</param>
-	public Region2d(Vector2d<T> origin, T sizeX, T sizeY)
+	public Region2d(Vector2d<N> origin, N sizeX, N sizeY)
 	{
 		Origin = origin;
 		Size = new(sizeX, sizeY);
@@ -53,7 +53,7 @@ public unsafe struct Region2d<T>
 	/// <param name="originY">Region origin point Y.</param>
 	/// <param name="sizeX">Region size X.</param>
 	/// <param name="sizeY">Region size Y.</param>
-	public Region2d(T originX, T originY, T sizeX, T sizeY)
+	public Region2d(N originX, N originY, N sizeX, N sizeY)
 	{
 		Origin = new(originX, originY);
 		Size = new(sizeX, sizeY);
@@ -65,7 +65,7 @@ public unsafe struct Region2d<T>
 	/// <param name="originX">Region origin point X.</param>
 	/// <param name="originY">Region origin point Y.</param>
 	/// <param name="size">Region size.</param>
-	public Region2d(T originX, T originY, Vector2d<T> size)
+	public Region2d(N originX, N originY, Vector2d<N> size)
 	{
 		Origin = new(originX, originY);
 		Size = size;
@@ -76,12 +76,12 @@ public unsafe struct Region2d<T>
 	/// </summary>
 	/// <param name="data">Buffer with region data.</param>
 	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
-	public Region2d(ReadOnlySpan<T> data)
+	public Region2d(ReadOnlySpan<N> data)
 	{
 		if (data.Length < 4)
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Region2d<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(data)));
+		this = Unsafe.ReadUnaligned<Region2d<N>>(ref Unsafe.As<N, byte>(ref MemoryMarshal.GetReference(data)));
 	}
 
 	/// <summary>
@@ -91,27 +91,40 @@ public unsafe struct Region2d<T>
 	/// <exception cref="ArgumentOutOfRangeException">Length of <paramref name="data"/> buffer not enough for creation.</exception>
 	public Region2d(ReadOnlySpan<byte> data)
 	{
-		if (data.Length < 4 * sizeof(T))
+		if (data.Length < 4 * sizeof(N))
 			throw new ArgumentOutOfRangeException(nameof(data));
 
-		this = Unsafe.ReadUnaligned<Region2d<T>>(ref MemoryMarshal.GetReference(data));
+		this = Unsafe.ReadUnaligned<Region2d<N>>(ref MemoryMarshal.GetReference(data));
 	}
 
 	/// <summary>
 	/// Region width.
 	/// </summary>
-	public T Width =>
+	public N Width =>
 		Size.X;
 
 	/// <summary>
 	/// Region height.
 	/// </summary>
-	public T Height =>
+	public N Height =>
 		Size.Y;
+
+	/// <summary>
+	/// Center of region.
+	/// </summary>
+	public Vector2d<N> Center
+		=> Origin + HalfSize;
+
+	/// <summary>
+	/// Half size of region.
+	/// </summary>
+	public Vector2d<N> HalfSize
+		=> Size / Scalar<N>.Two;
+
 
 	/// <summary>
 	/// Point where region is ends.
 	/// </summary>
-	public Vector2d<T> End
+	public Vector2d<N> End
 		=> Origin + Size;
 }

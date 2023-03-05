@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<AssemblyName>NiTiS.Math</AssemblyName>
-		<Version>2.3.5</Version>
+		<Version>2.3.6</Version>
 		<VersionPrefix>preview</VersionPrefix>
 
 		<Description>The NiTiS library providing maths structs and operations for them.</Description>
@@ -10,8 +10,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NiTiS.Core" Version="3.2.1" />
+		<PackageReference Include="NiTiS.Core" Version="3.2.3" />
 	</ItemGroup>
 	
-	<Import Project="../Meta.props" />
+	<Import Project="../../Meta.props" />
 </Project>

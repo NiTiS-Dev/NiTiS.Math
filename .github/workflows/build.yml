@@ -4,7 +4,7 @@ on:
   push:
     branches:
     - dev
-    - stable*   
+    - stable*
     paths:
     - '**.cs'
     - '**.csproj'
@@ -23,10 +23,10 @@ jobs:
         project: ["NiTiS.Math"]
     
     steps:
-      - uses: actions/checkout@v2      
+      - uses: actions/checkout@v2
       - name: Build
         run: |
-          cd ${{ matrix.project }}/
+          cd src/${{ matrix.project }}/
           dotnet clean
           dotnet restore
           dotnet build /m:1 -c Release -o ../.build/${{ matrix.project }}/

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
-		<None Include="../LICENSE" Pack="true" PackagePath="" />
-		<None Include="../README.md" Pack="true" PackagePath="" />
+		<None Include="../../LICENSE" Pack="true" PackagePath="" />
+		<None Include="../../README.md" Pack="true" PackagePath="" />
 		<None Include="./ICON.png" Pack="true" PackagePath="" />
 	</ItemGroup>
 	<PropertyGroup>
@@ -22,6 +22,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageLicenseFile>./LICENSE</PackageLicenseFile>
 		<PackageReadmeFile>./README.md</PackageReadmeFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 
 		<!-- C# Options -->
 		<LangVersion>latest</LangVersion>

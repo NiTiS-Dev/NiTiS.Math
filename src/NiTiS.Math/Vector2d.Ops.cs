@@ -9,19 +9,19 @@ public static unsafe class Vector2d
 {
 	#region Convert
 	/// <summary>
-	/// Convert <see cref="Vector2"/> to <see cref="Vector2d{T}"/>
+	/// Convert <see cref="Vector2"/> to <see cref="Vector2d{T}"/>.
 	/// </summary>
-	/// <param name="vector">Origin non-generic vector</param>
-	/// <returns>The generic vector</returns>
+	/// <param name="vector">Origin non-generic vector.</param>
+	/// <returns>The generic vector.</returns>
 	[MethodImpl(AggressiveOptimization | AggressiveInlining)]
     public static Vector2d<float> ConvertToGeneric(this Vector2 vector)
         => Unsafe.As<Vector2, Vector2d<float>>(ref vector);
 
     /// <summary>
-    /// Convert <see cref="Vector2d{T}"/> to <see cref="Vector2"/>
+    /// Convert <see cref="Vector2d{T}"/> to <see cref="Vector2"/>.
     /// </summary>
-    /// <param name="vector">Origin generic vector</param>
-    /// <returns>The non-generic vector</returns>
+    /// <param name="vector">Origin generic vector.</param>
+    /// <returns>The non-generic vector.</returns>
     [MethodImpl(AggressiveOptimization | AggressiveInlining)]
     public static Vector2 ConvertToSystem(this Vector2d<float> vector)
         => Unsafe.As<Vector2d<float>, Vector2>(ref vector);

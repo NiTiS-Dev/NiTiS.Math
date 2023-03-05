@@ -7,7 +7,7 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math.Matrices;
 
-/// <summary>Represents a 2x2 matrix.</summary>
+/// <summary>Structure representing a matrix2x2.</summary>
 /// <typeparam name="N">Matrix data type.</typeparam>
 public struct Matrix2x2<N> :
 	IMatrix<Matrix2x2<N>, N>

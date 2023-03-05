@@ -8,7 +8,7 @@ using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math.Matrices;
 
-/// <summary>Represents a 4x4 matrix.</summary>
+/// <summary>Structure representing a matrix4x4.</summary>
 /// <typeparam name="N">Matrix data type.</typeparam>
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public unsafe struct Matrix4x4<N> :
