@@ -12,7 +12,7 @@ namespace NiTiS.Math.Matrices;
 /// <typeparam name="N">Matrix data type.</typeparam>
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
 public unsafe struct Matrix4x4<N> :
-	IMatrix<Matrix4x4<N>, N>,
+	IFixedSizeMatrix<Matrix4x4<N>, N>,
 
 	IAdditionOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
 	ISubtractionOperators<Matrix4x4<N>, Matrix4x4<N>, Matrix4x4<N>>,
@@ -39,6 +39,12 @@ public unsafe struct Matrix4x4<N> :
 
 	/// <inheritdoc/>
 	public static int RowsCount => rowsCount;
+
+	/// <inheritdoc/>
+	int IMatrix<Matrix4x4<N>, N>.ColumnsCount => columnsCount;
+
+	/// <inheritdoc/>
+	int IMatrix<Matrix4x4<N>, N>.RowsCount => rowsCount;
 
 	public N M11;
 	public N M12;

@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using NiTiS.Math.Matrices;
 using GMat = NiTiS.Math.Matrices.Matrix4x4;
 using GMat4 = NiTiS.Math.Matrices.Matrix4x4<float>;
 using SMat4 = System.Numerics.Matrix4x4;
@@ -8,6 +9,10 @@ public class Program
 	private static void Main(string[] args)
 	{
 		//BenchmarkRunner.Run(new Type[] { typeof(MinusCheck), typeof(PlusCheck), typeof(MultiplyCheck) });
+		Matrix<float> fmat1 = new(2, 2);
+		Matrix<float> fmat2 = new(new float[] { 1f, 0f, 0f, 1f }, 2, 2);
+		
+		Matrix<float>.CreateIdentity(4).Equals(fmat2);
 	}
 	private static SMat4 x, y, z;
 	private static GMat4 gx, gy, gz;

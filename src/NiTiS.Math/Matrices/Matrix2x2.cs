@@ -3,14 +3,27 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using static System.Runtime.CompilerServices.MethodImplOptions;
 
 namespace NiTiS.Math.Matrices;
 
 /// <summary>Structure representing a matrix2x2.</summary>
 /// <typeparam name="N">Matrix data type.</typeparam>
+[StructLayout(LayoutKind.Sequential, Pack = 1)]
 public struct Matrix2x2<N> :
-	IMatrix<Matrix2x2<N>, N>
+	IFixedSizeMatrix<Matrix2x2<N>, N>,
+
+	IAdditionOperators<Matrix2x2<N>, Matrix2x2<N>, Matrix2x2<N>>,
+	ISubtractionOperators<Matrix2x2<N>, Matrix2x2<N>, Matrix2x2<N>>,
+	IMultiplyOperators<Matrix2x2<N>, Matrix2x2<N>, Matrix2x2<N>>,
+	IEqualityOperators<Matrix2x2<N>, Matrix2x2<N>, bool>,
+
+	IAdditionOperators<Matrix2x2<N>, N, Matrix2x2<N>>,
+	ISubtractionOperators<Matrix2x2<N>, N, Matrix2x2<N>>,
+	IMultiplyOperators<Matrix2x2<N>, N, Matrix2x2<N>>,
+
+	IEquatable<Matrix2x2<N>>
 	where N : unmanaged, INumberBase<N>
 {
 	#region Matrix
@@ -25,6 +38,12 @@ public struct Matrix2x2<N> :
 
 	/// <inheritdoc/>
 	public static int RowsCount => rowsCount;
+
+	/// <inheritdoc/>
+	int IMatrix<Matrix2x2<N>, N>.ColumnsCount => columnsCount;
+
+	/// <inheritdoc/>
+	int IMatrix<Matrix2x2<N>, N>.RowsCount => rowsCount;
 
 	public N M11;
 	public N M12;

@@ -6,17 +6,18 @@ namespace NiTiS.Math.Matrices;
 /// Defines a number type.
 /// </summary>
 /// <typeparam name="Self">The type that implements the interface.</typeparam>
-public interface IMatrix<Self, Element> where Self : IMatrix<Self, Element>
+public interface IMatrix<Self, Element>
+	where Self : IMatrix<Self, Element>
 {
 	/// <summary>
 	/// Number of rows of this matrix.
 	/// </summary>
-	static abstract int ColumnsCount { get; }
+	int ColumnsCount { get; }
 
 	/// <summary>
 	/// Number of columns of this matrix.
 	/// </summary>
-	static abstract int RowsCount { get; }
+	int RowsCount { get; }
 
 	/// <summary>
 	/// The element at [<paramref name="row"/>][<paramref name="column"/>].
