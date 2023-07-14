@@ -17,6 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Benchmark", "ben
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Tests", "tests\NiTiS.Math.Tests\NiTiS.Math.Tests.csproj", "{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{39E477A1-8BBB-4DC8-BB62-7E66FF521318}"
+	ProjectSection(SolutionItems) = preProject
+		tools\matrix_generate.py = tools\matrix_generate.py
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
