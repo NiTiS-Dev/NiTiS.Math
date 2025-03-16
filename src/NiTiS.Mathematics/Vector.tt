@@ -211,7 +211,7 @@ public partial struct <#= type.Name #> : IEquatable<<#= type.Name #>>, IFormatta
 
 <# foreach (string binaryOperator in binaryOperators) {#>
 	/// <summary>
-	/// Perform <c><#= binaryOperator #></c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>

@@ -120,7 +120,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -134,7 +134,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -148,7 +148,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -162,7 +162,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -176,7 +176,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -190,7 +190,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>|</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -204,7 +204,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>^</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -218,7 +218,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>&</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -443,7 +443,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -457,7 +457,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -471,7 +471,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -485,7 +485,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -499,7 +499,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -513,7 +513,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>|</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -527,7 +527,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>^</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -541,7 +541,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>&</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -766,7 +766,7 @@ public partial struct Vector2d : IEquatable<Vector2d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -780,7 +780,7 @@ public partial struct Vector2d : IEquatable<Vector2d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -794,7 +794,7 @@ public partial struct Vector2d : IEquatable<Vector2d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -808,7 +808,7 @@ public partial struct Vector2d : IEquatable<Vector2d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -822,7 +822,7 @@ public partial struct Vector2d : IEquatable<Vector2d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1146,7 +1146,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1161,7 +1161,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1176,7 +1176,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1191,7 +1191,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1206,7 +1206,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1221,7 +1221,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>|</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1236,7 +1236,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>^</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1251,7 +1251,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>&</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1492,7 +1492,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1507,7 +1507,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1522,7 +1522,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1537,7 +1537,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1552,7 +1552,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1567,7 +1567,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>|</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1582,7 +1582,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>^</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1597,7 +1597,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>&</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1838,7 +1838,7 @@ public partial struct Vector3d : IEquatable<Vector3d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1853,7 +1853,7 @@ public partial struct Vector3d : IEquatable<Vector3d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1868,7 +1868,7 @@ public partial struct Vector3d : IEquatable<Vector3d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1883,7 +1883,7 @@ public partial struct Vector3d : IEquatable<Vector3d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -1898,7 +1898,7 @@ public partial struct Vector3d : IEquatable<Vector3d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2253,7 +2253,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2269,7 +2269,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2285,7 +2285,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2301,7 +2301,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2317,7 +2317,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2333,7 +2333,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>|</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2349,7 +2349,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>^</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2365,7 +2365,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>&</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2622,7 +2622,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2638,7 +2638,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2654,7 +2654,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2670,7 +2670,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2686,7 +2686,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2702,7 +2702,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>|</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2718,7 +2718,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>^</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2734,7 +2734,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>&</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -2991,7 +2991,7 @@ public partial struct Vector4d : IEquatable<Vector4d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>+</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -3007,7 +3007,7 @@ public partial struct Vector4d : IEquatable<Vector4d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>-</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -3023,7 +3023,7 @@ public partial struct Vector4d : IEquatable<Vector4d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>/</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -3039,7 +3039,7 @@ public partial struct Vector4d : IEquatable<Vector4d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>%</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -3055,7 +3055,7 @@ public partial struct Vector4d : IEquatable<Vector4d>, IFormattable
 	}
 
 	/// <summary>
-	/// Perform <c>*</c> operation.
+	/// Perform operation.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
