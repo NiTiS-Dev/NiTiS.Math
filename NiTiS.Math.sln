@@ -6,8 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{28AAFD0D-1666-43A5-8DB4-F8B861645D71}"
 	ProjectSection(SolutionItems) = preProject
 		.filenesting.json = .filenesting.json
-		.github\workflows\build.yml = .github\workflows\build.yml
-		Meta.props = Meta.props
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -17,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Benchmark", "ben
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NiTiS.Math.Tests", "tests\NiTiS.Math.Tests\NiTiS.Math.Tests.csproj", "{912C38FA-D32C-4ACB-A8B9-FD6212BB6A11}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{39E477A1-8BBB-4DC8-BB62-7E66FF521318}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
-		tools\matrix_generate.py = tools\matrix_generate.py
+		build\common.props = build\common.props
 	EndProjectSection
 EndProject
 Global

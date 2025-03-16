@@ -1,0 +1,64 @@
+<Project InitialTargets="NiTiS_SetIcon;NiTiS_AddREADME">
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Authors>NiTiS-Dev and contributors</Authors>
+		<PackageTags>$(PackageTags);math;</PackageTags>
+		<Description>Multi-platform native library binding for shaderc.</Description>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<TargetFrameworks>net9.0;net6.0</TargetFrameworks>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageOutputPath>$(MSBuildThisFileDirectory)/../outPackages</PackageOutputPath>
+
+		<LangVersion>latest</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<VersionPrefix>0.4</VersionPrefix>
+
+		<NoWarn>$(NoWarn);IDE0290;IDE0305</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(NiTiS_NativePackage)' == 'true'">
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+		<TargetFrameworks>netstandard2.0;net4.6.1</TargetFrameworks>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(IsPackable)' == 'true' and '$(NiTiS_NativePackage)' == ''">
+		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All"/>
+		<PackageReference Include="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" PrivateAssets="All"/>
+	</ItemGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
+		<IsAotCompatible>true</IsAotCompatible>
+		<EnableAotAnalyzer>true</EnableAotAnalyzer>
+	</PropertyGroup>
+
+
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
+		<IsTrimmable>true</IsTrimmable>
+		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+		<TrimMode>full</TrimMode>
+	</PropertyGroup>
+
+	<!-- Setup the icon for libraries -->
+	<Target Name="NiTiS_Shaderc_SetIcon" Condition="'$(IsPackable)' == 'true'">
+		<PropertyGroup>
+			<PackageIcon>logo.png</PackageIcon>
+		</PropertyGroup>
+
+		<ItemGroup>
+			<None Include="$(MSBuildThisFileDirectory)../public/logo.png" Pack="true" PackagePath="/" />
+		</ItemGroup>
+	</Target>
+
+	<!-- Setup README file -->
+	<Target Name="NiTiS_Shaderc_AddREADME" Condition="'$(IsPackable)' == 'true' and '$(NiTiS_CustomREADME)' == ''">
+		<ItemGroup>
+			<None Include ="$(MSBuildThisFileDirectory)../public/NUGET_README.md" Pack="true" PackagePath="/" />
+		</ItemGroup>
+	</Target>
+
+</Project>

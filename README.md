@@ -1,8 +1,3 @@
-# NiTiS.Math (INDEV)
-Library providing tons of mathematics operation 
-
-# Tasks
-- [ ] Matrix**N**x**P** (feature/matrices)
-- [x] Region**N**d (feature/regions)
-- [x] Quaternion (feature/quaternion)
-- [x] Vector**N**d (dev)
+# NiTiS.Math
+This repository including source code for this packages
++ [NiTiS.Math (nuget)](https://www.nuget.org/packages/NiTiS.Math)
