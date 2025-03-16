@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../../build/common.props" />
+	
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Diagnostics" Version="8.4.0" />
+	</ItemGroup>
+
+	<ItemGroup Label="Text Template generator">
+		<None Update="Vector.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>Vector.cs</LastGenOutput>
+		</None>
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+		<Compile Update="Vector.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Vector.tt</DependentUpon>
+		</Compile>
+	</ItemGroup>
+</Project>

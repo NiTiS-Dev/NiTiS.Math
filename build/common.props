@@ -3,10 +3,10 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<Authors>NiTiS-Dev and contributors</Authors>
-		<PackageTags>$(PackageTags);math;</PackageTags>
-		<Description>Multi-platform native library binding for shaderc.</Description>
+		<PackageTags>$(PackageTags);math;vectors;vector;mathematics</PackageTags>
+		<Description>Mathematics library.</Description>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<TargetFrameworks>net9.0;net6.0</TargetFrameworks>
+		<TargetFrameworks>net9.0;net7.0</TargetFrameworks>
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageOutputPath>$(MSBuildThisFileDirectory)/../outPackages</PackageOutputPath>
@@ -16,17 +16,13 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		<VersionPrefix>0.4</VersionPrefix>
+		<VersionPrefix>3.0</VersionPrefix>
 
 		<NoWarn>$(NoWarn);IDE0290;IDE0305</NoWarn>
+		<IncludeBuildOutput>true</IncludeBuildOutput>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(NiTiS_NativePackage)' == 'true'">
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<TargetFrameworks>netstandard2.0;net4.6.1</TargetFrameworks>
-	</PropertyGroup>
-
-	<ItemGroup Condition="'$(IsPackable)' == 'true' and '$(NiTiS_NativePackage)' == ''">
+	<ItemGroup Condition="'$(IsPackable)' == 'true'">
 		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All"/>
 		<PackageReference Include="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" PrivateAssets="All"/>
 	</ItemGroup>
@@ -44,7 +40,7 @@
 	</PropertyGroup>
 
 	<!-- Setup the icon for libraries -->
-	<Target Name="NiTiS_Shaderc_SetIcon" Condition="'$(IsPackable)' == 'true'">
+	<Target Name="NiTiS_SetIcon" Condition="'$(IsPackable)' == 'true'">
 		<PropertyGroup>
 			<PackageIcon>logo.png</PackageIcon>
 		</PropertyGroup>
@@ -55,10 +51,13 @@
 	</Target>
 
 	<!-- Setup README file -->
-	<Target Name="NiTiS_Shaderc_AddREADME" Condition="'$(IsPackable)' == 'true' and '$(NiTiS_CustomREADME)' == ''">
+	<Target Name="NiTiS_AddREADME" Condition="'$(IsPackable)' == 'true'">
+		<PropertyGroup>
+			<PackageReadmeFile>NUGET_README.md</PackageReadmeFile>
+		</PropertyGroup>
+		
 		<ItemGroup>
 			<None Include ="$(MSBuildThisFileDirectory)../public/NUGET_README.md" Pack="true" PackagePath="/" />
 		</ItemGroup>
 	</Target>
-
 </Project>
