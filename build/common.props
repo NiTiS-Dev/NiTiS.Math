@@ -1,0 +1,63 @@
+<Project InitialTargets="NiTiS_SetIcon;NiTiS_AddREADME">
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Authors>NiTiS-Dev and contributors</Authors>
+		<PackageTags>$(PackageTags);math;vectors;vector;mathematics</PackageTags>
+		<Description>Mathematics library.</Description>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<TargetFrameworks>net9.0;net7.0</TargetFrameworks>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageOutputPath>$(MSBuildThisFileDirectory)/../outPackages</PackageOutputPath>
+
+		<LangVersion>latest</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<VersionPrefix>3.0</VersionPrefix>
+
+		<NoWarn>$(NoWarn);IDE0290;IDE0305</NoWarn>
+		<IncludeBuildOutput>true</IncludeBuildOutput>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(IsPackable)' == 'true'">
+		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All"/>
+		<PackageReference Include="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" PrivateAssets="All"/>
+	</ItemGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
+		<IsAotCompatible>true</IsAotCompatible>
+		<EnableAotAnalyzer>true</EnableAotAnalyzer>
+	</PropertyGroup>
+
+
+	<PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">
+		<IsTrimmable>true</IsTrimmable>
+		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+		<TrimMode>full</TrimMode>
+	</PropertyGroup>
+
+	<!-- Setup the icon for libraries -->
+	<Target Name="NiTiS_SetIcon" Condition="'$(IsPackable)' == 'true'">
+		<PropertyGroup>
+			<PackageIcon>logo.png</PackageIcon>
+		</PropertyGroup>
+
+		<ItemGroup>
+			<None Include="$(MSBuildThisFileDirectory)../public/logo.png" Pack="true" PackagePath="/" />
+		</ItemGroup>
+	</Target>
+
+	<!-- Setup README file -->
+	<Target Name="NiTiS_AddREADME" Condition="'$(IsPackable)' == 'true'">
+		<PropertyGroup>
+			<PackageReadmeFile>NUGET_README.md</PackageReadmeFile>
+		</PropertyGroup>
+		
+		<ItemGroup>
+			<None Include ="$(MSBuildThisFileDirectory)../public/NUGET_README.md" Pack="true" PackagePath="/" />
+		</ItemGroup>
+	</Target>
+</Project>

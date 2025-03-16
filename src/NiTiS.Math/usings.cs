@@ -1,1 +1,0 @@
-﻿global using SMath = System.Math;

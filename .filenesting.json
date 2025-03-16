@@ -3,9 +3,9 @@
 	"dependentFileProviders": {
 		"add": {
 			"extensionToExtension": {
-				"add": {
-					".Ops.cs": [".cs"]
-				}
+			  "add": {
+				".Ops.cs": [ ".cs" ]
+			  }
 			}
 		}
 	}
