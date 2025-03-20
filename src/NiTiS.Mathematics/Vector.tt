@@ -41,8 +41,6 @@ namespace NiTiS.Mathematics;
 	foreach (var type in types) {
 		string zero;
 		string one;
-		string[] binaryOperators;
-		string[] unaryOperators;
 		switch (type.Type)
 		{
 			case "double":
@@ -57,13 +55,6 @@ namespace NiTiS.Mathematics;
 				zero = "0";
 				one = "1";
 				break;
-		}
-		binaryOperators = ["+", "-", "/", "%", "*"];
-		unaryOperators = ["+", "-"];
-		if (!type.Float)
-		{
-			binaryOperators = binaryOperators.Concat(["|", "^", "&"]).ToArray();
-			unaryOperators = unaryOperators.Concat(["~"]).ToArray();
 		}
 #>
 
@@ -209,36 +200,47 @@ public partial struct <#= type.Name #> : IEquatable<<#= type.Name #>>, IFormatta
 		get => ref Unsafe.As<<#= type.Name #>, <#= type.Type #>>(ref Unsafe.AsRef(in this));
 	}
 
-<# foreach (string binaryOperator in binaryOperators) {#>
 	/// <summary>
-	/// Perform operation.
+	/// Perform vector addition.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
 	/// <returns>Operation result.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static <#= type.Name #> operator <#= binaryOperator #>(<#= type.Name #> left, <#= type.Name #> right)
+	public static <#= type.Name #> operator +(<#= type.Name #> left, <#= type.Name #> right)
 	{
 		return new(<# for (int element = 0; element < type.Count; element++) { #> 
-			left.<#= elements[element] #> <#= binaryOperator #> right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+			left.<#= elements[element] #> + right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
 	}
 
-<# } #>
-<# if (type.Float) { #>
 	/// <summary>
-	/// Perform multiplication operation.
+	/// Perform vector substraction.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
 	/// <returns>Operation result.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static <#= type.Name #> operator *(<#= type.Name #> left, <#= type.Type #> right)
+	public static <#= type.Name #> operator -(<#= type.Name #> left, <#= type.Name #> right)
 	{
-		return left * new <#= type.Name #>(right);
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> - right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
 	}
 
 	/// <summary>
-	/// Perform multiplication operation.
+	/// Perform vector multiplication.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator *(<#= type.Name #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> * right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector by scalar multiplication.
 	/// </summary>
 	/// <param name="left">The left operation parameter.</param>
 	/// <param name="right">The right operation parameter.</param>
@@ -246,7 +248,136 @@ public partial struct <#= type.Name #> : IEquatable<<#= type.Name #>>, IFormatta
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static <#= type.Name #> operator *(<#= type.Type #> left, <#= type.Name #> right)
 	{
-		return new <#= type.Name #>(left) * right;
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left * right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector by scalar multiplication.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator *(<#= type.Name #> left, <#= type.Type #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> * right<# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector division.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator /(<#= type.Name #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> / right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector by scalar division.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator /(<#= type.Type #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left / right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector by scalar division.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator /(<#= type.Name #> left, <#= type.Type #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> / right<# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector modulo operation.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator %(<#= type.Name #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> % right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector by scalar modulo operation.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator %(<#= type.Type #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left % right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+
+	/// <summary>
+	/// Perform vector by scalar modulo operation.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator %(<#= type.Name #> left, <#= type.Type #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> % right<# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+<# if (!type.Float) { #>
+	/// <summary>
+	/// Perform bitwise or operation.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator |(<#= type.Name #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> | right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+	/// <summary>
+	/// Perform bitwise and operation.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator &(<#= type.Name #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> & right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
+	}
+	/// <summary>
+	/// Perform bitwise xor operation.
+	/// </summary>
+	/// <param name="left">The left operation parameter.</param>
+	/// <param name="right">The right operation parameter.</param>
+	/// <returns>Operation result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static <#= type.Name #> operator ^(<#= type.Name #> left, <#= type.Name #> right)
+	{
+		return new(<# for (int element = 0; element < type.Count; element++) { #> 
+			left.<#= elements[element] #> ^ right.<#= elements[element] #><# if (element + 1 < type.Count) { #>,<# } #><# } #>);
 	}
 <# } #>
 
