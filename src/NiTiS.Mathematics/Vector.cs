@@ -19,7 +19,7 @@ using System.Runtime.Serialization;
 namespace NiTiS.Mathematics;
 
 /// <summary>
-/// Represents a vector with 2 elements of type <see cref="int" />.
+/// Represents a vector with 2 elements of <see cref="int" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -342,7 +342,7 @@ public partial struct Vector2i : IEquatable<Vector2i>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 2 elements of type <see cref="uint" />.
+/// Represents a vector with 2 elements of <see cref="uint" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -665,7 +665,7 @@ public partial struct Vector2u : IEquatable<Vector2u>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 2 elements of type <see cref="double" />.
+/// Represents a vector with 2 elements of <see cref="double" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -1032,7 +1032,7 @@ public partial struct Vector2d : IEquatable<Vector2d>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 3 elements of type <see cref="int" />.
+/// Represents a vector with 3 elements of <see cref="int" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -1378,7 +1378,7 @@ public partial struct Vector3i : IEquatable<Vector3i>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 3 elements of type <see cref="uint" />.
+/// Represents a vector with 3 elements of <see cref="uint" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -1724,7 +1724,7 @@ public partial struct Vector3u : IEquatable<Vector3u>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 3 elements of type <see cref="double" />.
+/// Represents a vector with 3 elements of <see cref="double" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -2126,7 +2126,7 @@ public partial struct Vector3d : IEquatable<Vector3d>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 4 elements of type <see cref="int" />.
+/// Represents a vector with 4 elements of <see cref="int" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -2495,7 +2495,7 @@ public partial struct Vector4i : IEquatable<Vector4i>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 4 elements of type <see cref="uint" />.
+/// Represents a vector with 4 elements of <see cref="uint" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -2864,7 +2864,7 @@ public partial struct Vector4u : IEquatable<Vector4u>, IFormattable
 }
 
 /// <summary>
-/// Represents a vector with 4 elements of type <see cref="double" />.
+/// Represents a vector with 4 elements of <see cref="double" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]

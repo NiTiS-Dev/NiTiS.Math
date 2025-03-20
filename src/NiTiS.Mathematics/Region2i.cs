@@ -29,6 +29,12 @@ public struct Region2i : IEquatable<Region2i>, IFormattable
 	public readonly Vector2i End => Origin + Size;
 
 	/// <summary>
+	/// Center of the region.
+	/// </summary>
+	[IgnoreDataMember]
+	public readonly Vector2i Center => Origin + (Size / 2);
+
+	/// <summary>
 	/// Creates new region with specified <paramref name="origin"/> and <paramref name="size"/>.
 	/// </summary>
 	/// <param name="origin">Region origin point.</param>

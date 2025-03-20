@@ -68,7 +68,7 @@ namespace NiTiS.Mathematics;
 #>
 
 /// <summary>
-/// Represents a vector with <#= type.Count #> elements of type <see cref="<#= type.Type #>" />.
+/// Represents a vector with <#= type.Count #> elements of <see cref="<#= type.Type #>" /> type.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
