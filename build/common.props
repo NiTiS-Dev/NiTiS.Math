@@ -16,7 +16,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
-		<VersionPrefix>3.1</VersionPrefix>
+		<VersionPrefix>3.2</VersionPrefix>
 
 		<NoWarn>$(NoWarn);IDE0290;IDE0305</NoWarn>
 		<IncludeBuildOutput>true</IncludeBuildOutput>
