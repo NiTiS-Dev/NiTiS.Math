@@ -5,82 +5,178 @@ using System.Runtime.Serialization;
 
 namespace NiTiS.Mathematics;
 
+/// <summary>
+/// Represent 3-dimensional region.
+/// </summary>
 [DataContract]
-public struct Region3 : IEquatable<Region3>, IFormattable
+public struct Region3<T> : IEquatable<Region3<T>>, IFormattable
+	where T : unmanaged, INumber<T>
 {
-    [DataMember(Order = 0)]
-    public Vector3 Origin;
+	/// <summary>
+	/// Region origin.
+	/// </summary>
+	[DataMember(Order = 0)]
+	public Vector3<T> Origin;
 
-    [DataMember(Order = 1)]
-    public Vector3 Size;
+	/// <summary>
+	/// Size of the region.
+	/// </summary>
+	[DataMember(Order = 1)]
+	public Vector3<T> Size;
 
-    [IgnoreDataMember]
-    public readonly Vector3 End => Origin + Size;
+	/// <summary>
+	/// End of the region.
+	/// </summary>
+	[IgnoreDataMember]
+	public readonly Vector3<T> End => Origin + Size;
 
-    [IgnoreDataMember]
-    public readonly Vector3 Center => Origin + (Size / 2);
+	/// <summary>
+	/// Center of the region.
+	/// </summary>
+	[IgnoreDataMember]
+	public readonly Vector3<T> Center => Origin + (Size / (T.One + T.One));
 
-    public Region3(Vector3 origin, Vector3 size)
-    {
-        Origin = origin;
-        Size = size;
-    }
+	/// <summary>
+	/// Creates new region with specified <paramref name="origin"/> and <paramref name="size"/>.
+	/// </summary>
+	/// <param name="origin">Region origin point.</param>
+	/// <param name="size">Region size.</param>
+	public Region3(Vector3<T> origin, Vector3<T> size)
+	{
+		Origin = origin;
+		Size = size;
+	}
 
-    public Region3(Vector3 size)
-    {
-        Origin = default;
-        Size = size;
-    }
+	/// <summary>
+	/// Creates new region from zero point with specified <paramref name="size"/>.
+	/// </summary>
+	/// <param name="size">Region size.</param>
+	public Region3(Vector3<T> size)
+	{
+		Origin = default;
+		Size = size;
+	}
 
-    public readonly override bool Equals([NotNullWhen(true)] object? obj) => obj is Region3 reg && Equals(reg);
-    public readonly bool Equals(Region3 other) => this == other;
-    public readonly override int GetHashCode() => HashCode.Combine(Origin, Size);
+	/// <inheritdoc/>
+	public readonly override bool Equals([NotNullWhen(true)] object? obj)
+	{
+		return obj is Region3<T> reg && Equals(reg);
+	}
 
-    public readonly override string ToString() => ToString("G", null);
-    public readonly string ToString(string? format) => ToString(format, null);
-    public readonly string ToString(string? format, IFormatProvider? formatProvider) => $"{{Origin: {Origin}, Size: {Size}}}";
+	/// <inheritdoc/>
+	public readonly bool Equals(Region3<T> other)
+	{
+		return this == other;
+	}
 
-    public readonly bool Contains(Vector3 point)
-    {
-        return point.X >= Origin.X && point.X < Origin.X + Size.X
-            && point.Y >= Origin.Y && point.Y < Origin.Y + Size.Y
-            && point.Z >= Origin.Z && point.Z < Origin.Z + Size.Z;
-    }
+	/// <inheritdoc/>
+	public readonly override int GetHashCode()
+	{
+		return HashCode.Combine(Origin, Size);
+	}
 
-    public readonly bool Intersects(Region3 other)
-    {
-        return Origin.X < other.End.X && End.X > other.Origin.X
-            && Origin.Y < other.End.Y && End.Y > other.Origin.Y
-            && Origin.Z < other.End.Z && End.Z > other.Origin.Z;
-    }
+	/// <inheritdoc/>
+	public readonly override string ToString()
+	{
+		return ToString("G", null);
+	}
 
-    public static Region3 Intersection(in Region3 first, in Region3 second)
-    {
-        float x1 = float.Max(first.Origin.X, second.Origin.X);
-        float y1 = float.Max(first.Origin.Y, second.Origin.Y);
-        float z1 = float.Max(first.Origin.Z, second.Origin.Z);
-        float x2 = float.Min(first.End.X, second.End.X);
-        float y2 = float.Min(first.End.Y, second.End.Y);
-        float z2 = float.Min(first.End.Z, second.End.Z);
+	/// <inheritdoc cref="ToString(string, IFormatProvider)"/>
+	public readonly string ToString(string? format)
+	{
+		return ToString(format, null);
+	}
 
-        if (x2 <= x1 || y2 <= y1 || z2 <= z1)
-            return default;
+	/// <inheritdoc/>
+	public readonly string ToString(string? format, IFormatProvider? formatProvider)
+	{
+		return $"{{Origin: {Origin}, Size: {Size}}}";
+	}
 
-        return new Region3(new Vector3(x1, y1, z1), new Vector3(x2 - x1, y2 - y1, z2 - z1));
-    }
+	/// <summary>
+	/// Checks if the region contains the specified point.
+	/// </summary>
+	/// <param name="point">The point to check.</param>
+	/// <returns><c>true</c> if the point is within the region; otherwise, <c>false</c>.</returns>
+	public readonly bool Contains(Vector3<T> point)
+	{
+		return point.X >= Origin.X && point.X < Origin.X + Size.X
+			&& point.Y >= Origin.Y && point.Y < Origin.Y + Size.Y;
+	}
 
-    public static Region3 Union(in Region3 first, in Region3 second)
-    {
-        float x1 = float.Min(first.Origin.X, second.Origin.X);
-        float y1 = float.Min(first.Origin.Y, second.Origin.Y);
-        float z1 = float.Min(first.Origin.Z, second.Origin.Z);
-        float x2 = float.Max(first.End.X, second.End.X);
-        float y2 = float.Max(first.End.Y, second.End.Y);
-        float z2 = float.Max(first.End.Z, second.End.Z);
+	/// <summary>
+	/// Checks if the region intersects with another region.
+	/// </summary>
+	/// <param name="other">The region to check.</param>
+	/// <returns><c>true</c> if the regions intersect; otherwise, <c>false</c>.</returns>
+	public readonly bool Intersects(Region3<T> other)
+	{
+		return Origin.X < other.End.X && End.X > other.Origin.X
+			&& Origin.Y < other.End.Y && End.Y > other.Origin.Y;
+	}
 
-        return new Region3(new Vector3(x1, y1, z1), new Vector3(x2 - x1, y2 - y1, z2 - z1));
-    }
+	/// <summary>
+	/// Calculates the intersection of the <paramref name="first"/> region with <paramref name="second"/> region.
+	/// </summary>
+	/// <param name="first">The region to intersect with <paramref name="second"/>.</param>
+	/// <param name="second">The region to intersect with <paramref name="first"/>.</param>
+	/// <returns>A new region representing the intersection, or a region with zero size if the regions do not intersect.</returns>
+	public static Region3<T> Intersection(in Region3<T> first, in Region3<T> second)
+	{
+		T x1 = T.Max(first.Origin.X, second.Origin.X);
+		T y1 = T.Max(first.Origin.Y, second.Origin.Y);
+		T z1 = T.Max(first.Origin.Z, second.Origin.Z);
+		T x2 = T.Min(first.End.X, second.End.X);
+		T y2 = T.Min(first.End.Y, second.End.Y);
+		T z2 = T.Min(first.End.Z, second.End.Z);
 
-    public static bool operator ==(Region3 left, Region3 right) => left.Origin == right.Origin && left.Size == right.Size;
-    public static bool operator !=(Region3 left, Region3 right) => left.Origin != right.Origin || left.Size != right.Size;
+		if (x2 <= x1 || y2 <= y1 || z2 <= z1)
+		{
+			return default;
+		}
+
+		return new Region3<T>(new Vector3<T>(x1, y1, z1), new Vector3<T>(x2 - x1, y2 - y1, z2 - z1));
+	}
+
+	/// <summary>
+	/// Calculates the union of the <paramref name="first"/> region with <paramref name="second"/> region.
+	/// </summary>
+	/// <param name="first">The region to union with <paramref name="second"/>.</param>
+	/// <param name="second">The region to union with <paramref name="first"/>.</param>
+	/// <returns>A new region representing the union.</returns>
+	public static Region3<T> Union(in Region3<T> first, in Region3<T> second)
+	{
+		T x1 = T.Min(first.Origin.X, second.Origin.X);
+		T y1 = T.Min(first.Origin.Y, second.Origin.Y);
+		T z1 = T.Min(first.Origin.Z, second.Origin.Z);
+		T x2 = T.Max(first.End.X, second.End.X);
+		T y2 = T.Max(first.End.Y, second.End.Y);
+		T z2 = T.Max(first.End.Z, second.End.Z);
+
+		return new Region3<T>(new Vector3<T>(x1, y1, z1), new Vector3<T>(x2 - x1, y2 - y1, z2 - z1));
+	}
+
+	/// <summary>
+	/// Perform equality comparison.
+	/// </summary>
+	/// <param name="left">Left parameter.</param>
+	/// <param name="right">Right parameter.</param>
+	/// <returns>Equality of input parameters.</returns>
+	public static bool operator ==(Region3<T> left, Region3<T> right)
+	{
+		return left.Origin == right.Origin
+			&& left.Size == right.Size;
+	}
+
+	/// <summary>
+	/// Perform inequality comparison.
+	/// </summary>
+	/// <param name="left">Left parameter.</param>
+	/// <param name="right">Right parameter.</param>
+	/// <returns>Inequality of input parameters.</returns>
+	public static bool operator !=(Region3<T> left, Region3<T> right)
+	{
+		return left.Origin != right.Origin
+			|| left.Size != right.Size;
+	}
 }

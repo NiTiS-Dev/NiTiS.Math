@@ -1,45 +1,47 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using System.Runtime.Serialization;
 
 namespace NiTiS.Mathematics;
 
 /// <summary>
-/// Represent 2-dimensional region.
+/// Represent 1-dimensional region.
 /// </summary>
 [DataContract]
-public struct Region2u : IEquatable<Region2u>, IFormattable
+public struct Region<T> : IEquatable<Region<T>>, IFormattable
+	where T : unmanaged, INumber<T>
 {
 	/// <summary>
 	/// Region origin.
 	/// </summary>
 	[DataMember(Order = 0)]
-	public Vector2u Origin;
+	public T Origin;
 
 	/// <summary>
 	/// Size of the region.
 	/// </summary>
 	[DataMember(Order = 1)]
-	public Vector2u Size;
+	public T Size;
 
 	/// <summary>
 	/// End of the region.
 	/// </summary>
 	[IgnoreDataMember]
-	public readonly Vector2u End => Origin + Size;
+	public readonly T End => Origin + Size;
 
 	/// <summary>
 	/// Center of the region.
 	/// </summary>
 	[IgnoreDataMember]
-	public readonly Vector2u Center => Origin + (Size / 2);
+	public readonly T Center => Origin + (Size / (T.One + T.One));
 
 	/// <summary>
 	/// Creates new region with specified <paramref name="origin"/> and <paramref name="size"/>.
 	/// </summary>
 	/// <param name="origin">Region origin point.</param>
 	/// <param name="size">Region size.</param>
-	public Region2u(Vector2u origin, Vector2u size)
+	public Region(T origin, T size)
 	{
 		Origin = origin;
 		Size = size;
@@ -49,7 +51,7 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// Creates new region from zero point with specified <paramref name="size"/>.
 	/// </summary>
 	/// <param name="size">Region size.</param>
-	public Region2u(Vector2u size)
+	public Region(T size)
 	{
 		Origin = default;
 		Size = size;
@@ -58,11 +60,11 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// <inheritdoc/>
 	public readonly override bool Equals([NotNullWhen(true)] object? obj)
 	{
-		return obj is Region2u reg && Equals(reg);
+		return obj is Region<T> reg && Equals(reg);
 	}
 
 	/// <inheritdoc/>
-	public readonly bool Equals(Region2u other)
+	public readonly bool Equals(Region<T> other)
 	{
 		return this == other;
 	}
@@ -79,7 +81,7 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 		return ToString("G", null);
 	}
 
-	/// <inheritdoc/>
+	/// <inheritdoc cref="ToString(string, IFormatProvider)"/>
 	public readonly string ToString(string? format)
 	{
 		return ToString(format, null);
@@ -96,10 +98,9 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// </summary>
 	/// <param name="point">The point to check.</param>
 	/// <returns><c>true</c> if the point is within the region; otherwise, <c>false</c>.</returns>
-	public readonly bool Contains(Vector2u point)
+	public readonly bool Contains(T point)
 	{
-		return point.X >= Origin.X && point.X < Origin.X + Size.X
-			&& point.Y >= Origin.Y && point.Y < Origin.Y + Size.Y;
+		return point >= Origin && point < Origin + Size;
 	}
 
 	/// <summary>
@@ -107,10 +108,9 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// </summary>
 	/// <param name="other">The region to check.</param>
 	/// <returns><c>true</c> if the regions intersect; otherwise, <c>false</c>.</returns>
-	public readonly bool Intersects(Region2u other)
+	public readonly bool Intersects(Region<T> other)
 	{
-		return Origin.X < other.End.X && End.X > other.Origin.X
-			&& Origin.Y < other.End.Y && End.Y > other.Origin.Y;
+		return Origin < other.End && End > other.Origin;
 	}
 
 	/// <summary>
@@ -119,19 +119,17 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// <param name="first">The region to intersect with <paramref name="second"/>.</param>
 	/// <param name="second">The region to intersect with <paramref name="first"/>.</param>
 	/// <returns>A new region representing the intersection, or a region with zero size if the regions do not intersect.</returns>
-	public static Region2u Intersection(in Region2u first, in Region2u second)
+	public static Region<T> Intersection(Region<T> first, Region<T> second)
 	{
-		uint x1 = uint.Max(first.Origin.X, second.Origin.X);
-		uint y1 = uint.Max(first.Origin.Y, second.Origin.Y);
-		uint x2 = uint.Min(first.End.X, second.End.X);
-		uint y2 = uint.Min(first.End.Y, second.End.Y);
+		T x1 = T.Max(first.Origin, second.Origin);
+		T x2 = T.Min(first.End, second.End);
 
-		if (x2 <= x1 || y2 <= y1)
+		if (x2 <= x1)
 		{
 			return default;
 		}
 
-		return new Region2u(new Vector2u(x1, y1), new Vector2u(x2 - x1, y2 - y1));
+		return new Region<T>(x1, x2 - x1);
 	}
 
 	/// <summary>
@@ -140,14 +138,12 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// <param name="first">The region to union with <paramref name="second"/>.</param>
 	/// <param name="second">The region to union with <paramref name="first"/>.</param>
 	/// <returns>A new region representing the union.</returns>
-	public static Region2u Union(in Region2u first, in Region2u second)
+	public static Region<T> Union(in Region<T> first, in Region<T> second)
 	{
-		uint x1 = uint.Min(first.Origin.X, second.Origin.X);
-		uint y1 = uint.Min(first.Origin.Y, second.Origin.Y);
-		uint x2 = uint.Max(first.End.X, second.End.X);
-		uint y2 = uint.Max(first.End.Y, second.End.Y);
+		T x1 = T.Min(first.Origin, second.Origin);
+		T x2 = T.Max(first.End, second.End);
 
-		return new Region2u(new Vector2u(x1, y1), new Vector2u(x2 - x1, y2 - y1));
+		return new Region<T>(x1, x2 - x1);
 	}
 
 	/// <summary>
@@ -156,7 +152,7 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// <param name="left">Left parameter.</param>
 	/// <param name="right">Right parameter.</param>
 	/// <returns>Equality of input parameters.</returns>
-	public static bool operator ==(Region2u left, Region2u right)
+	public static bool operator ==(Region<T> left, Region<T> right)
 	{
 		return left.Origin == right.Origin
 			&& left.Size == right.Size;
@@ -168,7 +164,7 @@ public struct Region2u : IEquatable<Region2u>, IFormattable
 	/// <param name="left">Left parameter.</param>
 	/// <param name="right">Right parameter.</param>
 	/// <returns>Inequality of input parameters.</returns>
-	public static bool operator !=(Region2u left, Region2u right)
+	public static bool operator !=(Region<T> left, Region<T> right)
 	{
 		return left.Origin != right.Origin
 			|| left.Size != right.Size;
