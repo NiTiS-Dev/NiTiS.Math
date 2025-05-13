@@ -5,13 +5,23 @@ namespace NiTiS.Mathematics;
 /// </summary>
 public static class Vector2Extensions
 {
-	public static float LengthSquared(this Vector2<float> vec)
+	/// <summary>
+	/// Gets squared magnitude of <paramref name="vector"/>.
+	/// </summary>
+	/// <param name="vector">The vector to get squared magnitude.</param>
+	/// <returns>Squared magnitude of provided vector.</returns>
+	public static float LengthSquared(this Vector2<float> vector)
 	{
-		return vec.X * vec.X + vec.Y * vec.Y;
+		return vector.X * vector.X + vector.Y * vector.Y;
 	}
 
-	public static float Length(this Vector2<float> vec)
+	/// <summary>
+	/// Gets magnitude of <paramref name="vector"/>.
+	/// </summary>
+	/// <param name="vector">The vector to get magnitude.</param>
+	/// <returns>Magnitude of provided vector.</returns>
+	public static float Length(this Vector2<float> vector)
 	{
-		return float.Sqrt(vec.X * vec.X + vec.Y * vec.Y);
+		return float.Sqrt(vector.X * vector.X + vector.Y * vector.Y);
 	}
 }

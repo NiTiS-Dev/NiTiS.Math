@@ -3,10 +3,10 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<Authors>NiTiS-Dev and contributors</Authors>
-		<PackageTags>$(PackageTags);math;vectors;vector;mathematics</PackageTags>
-		<Description>Mathematics library.</Description>
+		<PackageTags>$(PackageTags);math;vectors;geometry;curve;mathematics</PackageTags>
+		<Description>Mathematics and geometry library.</Description>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<TargetFrameworks>net10.0;net9.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net9.0;net7.0</TargetFrameworks>
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageOutputPath>$(MSBuildThisFileDirectory)/../outPackages</PackageOutputPath>

@@ -20,13 +20,23 @@ public static class Vector3Extensions
 	}
 #endif
 
-	public static float LengthSquared(this Vector3<float> vec)
+	/// <summary>
+	/// Gets squared magnitude of <paramref name="vector"/>.
+	/// </summary>
+	/// <param name="vector">The vector to get squared magnitude.</param>
+	/// <returns>Squared magnitude of provided vector.</returns>
+	public static float LengthSquared(this Vector3<float> vector)
 	{
-		return vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z;
+		return vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z;
 	}
 
-	public static float Length(this Vector3<float> vec)
+	/// <summary>
+	/// Gets magnitude of <paramref name="vector"/>.
+	/// </summary>
+	/// <param name="vector">The vector to get magnitude.</param>
+	/// <returns>Magnitude of provided vector.</returns>
+	public static float Length(this Vector3<float> vector)
 	{
-		return float.Sqrt(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z);
+		return float.Sqrt(vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z);
 	}
 }
