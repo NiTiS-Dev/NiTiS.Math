@@ -6,12 +6,9 @@
 		<PackageTags>$(PackageTags);math;vectors;geometry;curve;mathematics</PackageTags>
 		<Description>Mathematics and geometry library.</Description>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<TargetFrameworks>net9.0;net7.0</TargetFrameworks>
+		<TargetFrameworks>net10.0;net9.0;net7.0</TargetFrameworks>
 
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<PackageOutputPath>$(MSBuildThisFileDirectory)/../outPackages</PackageOutputPath>
-
-		<LangVersion>13</LangVersion>
+		<LangVersion>preview</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>enable</Nullable>
@@ -21,6 +18,11 @@
 		<NoWarn>$(NoWarn);IDE0290;IDE0305</NoWarn>
 		<IncludeBuildOutput>true</IncludeBuildOutput>
 	</PropertyGroup>
+
+    <PropertyGroup Condition="'$(IsPackable)' == 'true'">
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageOutputPath>$(MSBuildThisFileDirectory)/../outPackages</PackageOutputPath>
+    </PropertyGroup>
 
 	<ItemGroup Condition="'$(IsPackable)' == 'true'">
 		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1" PrivateAssets="All"/>

@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<Import Project="../../build/common.props" />
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+    </PropertyGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Diagnostics" Version="8.4.0" />
