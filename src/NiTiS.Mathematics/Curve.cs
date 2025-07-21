@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.Numerics;
+using CommunityToolkit.Diagnostics;
 
 namespace NiTiS.Mathematics;
 
@@ -18,20 +21,20 @@ public abstract class Curve<TX, TY>
 	/// <returns>The ordinate (Y-axis) value corresponding to the given X value on the curve.</returns>
 	public abstract TY Get(TX x);
 	
-	/// <summary>
-	/// Gets the domain of the curve (the range of X values where the curve is defined).
-	/// </summary>
-	public abstract Region<TX>? Domain { get; }
-
-	/// <summary>
-	/// Gets the range of the curve (the resulting Y values across the domain).
-	/// </summary>
-	public abstract Region<TY>? Range { get; }
+	// /// <summary>
+	// /// Gets the domain of the curve (the range of X values where the curve is defined).
+	// /// </summary>
+	// public abstract Region<TX>? Domain { get; }
+	//
+	// /// <summary>
+	// /// Gets the range of the curve (the resulting Y values across the domain).
+	// /// </summary>
+	// public abstract Region<TY>? Range { get; }
 
 	/// <summary>
 	/// Represent point on the curve.
 	/// </summary>
-	public readonly struct Point
+	public readonly record struct Point : IComparable<Point>
 	{
 		/// <summary>
 		/// The X position.
@@ -39,7 +42,7 @@ public abstract class Curve<TX, TY>
 		public readonly TX X;
 
 		/// <summary>
-		/// The Y position;
+		/// The Y position.
 		/// </summary>
 		public readonly TY Y;
 
@@ -52,6 +55,11 @@ public abstract class Curve<TX, TY>
 		{
 			X = x;
 			Y = y;
+		}
+
+		int IComparable<Point>.CompareTo(Point other)
+		{
+			return X.CompareTo(other.X);
 		}
 	}
 }

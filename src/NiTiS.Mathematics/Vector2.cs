@@ -367,7 +367,6 @@ public struct Vector2<T> : IEquatable<Vector2<T>>, IFormattable
 		return Min(Max(value, min), max);
 	}
 
-
 	/// <summary>Returns a vector whose elements are the maximum of each of the pairs of elements in two specified vectors.</summary>
 	/// <param name="value1">The first vector.</param>
 	/// <param name="value2">The second vector.</param>
@@ -400,7 +399,6 @@ public struct Vector2<T> : IEquatable<Vector2<T>>, IFormattable
 	{
 		return HashCode.Combine(X, Y);
 	}
-
 
 	/// <inheritdoc />
 	public readonly override string ToString()
