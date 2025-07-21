@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace NiTiS.Mathematics.Tests;
@@ -20,5 +21,22 @@ public class DefinedCurveTests
 		DefinedCurve<float> x = new(new(1, 1), new(2, 7), new(-1, 9));
 
 		await Assert.That(x.Get(0)).IsGreaterThan(1).IsLessThan(9);
+	}
+
+	[Test]
+	public async Task OutOfBounds()
+	{
+		DefinedCurve<float> x = new(new(1, 1), new(2, 7), new(-1, 9));
+
+		Assert.Throws<ArgumentOutOfRangeException>(() =>
+		{
+			x.Get(-1.01f);
+		});
+
+
+		Assert.Throws<ArgumentOutOfRangeException>(() =>
+		{
+			x.Get(2.01f);
+		});
 	}
 }
