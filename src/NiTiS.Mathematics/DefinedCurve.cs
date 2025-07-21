@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using CommunityToolkit.Diagnostics;
 
 namespace NiTiS.Mathematics;
 
-public sealed class DefinedCurve<T> : Curve<T, T>
+public sealed class DefinedCurve<T> : Curve<T, T>, IEnumerable<Curve<T, T>.Point>
 	where T : unmanaged, INumber<T>
 {
 	private readonly Point[] _points;
@@ -115,6 +117,17 @@ public sealed class DefinedCurve<T> : Curve<T, T>
             );
         }
     }
+
+	public IEnumerator<Point> GetEnumerator()
+	{
+		// Point[].GetEnumerator returns IEnumerator, not IEnumerator<Point> idk why
+		return ((IEnumerable<Point>)_points).GetEnumerator();
+	}
+
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return GetEnumerator();
+	}
 
 	private record struct Coefficients(T A, T B, T C, T D);
 }
