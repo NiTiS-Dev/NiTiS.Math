@@ -11,8 +11,8 @@ namespace NiTiS.Mathematics;
 /// <typeparam name="TX">Numeric type used for abscissa.</typeparam>
 /// <typeparam name="TY">Numeric type used for ordinate.</typeparam>
 public abstract class Curve<TX, TY>
-	where TX : unmanaged, INumber<TX>
-	where TY : unmanaged, INumber<TY>
+	where TX : INumber<TX>
+	where TY : INumber<TY>
 {
 	/// <summary>
 	/// Evaluates the curve at the specified abscissa (X) value.

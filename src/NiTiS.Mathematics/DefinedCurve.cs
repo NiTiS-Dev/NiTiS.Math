@@ -7,7 +7,7 @@ using CommunityToolkit.Diagnostics;
 namespace NiTiS.Mathematics;
 
 public sealed class DefinedCurve<T> : Curve<T, T>, IEnumerable<Curve<T, T>.Point>
-	where T : unmanaged, INumber<T>
+	where T : INumber<T>
 {
 	private readonly Point[] _points;
 	private readonly Coefficients[] _coefficients;

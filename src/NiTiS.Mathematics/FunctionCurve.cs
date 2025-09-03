@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 namespace NiTiS.Mathematics;
 
 public sealed class FunctionCurve<TX, TY>  : Curve<TX, TY>
-	where TX : unmanaged, INumber<TX>
-	where TY : unmanaged, INumber<TY>
+	where TX : INumber<TX>
+	where TY : INumber<TY>
 {
 	private readonly Func<TX, TY> _func;
 
