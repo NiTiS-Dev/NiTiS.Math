@@ -318,53 +318,6 @@ public struct Vector4<T> : IEquatable<Vector4<T>>, IFormattable
 			left.W % right);
 	}
 
-	/* TODO: Somehow fix it
-	/// <summary>
-	/// Perform bitwise or operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator |(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X | right.X, 
-			left.Y | right.Y, 
-			left.Z | right.Z);
-	}
-
-	/// <summary>
-	/// Perform bitwise and operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator &(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X & right.X, 
-			left.Y & right.Y, 
-			left.Z & right.Z);
-	}
-
-	/// <summary>
-	/// Perform bitwise xor operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator ^(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X ^ right.X, 
-			left.Y ^ right.Y, 
-			left.Z ^ right.Z);
-	}
-	*/
-
 	/// <summary>
 	/// Perform equality comparing.
 	/// </summary>

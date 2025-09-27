@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace NiTiS.Mathematics;
 
@@ -42,5 +43,54 @@ public static class Vector3Extensions
 		public T LengthSquared => vector.X * vector.X + vector.Y * vector.Y + vector.Z * vector.Z;
 
 		public T Length => T.Sqrt(vector.LengthSquared);
+	}
+
+	extension<T>(Vector3<T>)
+		where T : unmanaged, IBinaryInteger<T>
+	{
+		/// <summary>
+		/// Perform bitwise or operation.
+		/// </summary>
+		/// <param name="left">The left operation parameter.</param>
+		/// <param name="right">The right operation parameter.</param>
+		/// <returns>Operation result.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3<T> operator |(Vector3<T> left, Vector3<T> right)
+		{
+			return new(
+				left.X | right.X,
+				left.Y | right.Y,
+				left.Z | right.Z);
+		}
+
+		/// <summary>
+		/// Perform bitwise and operation.
+		/// </summary>
+		/// <param name="left">The left operation parameter.</param>
+		/// <param name="right">The right operation parameter.</param>
+		/// <returns>Operation result.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3<T> operator &(Vector3<T> left, Vector3<T> right)
+		{
+			return new(
+				left.X & right.X,
+				left.Y & right.Y,
+				left.Z & right.Z);
+		}
+
+		/// <summary>
+		/// Perform bitwise xor operation.
+		/// </summary>
+		/// <param name="left">The left operation parameter.</param>
+		/// <param name="right">The right operation parameter.</param>
+		/// <returns>Operation result.</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3<T> operator ^(Vector3<T> left, Vector3<T> right)
+		{
+			return new(
+				left.X ^ right.X,
+				left.Y ^ right.Y,
+				left.Z ^ right.Z);
+		}
 	}
 }

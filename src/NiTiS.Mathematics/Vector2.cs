@@ -270,50 +270,6 @@ public struct Vector2<T> : IEquatable<Vector2<T>>, IFormattable
 			left.Y % right);
 	}
 
-	/* TODO: Somehow fix it
-	/// <summary>
-	/// Perform bitwise or operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector2<T> operator |(Vector2<T> left, Vector2<T> right)
-	{
-		return new( 
-			left.X | right.X, 
-			left.Y | right.Y);
-	}
-
-	/// <summary>
-	/// Perform bitwise and operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector2<T> operator &(Vector2<T> left, Vector2<T> right)
-	{
-		return new( 
-			left.X & right.X, 
-			left.Y & right.Y);
-	}
-
-	/// <summary>
-	/// Perform bitwise xor operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector2<T> operator ^(Vector2<T> left, Vector2<T> right)
-	{
-		return new( 
-			left.X ^ right.X, 
-			left.Y ^ right.Y);
-	}
-	*/
-
 	/// <summary>
 	/// Perform equality comparing.
 	/// </summary>
