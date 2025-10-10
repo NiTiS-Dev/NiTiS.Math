@@ -13,9 +13,6 @@ namespace NiTiS.Mathematics;
 /// <summary>
 /// Represents a 3 dimension vector, where for each dimension used <typeparamref name="T"/> type.
 /// </summary>
-/// <remarks>
-/// Instead of using <see cref="Vector3{T}"/> with <see cref="float"/> type argument, use standard vector type <see cref="System.Numerics.Vector3"/>
-/// </remarks>
 /// <typeparam name="T">Number type to describe dimension, can be either integer or float.</typeparam>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -92,7 +89,7 @@ public struct Vector3<T> : IEquatable<Vector3<T>>, IFormattable
 	}
 
 	/// <summary>
-	/// Vector instance5 with all zeroes.
+	/// Vector instance with all zeroes.
 	/// </summary>
 	public static Vector3<T> Zero => default;
 

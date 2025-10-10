@@ -13,9 +13,6 @@ namespace NiTiS.Mathematics;
 /// <summary>
 /// Represents a 2 dimension vector, where for each dimension used <typeparamref name="T"/> type.
 /// </summary>
-/// <remarks>
-/// Instead of using <see cref="Vector2{T}"/> with <see cref="float"/> type argument, use standard vector type <see cref="System.Numerics.Vector2"/>
-/// </remarks>
 /// <typeparam name="T">Number type to describe dimension, can be either integer or float.</typeparam>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
@@ -84,7 +81,7 @@ public struct Vector2<T> : IEquatable<Vector2<T>>, IFormattable
 	}
 
 	/// <summary>
-	/// Vector instance5 with all zeroes.
+	/// Vector instance with all zeroes.
 	/// </summary>
 	public static Vector2<T> Zero => default;
 

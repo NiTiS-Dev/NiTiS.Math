@@ -1,27 +1,23 @@
+using CommunityToolkit.Diagnostics;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using CommunityToolkit.Diagnostics;
 
 namespace NiTiS.Mathematics;
 
 /// <summary>
 /// Represents a 4 dimension vector, where for each dimension used <typeparamref name="T"/> type.
 /// </summary>
-/// <remarks>
-/// Instead of using <see cref="Vector4{T}"/> with <see cref="float"/> type argument, use standard vector type <see cref="System.Numerics.Vector3"/>
-/// </remarks>
 /// <typeparam name="T">Number type to describe dimension, can be either integer or float.</typeparam>
 [DebuggerDisplay($"{{{nameof(ToString)}()}}")]
 [StructLayout(LayoutKind.Sequential)]
 [DataContract]
-public struct Vector4<T> : IEquatable<Vector4<T>>, IFormattable
-	where T : unmanaged, INumber<T>
+public struct Vector4<T> : IEquatable<Vector4<T>>
+	where T : unmanaged
 {
 	/// <summary>
 	/// Vector elements count.
@@ -100,29 +96,20 @@ public struct Vector4<T> : IEquatable<Vector4<T>>, IFormattable
 	}
 
 	/// <summary>
-	/// Vector instance5 with all zeroes.
+	/// Deconstructs vector to components.
 	/// </summary>
-	public static Vector4<T> Zero => default;
-
-	/// <summary>
-	/// Vector (1, 0, 0, 0).
-	/// </summary>
-	public static Vector4<T> UnitX => new(T.One, T.Zero, T.Zero, T.Zero);
-
-	/// <summary>
-	/// Vector (0, 1, 0, 0).
-	/// </summary>
-	public static Vector4<T> UnitY => new(T.Zero, T.One, T.Zero, T.Zero);
-
-	/// <summary>
-	/// Vector (0, 0, 1, 0).
-	/// </summary>
-	public static Vector4<T> UnitZ => new(T.Zero, T.Zero, T.One, T.Zero);
-
-	/// <summary>
-	/// Vector (0, 0, 0, 1).
-	/// </summary>
-	public static Vector4<T> UnitW => new(T.Zero, T.Zero, T.Zero, T.One);
+	/// <param name="x">The X component of the vector.</param>
+	/// <param name="y">The Y component of the vector.</param>
+	/// <param name="z">The Z component of the vector.</param>
+	/// <param name="w">The W component of the vector.</param>
+	[EditorBrowsable(EditorBrowsableState.Never)]
+	public readonly void Deconstruct(out T x, out T y, out T z, out T w)
+	{
+		x = X;
+		y = Y;
+		z = Z;
+		w = W;
+	}
 
 	/// <summary>
 	/// Reference to first vector element.
@@ -141,212 +128,6 @@ public struct Vector4<T> : IEquatable<Vector4<T>>, IFormattable
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		get => ref Unsafe.As<Vector4<T>, T>(ref Unsafe.AsRef(in this));
 	}
-	
-	/// <summary>
-	/// Perform vector addition.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator +(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X + right.X, 
-			left.Y + right.Y, 
-			left.Z + right.Z,
-			left.W + right.W);
-	}
-
-	/// <summary>
-	/// Perform vector substraction.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator -(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X - right.X,
-			left.Y - right.Y,
-			left.Z - right.Z,
-			left.W - right.W);
-	}
-
-	/// <summary>
-	/// Perform vector multiplication.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator *(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X * right.X, 
-			left.Y * right.Y, 
-			left.Z * right.Z,
-			left.W * right.W);
-	}
-
-	/// <summary>
-	/// Perform vector by scalar multiplication.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator *(T left, Vector4<T> right)
-	{
-		return new( 
-			left * right.X, 
-			left * right.Y, 
-			left * right.Z,
-			left * right.W);
-	}
-
-	/// <summary>
-	/// Perform vector by scalar multiplication.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator *(Vector4<T> left, T right)
-	{
-		return new( 
-			left.X * right, 
-			left.Y * right, 
-			left.Z * right,
-			left.W * right);
-	}
-
-	/// <summary>
-	/// Perform vector division.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator /(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X / right.X,
-			left.Y / right.Y,
-			left.Z / right.Z,
-			left.W / right.W);
-	}
-
-	/// <summary>
-	/// Perform vector by scalar division.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator /(T left, Vector4<T> right)
-	{
-		return new( 
-			left / right.X,
-			left / right.Y,
-			left / right.Z,
-			left / right.W);
-	}
-
-	/// <summary>
-	/// Perform vector by scalar division.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator /(Vector4<T> left, T right)
-	{
-		return new( 
-			left.X / right,
-			left.Y / right,
-			left.Z / right,
-			left.W / right);
-	}
-
-	/// <summary>
-	/// Perform vector modulo operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator %(Vector4<T> left, Vector4<T> right)
-	{
-		return new( 
-			left.X % right.X,
-			left.Y % right.Y,
-			left.Z % right.Z,
-			left.W % right.W);
-	}
-
-	/// <summary>
-	/// Perform vector by scalar modulo operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator %(T left, Vector4<T> right)
-	{
-		return new( 
-			left % right.X,
-			left % right.Y,
-			left % right.Z,
-			left % right.W);
-	}
-
-	/// <summary>
-	/// Perform vector by scalar modulo operation.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Operation result.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> operator %(Vector4<T> left, T right)
-	{
-		return new(
-			left.X % right,
-			left.Y % right,
-			left.Z % right,
-			left.W % right);
-	}
-
-	/// <summary>
-	/// Perform equality comparing.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Equality of input parameters.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static bool operator ==(Vector4<T> left, Vector4<T> right)
-	{
-		return left.X == right.X
-			&& left.Y == right.Y
-			&& left.Z == right.Z
-			&& left.W == right.W;
-	}
-
-	/// <summary>
-	/// Perform inequality comparing.
-	/// </summary>
-	/// <param name="left">The left operation parameter.</param>
-	/// <param name="right">The right operation parameter.</param>
-	/// <returns>Inequality of input parameters.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static bool operator !=(Vector4<T> left, Vector4<T> right)
-	{
-		return left.X != right.X
-			|| left.Y != right.Y
-			|| left.Z != right.Z
-			|| left.W != right.W;
-	}
 
 	/// <inheritdoc/>
 	public readonly override bool Equals(object? other)
@@ -356,54 +137,15 @@ public struct Vector4<T> : IEquatable<Vector4<T>>, IFormattable
 
 	/// <summary>
 	/// Check equality with <paramref name="other"/> <see cref="Vector4{T}" /> instance.
- 	/// </summary>
+	/// </summary>
 	/// <param name="other">Other vector instance.</param>
 	/// <returns>Equality of presented values.</returns>
 	public readonly bool Equals(Vector4<T> other)
 	{
-		return this == other;
-	}
-
-	/// <summary>Restricts a vector between a minimum and a maximum value.</summary>
-	/// <param name="value">The vector to restrict.</param>
-	/// <param name="min">The minimum value.</param>
-	/// <param name="max">The maximum value.</param>
-	/// <returns>The restricted vector.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> Clamp(Vector4<T> value, Vector4<T> min, Vector4<T> max)
-	{
-		return Min(Max(value, min), max);
-	}
-
-
-	/// <summary>Returns a vector whose elements are the maximum of each of the pairs of elements in two specified vectors.</summary>
-	/// <param name="value1">The first vector.</param>
-	/// <param name="value2">The second vector.</param>
-	/// <returns>The maximized vector.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> Max(Vector4<T> value1, Vector4<T> value2)
-	{
-		return new(
-			(value1.X > value2.X) ? value1.X : value2.X,
-			(value1.Y > value2.Y) ? value1.Y : value2.Y,
-			(value1.Z > value2.Z) ? value1.Z : value2.Z,
-			(value1.W > value2.W) ? value1.W : value2.W
-		);
-	}
-	
-	/// <summary>Returns a vector whose elements are the minimum of each of the pairs of elements in two specified vectors.</summary>
-	/// <param name="value1">The first vector.</param>
-	/// <param name="value2">The second vector.</param>
-	/// <returns>The minimized vector.</returns>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static Vector4<T> Min(Vector4<T> value1, Vector4<T> value2)
-	{
-		return new(
-			(value1.X < value2.X) ? value1.X : value2.X,
-			(value1.Y < value2.Y) ? value1.Y : value2.Y,
-			(value1.Z < value2.Z) ? value1.Z : value2.Z,
-			(value1.W < value2.W) ? value1.W : value2.W
-		);
+		return X.Equals(other.X)
+			&& Y.Equals(other.Y)
+			&& Z.Equals(other.Z)
+			&& W.Equals(other.W);
 	}
 
 	/// <summary>Returns the hash code for this instance.</summary>
@@ -413,29 +155,31 @@ public struct Vector4<T> : IEquatable<Vector4<T>>, IFormattable
 		return HashCode.Combine(X, Y, Z);
 	}
 
+	/// <summary>
+	/// Perform equality comparing.
+	/// </summary>
+	/// <param name="lhs">The left operation parameter.</param>
+	/// <param name="rhs">The right operation parameter.</param>
+	/// <returns>Equality of input parameters.</returns>
+	public static bool operator ==(Vector4<T> lhs, Vector4<T> rhs)
+	{
+		return lhs.Equals(rhs);
+	}
+
+	/// <summary>
+	/// Perform inequality comparing.
+	/// </summary>
+	/// <param name="lhs">The left operation parameter.</param>
+	/// <param name="rhs">The right operation parameter.</param>
+	/// <returns>Inequality of input parameters.</returns>
+	public static bool operator !=(Vector4<T> lhs, Vector4<T> rhs)
+	{
+		return !(lhs == rhs);
+	}
 
 	/// <inheritdoc />
 	public readonly override string ToString()
 	{
-		return ToString("G", CultureInfo.CurrentCulture);
-	}
-
-	/// <summary>Formats the value of the current instance using the specified format.</summary>
-	/// <param name="format">The format to use.
-	/// -or-
-	/// A null reference (<see langword="Nothing" /> in Visual Basic) to use the default format defined for the type of the <see cref="T:System.IFormattable" /> implementation.
-	/// </param>
-	/// <returns>The value of the current instance in the specified format.</returns>
-	public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
-	{
-		return ToString(format, CultureInfo.CurrentCulture);
-	}
-
-	/// <inheritdoc />
-	public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
-	{
-		string separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
-
-		return $"{X.ToString(format, formatProvider)}{separator} {Y.ToString(format, formatProvider)}{separator} {Z.ToString(format, formatProvider)}{separator} {W.ToString(format, formatProvider)}";
+		return $"<{X}, {Y}, {Z}, {W}>";
 	}
 }
